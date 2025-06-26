@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlbyw26fe20vd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jmd42"]
+size = Vector2(76, 76)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_v30as"]
+
+[node name="Heart" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+position = Vector2(0, -38)
+shape = SubResource("RectangleShape2D_jmd42")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.912659, 0.22057, 0.207099, 1)
+position = Vector2(0, -38)
+scale = Vector2(76, 76)
+texture = SubResource("CanvasTexture_v30as")

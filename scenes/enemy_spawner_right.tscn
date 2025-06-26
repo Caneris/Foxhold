@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx271cpci77bt"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_u24pc"]
+
+[node name="EnemySpawnerRight" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.959705, 0.0966145, 0.759362, 1)
+position = Vector2(1.5, 16.5)
+scale = Vector2(3, 33)
+texture = SubResource("CanvasTexture_u24pc")
