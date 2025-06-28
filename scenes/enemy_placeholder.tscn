@@ -19,3 +19,5 @@ modulate = Color(0.987748, 0.322359, 1, 1)
 position = Vector2(-1.35601e-06, -4.02331e-07)
 scale = Vector2(32, 32)
 texture = SubResource("CanvasTexture_drc24")
+
+[node name="Sight" type="RayCast2D" parent="."]
