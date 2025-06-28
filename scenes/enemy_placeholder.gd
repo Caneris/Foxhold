@@ -2,12 +2,15 @@ extends CharacterBody2D
 
 @export var heart_path : NodePath
 @export var speed : float = 100.0
-@export var attack_range : float = 24.0
+@export var heart_range : float = 50.0
+@export var heart_range_speed : float = 100.0
 @export var attack_damage : int = 1
 @export var attack_intervall : float = 1.0
 
 var heart_node : Node2D
 var attack_cooldown : float = 0.0
+
+@onready var sight: RayCast2D = $Sight
 
 func _ready() -> void:
 	# Cache Heart instance
@@ -17,8 +20,18 @@ func _physics_process(delta: float) -> void:
 	if not heart_node:
 		return
 	
+	# always aim at the art
 	var to_heart := heart_node.global_position - global_position
-	var dist = to_heart.length()
+	var dist := to_heart.length()
+	var dir := to_heart.normalized()
+	
+	if dist > heart_range:
+		# Move forward to the heart
+		velocity = dir * speed
+		move_and_slide()
+	else:
+		velocity = dir * heart_range_speed
+		move_and_slide()
 	
 	
 #func _physics_process(delta):

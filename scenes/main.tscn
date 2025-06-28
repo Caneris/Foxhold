@@ -34,4 +34,7 @@ position = Vector2(23, 275)
 position = Vector2(601, 274)
 
 [node name="EnemyPlaceholder" parent="." instance=ExtResource("5_tbgi4")]
-position = Vector2(122, 281)
+position = Vector2(99, 279)
+heart_path = NodePath("../Heart")
+speed = 50.0
+heart_range = 100.0
