@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2rt5cmjacwdg"]
+[gd_scene load_steps=6 format=3 uid="uid://b2rt5cmjacwdg"]
 
 [ext_resource type="PackedScene" uid="uid://dxdixvw4t64ag" path="res://scenes/floor.tscn" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://ckxt7xyn3omwu" path="res://scenes/wall.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://dlbyw26fe20vd" path="res://scenes/heart.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://bx271cpci77bt" path="res://scenes/enemy_spawner.tscn" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://d2e5vfsjvbujp" path="res://scenes/enemy_placeholder.tscn" id="5_tbgi4"]
 
 [node name="Main" type="Node2D"]
 
@@ -17,3 +19,19 @@ position = Vector2(650, 0)
 
 [node name="Heart" parent="." instance=ExtResource("3_sugp2")]
 position = Vector2(319, 300)
+
+[node name="EnemyContainer" type="Node2D" parent="."]
+
+[node name="EnemySpawner" parent="." instance=ExtResource("4_jyhfs")]
+spawn_points_path = Array[NodePath]([NodePath("Position1"), NodePath("Position2")])
+enemy_container_path = NodePath("../EnemyContainer")
+spawn_timer_one_shot = true
+
+[node name="Position1" type="Marker2D" parent="EnemySpawner"]
+position = Vector2(23, 275)
+
+[node name="Position2" type="Marker2D" parent="EnemySpawner"]
+position = Vector2(601, 274)
+
+[node name="EnemyPlaceholder" parent="." instance=ExtResource("5_tbgi4")]
+position = Vector2(122, 281)
