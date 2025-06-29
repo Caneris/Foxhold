@@ -4,8 +4,16 @@ extends CharacterBody2D
 @export var speed : float = 100.0
 @export var heart_range : float = 50.0
 @export var heart_range_speed : float = 100.0
+@export var attack_range : float = 30.0
 @export var attack_damage : int = 1
-@export var attack_intervall : float = 1.0
+@export var attack_interval : float = 2.0
+@export var health : int = 10
+
+# pixels/sec² — by default Godot’s 2D gravity
+@export var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+# Prevent them from accelerating forever
+@export var max_fall_speed: float = 800.0
+
 
 var heart_node : Node2D
 var attack_cooldown : float = 0.0
@@ -15,25 +23,43 @@ var attack_cooldown : float = 0.0
 func _ready() -> void:
 	# Cache Heart instance
 	heart_node = get_node(heart_path)
+	sight.collide_with_areas = true
 
 func _physics_process(delta: float) -> void:
 	if not heart_node:
 		return
 	
+	# insert gravity
+	velocity.y += gravity * delta
+	if velocity.y > max_fall_speed:
+		velocity.y =max_fall_speed
+	
 	# always aim at the art
 	var to_heart := heart_node.global_position - global_position
 	var dist := to_heart.length()
-	var dir := to_heart.normalized()
+	var dir := Vector2(sign(to_heart.x), 0)
 	
-	if dist > heart_range:
-		# Move forward to the heart
-		velocity = dir * speed
-		move_and_slide()
+	# point a fixed-length ray at the heart
+	sight.target_position = dir * attack_range
+	sight.force_raycast_update()
+	
+	var col := sight.get_collider()
+	
+	if sight.is_colliding() and col.is_in_group("heart"):
+		velocity.x = 0.0
+		_try_attack(delta)
 	else:
-		velocity = dir * heart_range_speed
+		velocity.x = dir.x * speed
 		move_and_slide()
 	
-	
+func _try_attack(delta) -> void:
+	if attack_cooldown <= 0.0:
+		print("attack the heart")
+		attack_cooldown = attack_interval
+	else:
+		attack_cooldown -= delta
+
+
 #func _physics_process(delta):
 	#if not heart_node:
 		#return

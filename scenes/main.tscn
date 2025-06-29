@@ -18,7 +18,7 @@ position = Vector2(-10, 0)
 position = Vector2(650, 0)
 
 [node name="Heart" parent="." instance=ExtResource("3_sugp2")]
-position = Vector2(319, 300)
+position = Vector2(319, 262)
 
 [node name="EnemyContainer" type="Node2D" parent="."]
 
@@ -34,7 +34,8 @@ position = Vector2(23, 275)
 position = Vector2(601, 274)
 
 [node name="EnemyPlaceholder" parent="." instance=ExtResource("5_tbgi4")]
-position = Vector2(99, 279)
+position = Vector2(19, 279)
 heart_path = NodePath("../Heart")
 speed = 50.0
-heart_range = 100.0
+heart_range = 10.0
+attack_range = 20.0
