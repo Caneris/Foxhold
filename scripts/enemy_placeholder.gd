@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var attack_range : float = 30.0
 @export var attack_damage : int = 1
 @export var attack_interval : float = 2.0
-@export var health : int = 10
+@export var max_health : int = 10
 
 # pixels/sec² — by default Godot’s 2D gravity
 @export var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -19,11 +19,31 @@ var heart_node : Node2D
 var attack_cooldown : float = 0.0
 
 @onready var sight: RayCast2D = $Sight
+@onready var health_bar: ProgressBar = %HealthBar
+
 
 func _ready() -> void:
 	# Cache Heart instance
 	heart_node = get_node(heart_path)
 	sight.collide_with_areas = true
+	initiate_health(max_health)
+
+
+func _input(event: InputEvent) -> void:
+	var event_is_mouseclick : bool = (
+		event is InputEventMouseButton and 
+		event.button_index == MOUSE_BUTTON_LEFT and
+		event.is_pressed()
+	)
+	
+	if event_is_mouseclick:
+		health_bar.value -= 2
+
+
+func initiate_health(value) -> void:
+	health_bar.max_value = max_health
+	health_bar.value = value
+
 
 func _physics_process(delta: float) -> void:
 	if not heart_node:

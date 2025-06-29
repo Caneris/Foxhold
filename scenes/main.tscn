@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2rt5cmjacwdg"]
+[gd_scene load_steps=7 format=3 uid="uid://b2rt5cmjacwdg"]
 
 [ext_resource type="PackedScene" uid="uid://dxdixvw4t64ag" path="res://scenes/floor.tscn" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://ckxt7xyn3omwu" path="res://scenes/wall.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://dlbyw26fe20vd" path="res://scenes/heart.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bx271cpci77bt" path="res://scenes/enemy_spawner.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://d2e5vfsjvbujp" path="res://scenes/enemy_placeholder.tscn" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://b57d0lhm3n03w" path="res://scenes/player.tscn" id="6_tefeu"]
 
 [node name="Main" type="Node2D"]
 
@@ -39,3 +40,6 @@ heart_path = NodePath("../Heart")
 speed = 50.0
 heart_range = 10.0
 attack_range = 20.0
+
+[node name="Player" parent="." instance=ExtResource("6_tefeu")]
+unique_name_in_owner = true
