@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var attack_damage : int = 1
 @export var attack_interval : float = 2.0
 @export var max_health : int = 10
+@export var damage_per_click: int = 2
 
 # pixels/sec² — by default Godot’s 2D gravity
 @export var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -20,16 +21,19 @@ var attack_cooldown : float = 0.0
 
 @onready var sight: RayCast2D = $Sight
 @onready var health_bar: ProgressBar = %HealthBar
+@onready var click_area: Area2D = $Area2D
 
 
-func _ready() -> void:
-	# Cache Heart instance
-	heart_node = get_node(heart_path)
-	sight.collide_with_areas = true
-	initiate_health(max_health)
+func take_damage() -> void:
+	health_bar.value = max(health_bar.value - damage_per_click, 0)
 
 
-func _input(event: InputEvent) -> void:
+func die() -> void:
+	# play death animation, spawn particles, sound, etc.
+	queue_free()
+
+
+func _on_click(viewport, event, shape_idx) -> void:
 	var event_is_mouseclick : bool = (
 		event is InputEventMouseButton and 
 		event.button_index == MOUSE_BUTTON_LEFT and
@@ -37,7 +41,7 @@ func _input(event: InputEvent) -> void:
 	)
 	
 	if event_is_mouseclick:
-		health_bar.value -= 2
+		health_bar.value -= damage_per_click
 
 
 func initiate_health(value) -> void:
@@ -45,9 +49,20 @@ func initiate_health(value) -> void:
 	health_bar.value = value
 
 
+func _ready() -> void:
+	# Cache Heart instance
+	heart_node = get_tree().get_root().get_node("Main/Heart") as Area2D
+	sight.collide_with_areas = true
+	initiate_health(max_health)
+	click_area.connect("input_event",_on_click)
+
+
 func _physics_process(delta: float) -> void:
 	if not heart_node:
 		return
+	
+	if health_bar.value == 0:
+		die()
 	
 	# insert gravity
 	velocity.y += gravity * delta

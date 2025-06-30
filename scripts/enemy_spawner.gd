@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var enemy_scenes : Array[PackedScene] = []
+@export var enemy_scene : PackedScene
 @export var spawn_interval : float = 2.0
 @export var spawn_points_path : Array[NodePath] = []
 @export var enemy_container_path : NodePath
@@ -37,5 +37,8 @@ func initiate_node_paths() -> void:
 	enemy_container = get_node_or_null(enemy_container_path)
 
 func _on_spawn_timer_timeout() -> void:
+	var enemy := enemy_scene.instantiate()
+	enemy_container.add_child(enemy)
+	enemy.global_position = spawn_points[0].global_position
 	print("time out")
 	

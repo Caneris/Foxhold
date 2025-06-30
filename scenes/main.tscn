@@ -8,38 +8,36 @@
 [ext_resource type="PackedScene" uid="uid://b57d0lhm3n03w" path="res://scenes/player.tscn" id="6_tefeu"]
 
 [node name="Main" type="Node2D"]
+rotation = -0.0012312
+scale = Vector2(1, 1.00743)
 
 [node name="Floor" parent="." instance=ExtResource("1_0wfyh")]
-position = Vector2(0, 300)
+position = Vector2(-0.411221, 631.536)
 
 [node name="Wall" parent="." instance=ExtResource("2_sugp2")]
-position = Vector2(-10, 0)
+position = Vector2(-10.4112, 4.96291)
 
 [node name="Wall2" parent="." instance=ExtResource("2_sugp2")]
-position = Vector2(650, 0)
+position = Vector2(1288.59, 4.94822)
 
 [node name="Heart" parent="." instance=ExtResource("3_sugp2")]
-position = Vector2(319, 262)
+position = Vector2(639.589, 593.536)
 
 [node name="EnemyContainer" type="Node2D" parent="."]
+position = Vector2(-0.411221, 331.536)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_jyhfs")]
+position = Vector2(-0.411221, 331.536)
+enemy_scene = ExtResource("5_tbgi4")
 spawn_points_path = Array[NodePath]([NodePath("Position1"), NodePath("Position2")])
 enemy_container_path = NodePath("../EnemyContainer")
-spawn_timer_one_shot = true
 
 [node name="Position1" type="Marker2D" parent="EnemySpawner"]
 position = Vector2(23, 275)
 
 [node name="Position2" type="Marker2D" parent="EnemySpawner"]
-position = Vector2(601, 274)
-
-[node name="EnemyPlaceholder" parent="." instance=ExtResource("5_tbgi4")]
-position = Vector2(19, 279)
-heart_path = NodePath("../Heart")
-speed = 50.0
-heart_range = 10.0
-attack_range = 20.0
+position = Vector2(1225, 273)
 
 [node name="Player" parent="." instance=ExtResource("6_tefeu")]
 unique_name_in_owner = true
+position = Vector2(-0.411221, 331.536)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2e5vfsjvbujp"]
+[gd_scene load_steps=7 format=3 uid="uid://d2e5vfsjvbujp"]
 
 [ext_resource type="Script" uid="uid://bpshwnkakma3o" path="res://scripts/enemy_placeholder.gd" id="1_4v77h"]
 
@@ -20,6 +20,9 @@ corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yo5jk"]
+size = Vector2(32, 32)
 
 [node name="EnemyPlaceholder" type="CharacterBody2D"]
 script = ExtResource("1_4v77h")
@@ -66,3 +69,8 @@ max_value = 10.0
 step = 1.0
 value = 5.0
 show_percentage = false
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_yo5jk")
