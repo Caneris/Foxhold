@@ -10,6 +10,7 @@ extends CharacterBody2D
 @export var max_health : int = 10
 @export var damage_per_click: int = 2
 
+
 # pixels/sec² — by default Godot’s 2D gravity
 @export var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 # Prevent them from accelerating forever
@@ -33,7 +34,19 @@ func die() -> void:
 	queue_free()
 
 
-func _on_click(viewport, event, shape_idx) -> void:
+#func _input(event: InputEvent) -> void:
+	#var event_is_mouseclick : bool = (
+		#event is InputEventMouseButton and 
+		#event.button_index == MOUSE_BUTTON_LEFT and
+		#event.is_pressed()
+	#)
+	#
+	#if event_is_mouseclick:
+		#print("hi")
+		#health_bar.value -= damage_per_click
+
+
+func _on_click_area_input(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
 	var event_is_mouseclick : bool = (
 		event is InputEventMouseButton and 
 		event.button_index == MOUSE_BUTTON_LEFT and
@@ -54,7 +67,13 @@ func _ready() -> void:
 	heart_node = get_tree().get_root().get_node("Main/Heart") as Area2D
 	sight.collide_with_areas = true
 	initiate_health(max_health)
-	click_area.connect("input_event",_on_click)
+	
+	# ignore mouse on the entire Control/HealthBar
+	$Control.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	health_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	click_area.input_pickable = true
+	click_area.input_event.connect(_on_click_area_input)
 
 
 func _physics_process(delta: float) -> void:

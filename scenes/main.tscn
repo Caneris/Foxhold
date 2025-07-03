@@ -41,3 +41,9 @@ position = Vector2(1225, 273)
 [node name="Player" parent="." instance=ExtResource("6_tefeu")]
 unique_name_in_owner = true
 position = Vector2(-0.411221, 331.536)
+
+[node name="EnemyPlaceholder" parent="." instance=ExtResource("5_tbgi4")]
+position = Vector2(1081.29, 574.066)
+
+[node name="EnemyPlaceholder2" parent="." instance=ExtResource("5_tbgi4")]
+position = Vector2(280.277, 583.014)

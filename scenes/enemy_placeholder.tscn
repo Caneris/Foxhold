@@ -25,6 +25,8 @@ corner_radius_bottom_left = 2
 size = Vector2(32, 32)
 
 [node name="EnemyPlaceholder" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_4v77h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -38,6 +40,7 @@ scale = Vector2(32, 32)
 texture = SubResource("CanvasTexture_drc24")
 
 [node name="Sight" type="RayCast2D" parent="."]
+collision_mask = 2
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -46,6 +49,7 @@ offset_left = -20.0
 offset_top = -19.0
 offset_right = 20.0
 offset_bottom = 21.0
+mouse_filter = 2
 
 [node name="HealthBar" type="ProgressBar" parent="Control"]
 unique_name_in_owner = true
@@ -73,4 +77,6 @@ show_percentage = false
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+z_index = 2
 shape = SubResource("RectangleShape2D_yo5jk")
+debug_color = Color(0.614852, 0.115266, 0.449245, 0.42)
