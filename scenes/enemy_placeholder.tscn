@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2e5vfsjvbujp"]
+[gd_scene load_steps=8 format=3 uid="uid://d2e5vfsjvbujp"]
 
 [ext_resource type="Script" uid="uid://bpshwnkakma3o" path="res://scripts/enemy_placeholder.gd" id="1_4v77h"]
+[ext_resource type="PackedScene" uid="uid://dit852ngrx8tm" path="res://scenes/coin.tscn" id="2_yo5jk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4v77h"]
 size = Vector2(32, 32)
@@ -28,6 +29,7 @@ size = Vector2(32, 32)
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_4v77h")
+drop_items = Array[PackedScene]([ExtResource("2_yo5jk")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 1

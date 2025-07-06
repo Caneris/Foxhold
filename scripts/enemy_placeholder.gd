@@ -9,6 +9,7 @@ extends CharacterBody2D
 @export var attack_interval : float = 2.0
 @export var max_health : int = 10
 @export var damage_per_click: int = 2
+@export var drop_items : Array[PackedScene]
 
 
 # pixels/sec² — by default Godot’s 2D gravity
@@ -19,6 +20,7 @@ extends CharacterBody2D
 
 var heart_node : Node2D
 var attack_cooldown : float = 0.0
+var main_scene : Node2D
 
 @onready var sight: RayCast2D = $Sight
 @onready var health_bar: ProgressBar = %HealthBar
@@ -28,8 +30,15 @@ var attack_cooldown : float = 0.0
 func take_damage() -> void:
 	health_bar.value = max(health_bar.value - damage_per_click, 0)
 
+func drop_item() -> void:
+	var dropped_item : Area2D = drop_items.pick_random().instantiate()
+	main_scene.add_child(dropped_item)
+	dropped_item.position = position
 
 func die() -> void:
+	
+	# drop item
+	drop_item()
 	# play death animation, spawn particles, sound, etc.
 	queue_free()
 
@@ -63,6 +72,8 @@ func initiate_health(value) -> void:
 
 
 func _ready() -> void:
+	
+	main_scene = get_tree().current_scene
 	# Cache Heart instance
 	heart_node = get_tree().get_root().get_node("Main/Heart") as Area2D
 	sight.collide_with_areas = true
