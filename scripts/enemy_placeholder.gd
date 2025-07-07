@@ -31,9 +31,17 @@ func take_damage() -> void:
 	health_bar.value = max(health_bar.value - damage_per_click, 0)
 
 func drop_item() -> void:
-	var dropped_item : Area2D = drop_items.pick_random().instantiate()
+	var dropped_item : RigidBody2D = drop_items.pick_random().instantiate()
+	var item_animated_sprite : AnimatedSprite2D = dropped_item.get_node("AnimatedSprite2D")
 	main_scene.add_child(dropped_item)
-	dropped_item.position = position
+	dropped_item.position = global_position
+	
+	dropped_item.gravity_scale = 1.0
+	# choose a random pop vector
+	var vx = randf_range(-100, 100)
+	var vy = randf_range(-300, -200)
+	# apply_impulse(relative_offset, impulse_vector)
+	dropped_item.linear_velocity = Vector2(vx, vy)
 
 func die() -> void:
 	
@@ -41,18 +49,6 @@ func die() -> void:
 	drop_item()
 	# play death animation, spawn particles, sound, etc.
 	queue_free()
-
-
-#func _input(event: InputEvent) -> void:
-	#var event_is_mouseclick : bool = (
-		#event is InputEventMouseButton and 
-		#event.button_index == MOUSE_BUTTON_LEFT and
-		#event.is_pressed()
-	#)
-	#
-	#if event_is_mouseclick:
-		#print("hi")
-		#health_bar.value -= damage_per_click
 
 
 func _on_click_area_input(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
