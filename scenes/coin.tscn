@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://dit852ngrx8tm"]
+[gd_scene load_steps=11 format=3 uid="uid://dit852ngrx8tm"]
 
+[ext_resource type="Script" uid="uid://usuqisd7et2x" path="res://scripts/coin.gd" id="1_i64fm"]
 [ext_resource type="Texture2D" uid="uid://djb3kyml2di08" path="res://assets/ItemSprites/coins-chests-etc-2-0.png" id="1_rwqht"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i64fm"]
@@ -56,6 +57,8 @@ animations = [{
 size = Vector2(11, 11)
 
 [node name="Coin" type="RigidBody2D"]
+collision_layer = 8
+script = ExtResource("1_i64fm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

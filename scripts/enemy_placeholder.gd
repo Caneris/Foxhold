@@ -8,7 +8,7 @@ extends CharacterBody2D
 @export var attack_damage : int = 1
 @export var attack_interval : float = 2.0
 @export var max_health : int = 10
-@export var damage_per_click: int = 2
+@export var damage_per_click: int = 5
 @export var drop_items : Array[PackedScene]
 
 
@@ -39,7 +39,7 @@ func drop_item() -> void:
 	dropped_item.gravity_scale = 1.0
 	# choose a random pop vector
 	var vx = randf_range(-100, 100)
-	var vy = randf_range(-300, -200)
+	var vy = randf_range(-350, -250)
 	# apply_impulse(relative_offset, impulse_vector)
 	dropped_item.linear_velocity = Vector2(vx, vy)
 
