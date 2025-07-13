@@ -1,15 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2rt5cmjacwdg"]
+[gd_scene load_steps=9 format=3 uid="uid://b2rt5cmjacwdg"]
 
 [ext_resource type="PackedScene" uid="uid://dxdixvw4t64ag" path="res://scenes/floor.tscn" id="1_0wfyh"]
+[ext_resource type="Script" uid="uid://bvyiyyx04otg5" path="res://scripts/main.gd" id="1_tipki"]
 [ext_resource type="PackedScene" uid="uid://ckxt7xyn3omwu" path="res://scenes/wall.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://dlbyw26fe20vd" path="res://scenes/heart.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bx271cpci77bt" path="res://scenes/enemy_spawner.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://d2e5vfsjvbujp" path="res://scenes/enemy_placeholder.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://b57d0lhm3n03w" path="res://scenes/player.tscn" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://dit852ngrx8tm" path="res://scenes/coin.tscn" id="7_o6xl0"]
 
 [node name="Main" type="Node2D"]
 rotation = -0.0012312
 scale = Vector2(1, 1.00743)
+script = ExtResource("1_tipki")
 
 [node name="Floor" parent="." instance=ExtResource("1_0wfyh")]
 position = Vector2(-0.411221, 631.536)
@@ -47,3 +50,6 @@ position = Vector2(1081.29, 574.066)
 
 [node name="EnemyPlaceholder2" parent="." instance=ExtResource("5_tbgi4")]
 position = Vector2(280.277, 583.014)
+
+[node name="Coin" parent="." instance=ExtResource("7_o6xl0")]
+position = Vector2(445.284, 577.26)
