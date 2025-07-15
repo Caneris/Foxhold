@@ -17,7 +17,7 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void
 
 func _physics_process(delta: float) -> void:
 	if dragging:
-		global_transform.origin = get_global_mouse_position()
+		global_position = get_global_mouse_position()
 
 func pick_up() -> void:
 	if dragging:
