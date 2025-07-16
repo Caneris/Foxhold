@@ -38,9 +38,9 @@ func pick_up() -> void:
 	angular_velocity = 0.0
 
 func drop(impulse = Vector2.ZERO) -> void:
-	print("impulse vector before clampinng: " + str(impulse))
+	print("impulse vector before clamping: " + str(impulse))
 	impulse = impulse.limit_length(max_throw_speed)
-	print("impulse vector after clampinng: " + str(impulse))
+	print("impulse vector after clamping: " + str(impulse))
 	if dragging:
 		freeze = false
 		if impulse.length() > min_throw_speed:

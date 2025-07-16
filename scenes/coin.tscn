@@ -61,7 +61,7 @@ collision_layer = 8
 collision_mask = 11
 script = ExtResource("1_i64fm")
 max_throw_speed = 700.0
-min_throw_speed = 500.0
+min_throw_speed = 200.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
