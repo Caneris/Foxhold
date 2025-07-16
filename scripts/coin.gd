@@ -4,7 +4,8 @@ signal clicked
 
 var dragging : bool = false
 var drag_offset := Vector2.ZERO
-@export var max_throw_speed : float = 30.0
+@export var max_throw_speed : float = 300.0
+@export var min_throw_speed : float = 100.0
 
 func _ready() -> void:
 	input_pickable = true
@@ -35,5 +36,6 @@ func drop(impulse = Vector2.ZERO) -> void:
 	print("impulse vector after clampinng: " + str(impulse))
 	if dragging:
 		freeze = false
-		apply_central_impulse(impulse)
+		if impulse.length() > min_throw_speed:
+			apply_central_impulse(impulse)
 		dragging = false
