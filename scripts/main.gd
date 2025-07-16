@@ -5,7 +5,7 @@ var dragged_item : RigidBody2D
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if dragged_item and !event.is_pressed():
-			dragged_item.drop(Input.get_last_mouse_velocity().limit_length(20))
+			dragged_item.drop(Input.get_last_mouse_velocity())
 			dragged_item = null
 
 func _ready() -> void:
