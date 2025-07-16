@@ -3,7 +3,10 @@ extends RigidBody2D
 signal clicked
 
 var dragging : bool = false
+var throwing : bool = false
+
 var drag_offset := Vector2.ZERO
+
 @export var max_throw_speed : float = 300.0
 @export var min_throw_speed : float = 100.0
 
@@ -21,7 +24,7 @@ func _physics_process(delta: float) -> void:
 	if dragging:
 		global_transform.origin = get_global_mouse_position()
 	else:
-		if linear_velocity.length() > max_throw_speed:
+		if linear_velocity.length() > max_throw_speed and throwing:
 			linear_velocity = linear_velocity.normalized() * max_throw_speed
 
 func pick_up() -> void:
@@ -29,6 +32,10 @@ func pick_up() -> void:
 		return
 	freeze = true
 	dragging = true
+	throwing = false
+	
+	linear_velocity = Vector2.ZERO
+	angular_velocity = 0.0
 
 func drop(impulse = Vector2.ZERO) -> void:
 	print("impulse vector before clampinng: " + str(impulse))
@@ -37,5 +44,7 @@ func drop(impulse = Vector2.ZERO) -> void:
 	if dragging:
 		freeze = false
 		if impulse.length() > min_throw_speed:
+			throwing = true
+			print("apply impulse")
 			apply_central_impulse(impulse)
 		dragging = false
