@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlbyw26fe20vd"]
+[gd_scene load_steps=6 format=3 uid="uid://dlbyw26fe20vd"]
 
 [ext_resource type="Script" uid="uid://cojp2nac3arah" path="res://scripts/heart.gd" id="1_v30as"]
 
@@ -6,6 +6,20 @@
 size = Vector2(76, 76)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_v30as"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v30as"]
+bg_color = Color(0.203922, 0.137255, 0.137255, 0.360784)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ycbwg"]
+bg_color = Color(0.784314, 0.133333, 0.235294, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [node name="Heart" type="Area2D" groups=["heart"]]
 collision_layer = 2
@@ -20,3 +34,21 @@ shape = SubResource("RectangleShape2D_jmd42")
 self_modulate = Color(0.912659, 0.22057, 0.207099, 1)
 scale = Vector2(76, 76)
 texture = SubResource("CanvasTexture_v30as")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HealthBar" type="ProgressBar" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -68.0
+offset_top = -60.0
+offset_right = 69.0
+offset_bottom = -48.0
+theme_override_styles/background = SubResource("StyleBoxFlat_v30as")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ycbwg")
+value = 50.0
+show_percentage = false

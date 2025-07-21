@@ -121,6 +121,7 @@ func _try_attack(delta) -> void:
 	if attack_cooldown <= 0.0:
 		print("attack the heart")
 		attack_cooldown = attack_interval
+		heart_node.take_damage(attack_damage)
 	else:
 		attack_cooldown -= delta
 
