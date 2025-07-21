@@ -25,10 +25,12 @@ corner_radius_bottom_left = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yo5jk"]
 size = Vector2(32, 32)
 
-[node name="EnemyPlaceholder" type="CharacterBody2D"]
+[node name="EnemyPlaceholder" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_4v77h")
+max_health = 12
+damage_per_click = 3
 drop_items = Array[PackedScene]([ExtResource("2_yo5jk")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

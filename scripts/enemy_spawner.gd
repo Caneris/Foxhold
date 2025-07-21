@@ -39,6 +39,6 @@ func initiate_node_paths() -> void:
 func _on_spawn_timer_timeout() -> void:
 	var enemy := enemy_scene.instantiate()
 	enemy_container.add_child(enemy)
+	enemy_container.move_child(enemy, 0)
 	enemy.global_position = spawn_points[0].global_position
-	print("time out")
 	
