@@ -34,6 +34,7 @@ position = Vector2(-0.411221, 331.536)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_jyhfs")]
 position = Vector2(-0.411221, 331.536)
+spawn_interval = 5.0
 spawn_points_path = Array[NodePath]([NodePath("Position1"), NodePath("Position2")])
 enemy_container_path = NodePath("../EnemyContainer")
 
