@@ -17,3 +17,5 @@ offset_bottom = 74.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 24
 text = "COIN COUNT:"
+
+[node name="HeartMenu" type="PopupMenu" parent="."]

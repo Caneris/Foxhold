@@ -1,8 +1,8 @@
 extends Node2D
 
 @onready var heart: Area2D = %Heart
-@onready var ui: Control = $UI
-@onready var ui_coin_count_label: Control = $UI/CoinCountLabel
+@onready var ui: Control = $UI_Layer/UI
+@onready var ui_coin_count_label: Control = $UI_Layer/UI/CoinCountLabel
 
 var coin_count : int = 0
 var dragged_item : RigidBody2D
