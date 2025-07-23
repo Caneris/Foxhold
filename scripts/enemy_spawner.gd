@@ -37,8 +37,12 @@ func initiate_node_paths() -> void:
 	enemy_container = get_node_or_null(enemy_container_path)
 
 func _on_spawn_timer_timeout() -> void:
+	spawn_enemy(0)
+	spawn_enemy(1)
+
+
+func spawn_enemy(spawn_index) -> void:
 	var enemy := enemy_scene.instantiate()
 	enemy_container.add_child(enemy)
 	enemy_container.move_child(enemy, 0)
-	enemy.global_position = spawn_points[0].global_position
-	
+	enemy.global_position = spawn_points[spawn_index].global_position
