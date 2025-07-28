@@ -20,6 +20,5 @@ text = "COIN COUNT:"
 
 [node name="HeartMenu" type="PopupMenu" parent="."]
 title = "HeartMenu"
-visible = true
 item_count = 1
 item_0/id = 0

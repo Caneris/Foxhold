@@ -7,3 +7,4 @@
 script = ExtResource("1_ks1gq")
 enemy_scene = ExtResource("2_devoi")
 spawn_points_path = Array[NodePath]([NodePath(""), NodePath("")])
+spawn_timer_one_shot = true

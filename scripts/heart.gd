@@ -7,13 +7,17 @@ signal coin_in_heart(coin)
 @onready var menu : PopupMenu
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
+#var mouse_over_heart : bool = false
 
 func _ready() -> void:
+	health_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	menu = get_tree().current_scene.get_node("UI_Layer/UI/HeartMenu")
 	initiate_health(max_health)
 	body_entered.connect(_on_body_entered)
 	mouse_entered.connect(_on_mouse_entered)
-	mouse_exited.connect(_on_menu_mouse_exited)
+	mouse_exited.connect(_on_heart_mouse_exited)
+	
+	menu.mouse_exited.connect(_on_menu_mouse_exited)
 
 func take_damage(damage: float) -> void:
 	print("heart takes " + str(damage) + " damage!")
@@ -35,5 +39,29 @@ func _on_mouse_entered() -> void:
 	menu.position = target_point
 	menu.show()
 
-func _on_menu_mouse_exited() -> void:
+func _on_heart_mouse_exited() -> void:
 	print("mouse exited heart")
+	call_deferred("_try_hide_menu")
+
+func _on_menu_mouse_exited() -> void:
+	print("mouse exited menu")
+	call_deferred("_try_hide_menu")
+
+func _try_hide_menu() -> void:
+	var mpos = get_viewport().get_mouse_position()
+	var menu_rect : Rect2 = Rect2(menu.position, menu.size)
+	
+	# build heart rect
+	var tex_size : Vector2 = sprite_2d.texture.get_size() * sprite_2d.global_scale
+	var heart_tl : Vector2 = global_position - tex_size * 0.5
+	var heart_rect : Rect2 = Rect2(heart_tl, tex_size)
+	
+	var over_menu : bool = menu_rect.has_point(mpos)
+	var over_heart : bool = heart_rect.has_point(mpos)
+	
+	if not over_heart and not over_menu:
+		menu.hide()
+		print("neither over heart nor menu")
+
+func _populate_heart_menu() -> void:
+	pass
