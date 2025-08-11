@@ -9,15 +9,59 @@ signal coin_in_heart(coin)
 
 #var mouse_over_heart : bool = false
 
+var menu_item_ids = {
+	"House": 0,
+	"Tower": 1,
+	"Wall": 2
+}
+
+var menu_item_costs = {
+	0: 5, # House cost
+	1: 10, # Tower cost
+	2: 25 # Wall cost
+}
+
+
 func _ready() -> void:
 	health_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	menu = get_tree().current_scene.get_node("UI_Layer/UI/HeartMenu")
+	_populate_heart_menu()
 	initiate_health(max_health)
 	body_entered.connect(_on_body_entered)
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_heart_mouse_exited)
 	
 	menu.mouse_exited.connect(_on_menu_mouse_exited)
+	menu.id_pressed.connect(_on_menu_item_selected)
+
+
+func _populate_heart_menu() -> void:
+	menu.clear()
+	_add_menu_item("House")
+	_add_menu_item("Tower")
+	_add_menu_item("Wall")
+
+func _add_menu_item(name: String) -> void:
+	var id : int = menu_item_ids[name]
+	menu.add_item(name + " (" + str(menu_item_costs[id]) + " coins)", id)
+
+func _on_menu_item_selected(id: int) -> void:
+	match id:
+		0:
+			_create_house()
+		1:
+			_create_tower()
+		2:
+			_create_wall()
+
+func _create_house() -> void:
+	print("Created a house!")
+
+func _create_tower() -> void:
+	print("Created a tower!")
+
+func _create_wall() -> void:
+	print("Created a wall!")
 
 func take_damage(damage: float) -> void:
 	print("heart takes " + str(damage) + " damage!")
@@ -61,7 +105,3 @@ func _try_hide_menu() -> void:
 	
 	if not over_heart and not over_menu:
 		menu.hide()
-		print("neither over heart nor menu")
-
-func _populate_heart_menu() -> void:
-	pass
