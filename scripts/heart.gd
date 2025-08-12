@@ -1,6 +1,8 @@
 extends Area2D
 
 signal coin_in_heart(coin)
+signal menu_item_selected(cost)
+
 
 @export var max_health : float = 20.0
 @onready var health_bar: ProgressBar = %HealthBar
@@ -46,22 +48,29 @@ func _add_menu_item(name: String) -> void:
 	menu.add_item(name + " (" + str(menu_item_costs[id]) + " coins)", id)
 
 func _on_menu_item_selected(id: int) -> void:
+	var cost : int = menu_item_costs[id]
 	match id:
 		0:
-			_create_house()
+			_create_house(cost)
 		1:
-			_create_tower()
+			_create_tower(cost)
 		2:
-			_create_wall()
+			_create_wall(cost)
 
-func _create_house() -> void:
+func _create_house(cost: int) -> void:
 	print("Created a house!")
+	print("It costs " + str(cost) + " coins")
+	menu_item_selected.emit(cost)
 
-func _create_tower() -> void:
+func _create_tower(cost: int) -> void:
 	print("Created a tower!")
+	print("It costs " + str(cost) + " coins")
+	menu_item_selected.emit(cost)
 
-func _create_wall() -> void:
+func _create_wall(cost: int) -> void:
 	print("Created a wall!")
+	print("It costs " + str(cost) + " coins")
+	menu_item_selected.emit(cost)
 
 func take_damage(damage: float) -> void:
 	print("heart takes " + str(damage) + " damage!")
@@ -84,11 +93,9 @@ func _on_mouse_entered() -> void:
 	menu.show()
 
 func _on_heart_mouse_exited() -> void:
-	print("mouse exited heart")
 	call_deferred("_try_hide_menu")
 
 func _on_menu_mouse_exited() -> void:
-	print("mouse exited menu")
 	call_deferred("_try_hide_menu")
 
 func _try_hide_menu() -> void:

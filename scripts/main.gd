@@ -39,7 +39,7 @@ func _ready() -> void:
 	vp.physics_object_picking_first_only = true
 	
 	#intersect_params = PhysicsPointQueryParameters2D.new()
-	
+	heart.menu_item_selected.connect(_selected_menu_item)
 	heart.coin_in_heart.connect(_coin_entered_heart)
 	for node in get_tree().get_nodes_in_group("item"):
 		print(node.is_in_group("item"))
@@ -55,3 +55,13 @@ func _coin_entered_heart(coin: RigidBody2D) -> void:
 	print("new coin count: " + str(coin_count))
 	ui_coin_count_label.text = "COIN COUNT: " + str(coin_count)
 	coin.queue_free()
+
+func _selected_menu_item(cost: int) -> void:
+	print("cost signal reached main: " + str(cost) + " coins!")
+	if cost > coin_count:
+		print("Not enough coins!")
+	else:
+		coin_count -= cost
+		print("new coin count: " + str(coin_count))
+		ui_coin_count_label.text = "COIN COUNT: " + str(coin_count)
+		
