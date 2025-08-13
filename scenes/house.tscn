@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cagc640uyr0gl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x8wvn"]
+size = Vector2(64, 64)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_x8wvn"]
+
+[node name="House" type="Area2D"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+shape = SubResource("RectangleShape2D_x8wvn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.330827, 0.492065, 0.931673, 1)
+scale = Vector2(64, 64)
+texture = SubResource("CanvasTexture_x8wvn")
