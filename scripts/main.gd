@@ -56,12 +56,15 @@ func _coin_entered_heart(coin: RigidBody2D) -> void:
 	ui_coin_count_label.text = "COIN COUNT: " + str(coin_count)
 	coin.queue_free()
 
-func _selected_menu_item(cost: int) -> void:
-	print("cost signal reached main: " + str(cost) + " coins!")
+func _selected_menu_item(cost: int, menu_item_type) -> void:
+	print("item signal reached main: " + str(cost) + " coins and " + str(menu_item_type) + " type!")
 	if cost > coin_count:
 		print("Not enough coins!")
 	else:
 		coin_count -= cost
 		print("new coin count: " + str(coin_count))
+		_create_item(menu_item_type)
 		ui_coin_count_label.text = "COIN COUNT: " + str(coin_count)
-		
+
+func _create_item(type: String) -> void:
+	print("A " + str(type) + " was created!")

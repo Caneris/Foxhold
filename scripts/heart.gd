@@ -1,7 +1,7 @@
 extends Area2D
 
 signal coin_in_heart(coin)
-signal menu_item_selected(cost)
+signal menu_item_selected(cost, menu_item_type)
 
 
 @export var max_health : float = 20.0
@@ -51,26 +51,26 @@ func _on_menu_item_selected(id: int) -> void:
 	var cost : int = menu_item_costs[id]
 	match id:
 		0:
-			_create_house(cost)
+			_create_item(cost, "house")
 		1:
-			_create_tower(cost)
+			_create_item(cost, "tower")
 		2:
-			_create_wall(cost)
+			_create_item(cost, "house")
 
-func _create_house(cost: int) -> void:
-	print("Created a house!")
+func _create_item(cost: int, type: String) -> void:
+	print("Created an item of type " + str(type) + "!")
 	print("It costs " + str(cost) + " coins")
-	menu_item_selected.emit(cost)
+	menu_item_selected.emit(cost, type)
 
-func _create_tower(cost: int) -> void:
-	print("Created a tower!")
-	print("It costs " + str(cost) + " coins")
-	menu_item_selected.emit(cost)
-
-func _create_wall(cost: int) -> void:
-	print("Created a wall!")
-	print("It costs " + str(cost) + " coins")
-	menu_item_selected.emit(cost)
+#func _create_tower(cost: int) -> void:
+	#print("Created a tower!")
+	#print("It costs " + str(cost) + " coins")
+	#menu_item_selected.emit(cost)
+#
+#func _create_wall(cost: int) -> void:
+	#print("Created a wall!")
+	#print("It costs " + str(cost) + " coins")
+	#menu_item_selected.emit(cost)
 
 func take_damage(damage: float) -> void:
 	print("heart takes " + str(damage) + " damage!")
