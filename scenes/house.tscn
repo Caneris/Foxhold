@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cagc640uyr0gl"]
+[gd_scene load_steps=4 format=3 uid="uid://cagc640uyr0gl"]
+
+[ext_resource type="Script" uid="uid://dy4dyp3sytag5" path="res://scripts/house.gd" id="1_d7po0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x8wvn"]
 size = Vector2(64, 64)
@@ -8,6 +10,7 @@ size = Vector2(64, 64)
 [node name="House" type="Area2D"]
 collision_layer = 16
 collision_mask = 0
+script = ExtResource("1_d7po0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 1
