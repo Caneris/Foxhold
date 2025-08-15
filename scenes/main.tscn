@@ -34,6 +34,8 @@ position = Vector2(639.589, 593.536)
 [node name="EnemyContainer" type="Node2D" parent="."]
 position = Vector2(-0.411221, 331.536)
 
+[node name="HouseContainer" type="Node2D" parent="."]
+
 [node name="EnemySpawner" parent="." instance=ExtResource("4_jyhfs")]
 position = Vector2(-0.411221, 331.536)
 spawn_interval = 5.0
@@ -53,3 +55,9 @@ position = Vector2(-0.411221, 331.536)
 
 [node name="Coin" parent="." instance=ExtResource("7_o6xl0")]
 position = Vector2(445.284, 577.26)
+
+[node name="HousePositions" type="Node2D" parent="."]
+
+[node name="Position1" type="Marker2D" parent="HousePositions"]
+
+[node name="Position2" type="Marker2D" parent="HousePositions"]
