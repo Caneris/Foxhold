@@ -51,11 +51,11 @@ func _on_menu_item_selected(id: int) -> void:
 	var cost : int = menu_item_costs[id]
 	match id:
 		0:
-			_create_item(cost, "house")
+			_create_item(cost, "House")
 		1:
-			_create_item(cost, "tower")
+			_create_item(cost, "Tower")
 		2:
-			_create_item(cost, "house")
+			_create_item(cost, "Wall")
 
 func _create_item(cost: int, type: String) -> void:
 	print("Created an item of type " + str(type) + "!")

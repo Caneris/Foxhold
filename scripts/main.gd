@@ -8,6 +8,12 @@ var coin_count : int = 0
 var dragged_item : RigidBody2D
 var intersect_params : PhysicsPointQueryParameters2D
 
+var building_scenes = {
+	"house": preload("res://scenes/house.tscn"),
+	#"tower": preload("res://scenes/tower.tscn"),
+	#"wall": preload("res://scenes/wall.tscn")
+}
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if dragged_item and !event.is_pressed():
@@ -60,6 +66,8 @@ func _selected_menu_item(cost: int, menu_item_type) -> void:
 	print("item signal reached main: " + str(cost) + " coins and " + str(menu_item_type) + " type!")
 	if cost > coin_count:
 		print("Not enough coins!")
+		if building_scenes.has(menu_item_type):
+			var building = building_scenes[menu_item_type].instantiate()
 	else:
 		coin_count -= cost
 		print("new coin count: " + str(coin_count))
