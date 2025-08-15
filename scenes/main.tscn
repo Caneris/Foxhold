@@ -59,5 +59,7 @@ position = Vector2(445.284, 577.26)
 [node name="HousePositions" type="Node2D" parent="."]
 
 [node name="Position1" type="Marker2D" parent="HousePositions"]
+position = Vector2(347.217, 631.734)
 
 [node name="Position2" type="Marker2D" parent="HousePositions"]
+position = Vector2(912.218, 631.432)
