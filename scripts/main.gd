@@ -3,15 +3,23 @@ extends Node2D
 @onready var heart: Area2D = %Heart
 @onready var ui: Control = $UI_Layer/UI
 @onready var ui_coin_count_label: Control = $UI_Layer/UI/CoinCountLabel
+@onready var house_container: Node2D = $HouseContainer
+
+
 
 var coin_count : int = 0
 var dragged_item : RigidBody2D
 var intersect_params : PhysicsPointQueryParameters2D
 
+@onready var house_positions: Array[Marker2D] = [
+	$HousePositions/Position1,
+	$HousePositions/Position2
+]
+
 var building_scenes = {
-	"house": preload("res://scenes/house.tscn"),
-	#"tower": preload("res://scenes/tower.tscn"),
-	#"wall": preload("res://scenes/wall.tscn")
+	"House": preload("res://scenes/house.tscn"),
+	#"Tower": preload("res://scenes/tower.tscn"),
+	#"Wall": preload("res://scenes/wall.tscn")
 }
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -69,10 +77,28 @@ func _selected_menu_item(cost: int, menu_item_type) -> void:
 		if building_scenes.has(menu_item_type):
 			var building = building_scenes[menu_item_type].instantiate()
 	else:
-		coin_count -= cost
-		print("new coin count: " + str(coin_count))
-		_create_item(menu_item_type)
-		ui_coin_count_label.text = "COIN COUNT: " + str(coin_count)
+		_create_item(cost, menu_item_type)
 
-func _create_item(type: String) -> void:
-	print("A " + str(type) + " was created!")
+func _create_item(cost: int, type: String) -> void:
+	print("A " + str(type) + " will be created!")
+	
+	match type:
+		"House":
+			if try_create_house():
+				coin_count -= cost
+				print("new coin count: " + str(coin_count))
+				ui_coin_count_label.text = "COIN COUNT: " + str(coin_count)
+		"Tower":
+			pass
+		"Wall":
+			pass
+
+func try_create_house() -> bool:
+	var n_house : int = house_container.get_child_count()
+	if n_house >= house_positions.size():
+		return false # no spots left
+	
+	var house : Area2D = building_scenes["House"].instantiate()
+	house_container.add_child(house)
+	house.global_position = house_positions[n_house - 1].global_position
+	return true
