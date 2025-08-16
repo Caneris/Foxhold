@@ -30,22 +30,36 @@ func _ready() -> void:
 	_populate_heart_menu()
 	initiate_health(max_health)
 	body_entered.connect(_on_body_entered)
-	mouse_entered.connect(_on_mouse_entered)
-	mouse_exited.connect(_on_heart_mouse_exited)
 	
-	menu.mouse_exited.connect(_on_menu_mouse_exited)
+	input_event.connect(_on_heart_input_event)
+	#mouse_entered.connect(_on_mouse_entered)
+	#mouse_exited.connect(_on_heart_mouse_exited)
+	
+	#menu.mouse_exited.connect(_on_menu_mouse_exited)
+	
 	menu.id_pressed.connect(_on_menu_item_selected)
+
+func _on_heart_input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
+		_show_menu_at_mouse()
+
+
+func _show_menu_at_mouse() -> void:
+	menu.position = get_global_mouse_position()
+	menu.show()
 
 
 func _populate_heart_menu() -> void:
 	menu.clear()
 	_add_menu_item("House")
-	_add_menu_item("Tower")
+	_add_menu_item("Tower") 
 	_add_menu_item("Wall")
+
 
 func _add_menu_item(name: String) -> void:
 	var id : int = menu_item_ids[name]
 	menu.add_item(name + " (" + str(menu_item_costs[id]) + " coins)", id)
+
 
 func _on_menu_item_selected(id: int) -> void:
 	var cost : int = menu_item_costs[id]
@@ -56,6 +70,7 @@ func _on_menu_item_selected(id: int) -> void:
 			_create_item(cost, "Tower")
 		2:
 			_create_item(cost, "Wall")
+
 
 func _create_item(cost: int, type: String) -> void:
 	print("Created an item of type " + str(type) + "!")
@@ -72,17 +87,21 @@ func _create_item(cost: int, type: String) -> void:
 	#print("It costs " + str(cost) + " coins")
 	#menu_item_selected.emit(cost)
 
+
 func take_damage(damage: float) -> void:
 	print("heart takes " + str(damage) + " damage!")
 	health_bar.value = max(health_bar.value - damage, 0)
+
 
 func initiate_health(value: float) -> void:
 	health_bar.max_value = max_health
 	health_bar.value = value
 
+
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("coin"):
 		coin_in_heart.emit(body)
+
 
 func _on_mouse_entered() -> void:
 	var heart_pos = global_position
@@ -92,11 +111,14 @@ func _on_mouse_entered() -> void:
 	menu.position = target_point
 	menu.show()
 
+
 func _on_heart_mouse_exited() -> void:
 	call_deferred("_try_hide_menu")
 
+
 func _on_menu_mouse_exited() -> void:
 	call_deferred("_try_hide_menu")
+
 
 func _try_hide_menu() -> void:
 	var mpos = get_viewport().get_mouse_position()
