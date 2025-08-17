@@ -26,6 +26,8 @@ var main_scene : Node2D
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var click_area: Area2D = $Area2D
 
+signal enemy_died
+
 
 func take_damage() -> void:
 	health_bar.value = max(health_bar.value - damage_per_click, 0)
@@ -49,6 +51,7 @@ func drop_item() -> void:
 
 func die() -> void:
 	
+	enemy_died.emit()
 	# drop item
 	drop_item()
 	# play death animation, spawn particles, sound, etc.
