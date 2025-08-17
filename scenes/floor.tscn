@@ -4,6 +4,7 @@
 size = Vector2(1279, 91)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_ukw5w"]
+texture_filter = 1
 
 [node name="Floor" type="StaticBody2D"]
 
@@ -13,6 +14,7 @@ position = Vector2(639.5, 45.5)
 shape = SubResource("RectangleShape2D_c41w6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 position = Vector2(639.5, 45.5)
 scale = Vector2(1279, 91)
 texture = SubResource("CanvasTexture_ukw5w")

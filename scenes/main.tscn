@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://dit852ngrx8tm" path="res://scenes/coin.tscn" id="7_o6xl0"]
 
 [node name="Main" type="Node2D"]
-rotation = -0.0012312
 scale = Vector2(1, 1.00743)
 script = ExtResource("1_tipki")
 
