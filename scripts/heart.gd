@@ -89,7 +89,6 @@ func _create_item(cost: int, type: String) -> void:
 
 
 func take_damage(damage: float) -> void:
-	print("heart takes " + str(damage) + " damage!")
 	health_bar.value = max(health_bar.value - damage, 0)
 
 

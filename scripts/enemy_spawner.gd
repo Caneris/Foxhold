@@ -10,6 +10,8 @@ var spawn_points : Array[Marker2D]
 var enemy_container : Node2D
 var spawn_timer : Timer
 
+var wave_number : int = 0
+
 
 func _ready() -> void:
 	initiate_timer()
