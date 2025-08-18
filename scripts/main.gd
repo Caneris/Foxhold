@@ -66,7 +66,7 @@ func _on_item_clicked(item: RigidBody2D) -> void:
 
 func _coin_entered_heart(coin: RigidBody2D) -> void:
 	coin_count += 1
-	print("new coin count: " + str(coin_count))
+	#print("new coin count: " + str(coin_count))
 	ui_coin_count_label.text = "COIN COUNT: " + str(coin_count)
 	coin.queue_free()
 

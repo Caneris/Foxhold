@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var enemy_scene : PackedScene
-@export var spawn_interval : float = 20.0
+@export var spawn_interval : float = 1.0
 @export var break_interval : float = 5.0
 @export var spawn_points_path : Array[NodePath] = []
 @export var enemy_container_path : NodePath
@@ -34,6 +34,7 @@ func start_wave() -> void:
 	n_this_wave = roundi(n_base * (1+enemy_growth_rate)**(wave_number - 1))
 	print("n this wave: " + str(n_this_wave))
 	spawn_timer.start()
+	print("spawn_timer wait time: " + str(spawn_timer.wait_time))
 
 func initiate_spawn_timer() -> void:
 	spawn_timer = Timer.new()
@@ -67,7 +68,6 @@ func _on_spawn_timer_timeout() -> void:
 		spawn_enemy(spawn_index)
 	else:
 		spawn_timer.stop()
-		break_timer.start()
 
 
 func _on_break_timer_timeout() -> void:
@@ -80,3 +80,12 @@ func spawn_enemy(spawn_index) -> void:
 	enemy_container.add_child(enemy)
 	enemy_container.move_child(enemy, 0)
 	enemy.global_position = spawn_points[spawn_index].global_position
+	
+	# connect death signal
+	enemy.enemy_died.connect(_on_enemy_died)
+
+func _on_enemy_died() -> void:
+	print("enemy died signal")
+	n_current -= 1
+	if n_current == 0:
+		break_timer.start()
