@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var enemy_scene : PackedScene
-@export var spawn_interval : float = 2.0
+@export var spawn_interval : float = 20.0
 @export var break_interval : float = 5.0
 @export var spawn_points_path : Array[NodePath] = []
 @export var enemy_container_path : NodePath
@@ -22,12 +22,14 @@ var break_timer : Timer
 
 func _ready() -> void:
 	initiate_spawn_timer()
+	initiate_break_timer()
 	initiate_node_paths()
 	start_wave()
 
 
 func start_wave() -> void:
-	break_timer.stop()
+	if not break_timer.is_stopped():
+		break_timer.stop()
 	wave_number += 1
 	n_this_wave = roundi(n_base * (1+enemy_growth_rate)**(wave_number - 1))
 	print("n this wave: " + str(n_this_wave))
