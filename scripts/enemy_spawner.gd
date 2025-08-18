@@ -1,7 +1,10 @@
 extends Node2D
 
 @export var enemy_scene : PackedScene
-@export var spawn_interval : float = 1.0
+#@export var spawn_interval : float = 1.0
+@export var spawn_interval_min : float = 1.0
+@export var spawn_interval_max : float = 1.0
+
 @export var break_interval : float = 5.0
 @export var spawn_points_path : Array[NodePath] = []
 @export var enemy_container_path : NodePath
@@ -40,7 +43,7 @@ func initiate_spawn_timer() -> void:
 	spawn_timer = Timer.new()
 	add_child(spawn_timer)
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
-	spawn_timer.wait_time = spawn_interval
+	spawn_timer.wait_time = randf_range(spawn_interval_min, spawn_interval_max)
 	spawn_timer.one_shot = spawn_timer_one_shot
 
 
@@ -66,6 +69,7 @@ func _on_spawn_timer_timeout() -> void:
 	if n_current < n_this_wave:
 		var spawn_index : int = randi_range(0, 1)
 		spawn_enemy(spawn_index)
+		spawn_timer.wait_time = randf_range(spawn_interval_min, spawn_interval_max)
 	else:
 		spawn_timer.stop()
 
