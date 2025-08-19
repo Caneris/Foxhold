@@ -23,11 +23,22 @@ var enemy_growth_rate : float = 0.2
 
 var break_timer : Timer
 
+signal wave_countdown_started(duration)
+signal countdown_updated(time_remaining)
+signal wave_starting
+
+
 func _ready() -> void:
 	initiate_spawn_timer()
 	initiate_break_timer()
 	initiate_node_paths()
 	start_wave()
+
+
+func _process(delta: float) -> void:
+	if not break_timer.is_stopped():
+		var time_left : float = break_timer.time_left
+		countdown_updated.emit(time_left)
 
 
 func start_wave() -> void:
@@ -36,8 +47,8 @@ func start_wave() -> void:
 	wave_number += 1
 	n_this_wave = roundi(n_base * (1+enemy_growth_rate)**(wave_number - 1))
 	print("n this wave: " + str(n_this_wave))
+	wave_starting.emit()
 	spawn_timer.start()
-	print("spawn_timer wait time: " + str(spawn_timer.wait_time))
 
 func initiate_spawn_timer() -> void:
 	spawn_timer = Timer.new()
@@ -88,8 +99,14 @@ func spawn_enemy(spawn_index) -> void:
 	# connect death signal
 	enemy.enemy_died.connect(_on_enemy_died)
 
+
 func _on_enemy_died() -> void:
 	print("enemy died signal")
 	n_current -= 1
 	if n_current == 0:
-		break_timer.start()
+		_wave_complete()
+
+
+func _wave_complete() -> void:
+	wave_countdown_started.emit(break_timer.wait_time)
+	break_timer.start()

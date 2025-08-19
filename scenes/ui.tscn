@@ -1,10 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cirhxs55at7w7"]
+[gd_scene load_steps=3 format=3 uid="uid://cirhxs55at7w7"]
+
+[ext_resource type="Script" uid="uid://ci8rvsl7jj13i" path="res://scripts/ui.gd" id="1_nt7q6"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_xlq6p"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_nt7q6")
 
 [node name="CoinCountLabel" type="Label" parent="."]
 layout_mode = 1
@@ -26,10 +29,13 @@ item_count = 1
 item_0/text = "House"
 item_0/id = 0
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+[node name="BreakTimerCircle" type="TextureProgressBar" parent="."]
+visible = false
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 100.0
+offset_bottom = 100.0
 value = 80.0
 fill_mode = 4
 nine_patch_stretch = true

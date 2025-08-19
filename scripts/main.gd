@@ -4,6 +4,7 @@ extends Node2D
 @onready var ui: Control = $UI_Layer/UI
 @onready var ui_coin_count_label: Control = $UI_Layer/UI/CoinCountLabel
 @onready var house_container: Node2D = $HouseContainer
+@onready var enemy_spawner: Node2D = $EnemySpawner
 
 
 
@@ -51,6 +52,10 @@ func _ready() -> void:
 	var vp := get_viewport()
 	vp.physics_object_picking_sort = true
 	vp.physics_object_picking_first_only = true
+	
+	# connect ui and enemy spawner signals
+	enemy_spawner.wave_countdown_started.connect(ui._on_countdown_started)
+	enemy_spawner.countdown_updated.connect(ui._on_countdown_updated)
 	
 	#intersect_params = PhysicsPointQueryParameters2D.new()
 	heart.menu_item_selected.connect(_selected_menu_item)
