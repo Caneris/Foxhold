@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://cirhxs55at7w7"]
+[gd_scene load_steps=2 format=3 uid="uid://cirhxs55at7w7"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_xlq6p"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -23,3 +25,13 @@ title = "HeartMenu"
 item_count = 1
 item_0/text = "House"
 item_0/id = 0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+value = 80.0
+fill_mode = 4
+nine_patch_stretch = true
+texture_progress = SubResource("CanvasTexture_xlq6p")
+tint_progress = Color(0.290196, 0.411765, 1, 1)
