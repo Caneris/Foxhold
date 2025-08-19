@@ -8,4 +8,5 @@ func _on_countdown_started(duration : float) -> void:
 
 
 func _on_countdown_updated(time_remaining : float) -> void:
+	#print("UI received: ", time_remaining)
 	break_timer_circle.value = time_remaining

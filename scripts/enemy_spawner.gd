@@ -19,6 +19,7 @@ var wave_number : int = 0
 var n_base : int = 5
 var n_this_wave : int
 var n_current : int = 0
+var n_spawned : int = 0
 var enemy_growth_rate : float = 0.2
 
 var break_timer : Timer
@@ -38,6 +39,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not break_timer.is_stopped():
 		var time_left : float = break_timer.time_left
+		#print("Time left: ", time_left)  
 		countdown_updated.emit(time_left)
 
 
@@ -77,7 +79,7 @@ func initiate_node_paths() -> void:
 	enemy_container = get_node_or_null(enemy_container_path)
 
 func _on_spawn_timer_timeout() -> void:
-	if n_current < n_this_wave:
+	if n_spawned < n_this_wave:
 		var spawn_index : int = randi_range(0, 1)
 		spawn_enemy(spawn_index)
 		spawn_timer.wait_time = randf_range(spawn_interval_min, spawn_interval_max)
@@ -91,6 +93,7 @@ func _on_break_timer_timeout() -> void:
 
 func spawn_enemy(spawn_index) -> void:
 	n_current += 1
+	n_spawned += 1
 	var enemy := enemy_scene.instantiate()
 	enemy_container.add_child(enemy)
 	enemy_container.move_child(enemy, 0)
@@ -110,3 +113,4 @@ func _on_enemy_died() -> void:
 func _wave_complete() -> void:
 	wave_countdown_started.emit(break_timer.wait_time)
 	break_timer.start()
+	n_spawned = 0
