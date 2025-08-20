@@ -18,7 +18,7 @@ var menu_item_ids = {
 }
 
 var menu_item_costs = {
-	0: 5, # House cost
+	0: 2, # House cost
 	1: 10, # Tower cost
 	2: 25 # Wall cost
 }
