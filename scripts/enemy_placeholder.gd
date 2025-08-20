@@ -104,7 +104,7 @@ func _physics_process(delta: float) -> void:
 	
 	# always aim at the art
 	var to_heart := heart_node.global_position - global_position
-	var dist := to_heart.length()
+	# var dist := to_heart.length()
 	var dir := Vector2(sign(to_heart.x), 0)
 	
 	# point a fixed-length ray at the heart
