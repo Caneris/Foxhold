@@ -73,8 +73,8 @@ func _on_menu_item_selected(id: int) -> void:
 
 
 func _create_item(cost: int, type: String) -> void:
-	print("Created an item of type " + str(type) + "!")
-	print("It costs " + str(cost) + " coins")
+	#print("Created an item of type " + str(type) + "!")
+	#print("It costs " + str(cost) + " coins")
 	menu_item_selected.emit(cost, type)
 
 #func _create_tower(cost: int) -> void:
