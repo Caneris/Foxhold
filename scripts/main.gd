@@ -1,3 +1,11 @@
+"""
+In this script, the main game logic is managed. Structures for the game world, 
+such as houses and enemies, are created and managed. 
+While house etc are managed created here, foxlings are created in the house.gd script.
+However, the main script also listens to signals from the house.gd script to create foxlings
+and check whether the player has enough coins to create items.
+"""
+
 extends Node2D
 
 @onready var heart: Area2D = %Heart
@@ -8,9 +16,12 @@ extends Node2D
 
 
 
-var coin_count : int = 0
+var coin_count : int = 10
 var dragged_item : RigidBody2D
 var intersect_params : PhysicsPointQueryParameters2D
+var n_house : int = 0
+var house_array : Array[Area2D] = []
+
 
 @onready var house_positions: Array[Marker2D] = [
 	$HousePositions/Position1,
@@ -60,9 +71,15 @@ func _ready() -> void:
 	#intersect_params = PhysicsPointQueryParameters2D.new()
 	heart.menu_item_selected.connect(_selected_menu_item)
 	heart.coin_in_heart.connect(_coin_entered_heart)
+
 	for node in get_tree().get_nodes_in_group("item"):
 		print(node.is_in_group("item"))
 		node.clicked.connect(_on_item_clicked)
+
+
+func update_coin_count(amount: int) -> void:
+	coin_count += amount
+	ui_coin_count_label.text = "COIN COUNT: " + str(coin_count)
 
 func _on_item_clicked(item: RigidBody2D) -> void:
 	if !dragged_item:
@@ -70,22 +87,27 @@ func _on_item_clicked(item: RigidBody2D) -> void:
 		dragged_item = item
 
 func _coin_entered_heart(coin: RigidBody2D) -> void:
-	coin_count += 1
-	#print("new coin count: " + str(coin_count))
-	ui_coin_count_label.text = "COIN COUNT: " + str(coin_count)
+	update_coin_count(1)
 	coin.queue_free()
 
-func _selected_menu_item(cost: int, menu_item_type) -> void:
+func _selected_menu_item(cost : int, menu_item_type : String) -> void:
 	print("item signal reached main: " + str(cost) + " coins and " + str(menu_item_type) + " type!")
 	if cost > coin_count:
 		print("Not enough coins!")
-		if building_scenes.has(menu_item_type):
-			var building = building_scenes[menu_item_type].instantiate()
 	else:
 		_create_item(cost, menu_item_type)
 
+
+func _selected_house_menu_item(house_id: int, cost: int, menu_item_type: String) -> void:
+	print("House " + str(house_id) + " selected item: " + str(menu_item_type) + " with cost: " + str(cost))
+	if cost > coin_count:
+		print("Not enough coins!")
+	else:
+		_create_house_item(house_id, cost, menu_item_type)
+
+
 func _create_item(cost: int, type: String) -> void:
-	print("A " + str(type) + " will be created!")
+	print("main: A " + str(type) + " will be created!")
 	
 	match type:
 		"House":
@@ -98,12 +120,36 @@ func _create_item(cost: int, type: String) -> void:
 		"Wall":
 			pass
 
+
+func _create_house_item(house_id : int, cost: int, type: String) -> void:
+	print("main: A " + str(type) + " will be created for house " + str(house_id) + "!")
+	var house : Area2D = house_array[house_id]
+	match type:
+		"House_Upgrade":
+			if coin_count >= cost:
+				update_coin_count(-cost)
+				# Call the house's upgrade function
+				house._upgrade_house()
+			else:
+				print("Not enough coins to upgrade house!")
+		"Knight_Foxling", "Collector_Foxling":
+			if coin_count >= cost and house_container.get_child(house_id).max_foxlings > 0:
+				update_coin_count(-cost)
+				house._spawn_foxling(type)
+			else:
+				print("Not enough coins or max foxlings reached!")
+
+
 func try_create_house() -> bool:
-	var n_house : int = house_container.get_child_count()
 	if n_house >= house_positions.size():
 		return false # no spots left
-	
+
 	var house : Area2D = building_scenes["House"].instantiate()
 	house_container.add_child(house)
-	house.global_position = house_positions[n_house - 1].global_position
+	house.house_id = n_house
+	house_array.append(house)
+	# connect house menu item selected signal to main script
+	house.menu_item_selected.connect(_selected_house_menu_item)
+	house.global_position = house_positions[n_house].global_position
+	n_house += 1
 	return true

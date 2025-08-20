@@ -1,8 +1,19 @@
 extends Area2D
 
-signal menu_item_selected(cost, menu_item_type)
+# house id
+var house_id : int
+var max_foxlings : int = 2
+var n_foxlings : int = 0
+
+signal menu_item_selected(house_id, cost, menu_item_type)
 
 @onready var menu : PopupMenu
+
+
+#@export var foxling_scenes = {
+	#"Knight_Foxling": preload("res://scenes/knight_foxling.tscn"),
+	#"Collector_Foxling": preload("res://scenes/collector_foxling.tscn")
+#}
 
 
 var menu_item_ids = {
@@ -13,9 +24,9 @@ var menu_item_ids = {
 
 
 var menu_item_costs = {
-	0: 15,  # House Upgrade cost
-	1: 10,  # Knight Foxling cost
-	2: 8    # Collector Foxling cost
+	0: 5,  # House Upgrade cost
+	1: 3,  # Knight Foxling cost
+	2: 2    # Collector Foxling cost
 }
 
 
@@ -41,17 +52,27 @@ func _on_menu_item_selected(id: int) -> void:
 	var cost : int = menu_item_costs[id]
 	match id:
 		0:
-			_create_item(cost, "House_Upgrade")
+			menu_item_selected.emit(house_id, cost, "House_Upgrade")
 		1:
-			_create_item(cost, "Knight_Foxling")
+			menu_item_selected.emit(house_id, cost, "Knight_Foxling")
 		2:
-			_create_item(cost, "Collector_Foxling")
+			menu_item_selected.emit(house_id, cost, "Collector_Foxling")
 
 
-func _create_item(cost: int, type: String) -> void:
-	print("Created an item of type " + str(type) + "!")
-	print("It costs " + str(cost) + " coins")
-	menu_item_selected.emit(cost, type)
+
+
+# func _create_item(type: String) -> void:
+# 	match type:
+# 		"House_Upgrade" : _upgrade_house()
+# 		"Knight_Foxling", "Collector_Foxling": _spawn_foxling(type) 
+
+
+func _upgrade_house() -> void:
+	print("upgrade house!")
+
+
+func _spawn_foxling(type : String) -> void:
+	print("create a foxling of type ", type)
 
 
 func _populate_house_menu() -> void:
@@ -62,7 +83,7 @@ func _populate_house_menu() -> void:
 	_add_menu_item("Collector_Foxling")
 
 
-func _add_menu_item(name: String) -> void:
-	var id : int = menu_item_ids[name]
-	var display_name = name.replace("_", " ")  # Convert underscores to spaces for display
+func _add_menu_item(item_name: String) -> void:
+	var id : int = menu_item_ids[item_name]
+	var display_name = item_name.replace("_", " ")  # Convert underscores to spaces for display
 	menu.add_item(display_name + " (" + str(menu_item_costs[id]) + " coins)", id)
