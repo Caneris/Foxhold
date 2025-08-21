@@ -19,12 +19,18 @@ var home_position: Vector2
 var current_target: CharacterBody2D
 var attack_timer: float = 0.0
 
+# Search after killing an enemy
+const SEARCH_DELAY: float = 0.5
+var search_timer: float = 0.0
+var is_searching: bool = false
+
 # Patrol variables
 var patrol_direction: int = 1
 var patrol_timer: float = 0.0
 var is_paused: bool = false
 var current_patrol_radius: float
 var has_reversed: bool = false
+
 
 
 # pixels/sec² — by default Godot’s 2D gravity
@@ -56,12 +62,11 @@ func _physics_process(delta: float) -> void:
     match current_state:
         State.IDLE:
             patrol(delta)
-            check_for_enemies()
+            check_for_enemies(patrol_direction)
         State.CHASING:
             chase_enemy(delta)
-        State.ATTACKING:
-            attack_enemy(delta)
         State.RETURNING:
+            # check_for_enemies()
             return_home(delta)
 
 func patrol(delta: float) -> void:
@@ -99,9 +104,9 @@ func _decide_next_action() -> void:
 
 
 
-func check_for_enemies() -> void:
+func check_for_enemies(check_direction: float) -> void:
     
-    sight.target_position = Vector2(patrol_direction * sight_range, 0)
+    sight.target_position = Vector2(check_direction * sight_range, 0)
     sight.force_raycast_update()
 
     var collider = sight.get_collider()
@@ -111,8 +116,25 @@ func check_for_enemies() -> void:
     # Find nearest one
     # Set as current_target and switch to CHASING
 
+
+func search_for_enemies() -> void:
+
+    # get current direction
+    var direction = sign(velocity.x)
+    if is_searching:
+        check_for_enemies(direction)
+        search_timer -= get_process_delta_time()
+        if search_timer <= 0.0:
+            is_searching = false
+            current_state = State.IDLE
+            _decide_next_action()
+    else:
+        # Start searching for enemies
+        is_searching = true
+        search_timer = SEARCH_DELAY
+        print("Searching for enemies...")  # Debug message
+
 func chase_enemy(delta: float) -> void:
-    print("Chasing enemy")
     # Check if target still exists
     if not is_instance_valid(current_target):
         current_state = State.RETURNING
@@ -154,14 +176,30 @@ func chase_enemy(delta: float) -> void:
     # If in attack_range, switch to ATTACKING
     # If enemy dead or out of sight, switch to RETURNING
 
-func attack_enemy(delta: float) -> void:
-    print("Attacking enemy")
-    pass
-    # Apply slow to enemy
-    # Deal damage if attack_timer <= 0
-    # Continue chasing if enemy moves away
+# func attack_enemy(delta: float) -> void:
+#     print("Attacking enemy")
+#     pass
+#     # Apply slow to enemy
+#     # Deal damage if attack_timer <= 0
+#     # Continue chasing if enemy moves away
 
 func return_home(delta: float) -> void:
-    pass
-    # Move back to home_position
-    # If reached home, switch to IDLE
+
+    search_for_enemies()
+    var to_home = home_position - global_position
+    var distance = abs(to_home.x)
+    print("Returning home, distance: ", distance)
+    if distance < 10.0:  # Close enough to home
+        current_state = State.IDLE
+        velocity.x = 0  # Stop moving
+
+        # Reset patrol variables when arriving home
+        has_reversed = false
+        current_patrol_radius = patrol_radius * randf_range(0.95, 1.05)
+        _decide_next_action()  # Start a new patrol action
+    else:
+        # Move back toward home
+        var direction = sign(to_home.x)
+        check_for_enemies(direction)
+        velocity.x = direction * speed * 0.5  # Slow down while returning
+    move_and_slide()
