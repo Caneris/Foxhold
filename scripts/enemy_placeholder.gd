@@ -34,7 +34,7 @@ func take_damage() -> void:
 
 func drop_item() -> void:
 	var dropped_item : RigidBody2D = drop_items.pick_random().instantiate()
-	var item_animated_sprite : AnimatedSprite2D = dropped_item.get_node("AnimatedSprite2D")
+	# var item_animated_sprite : AnimatedSprite2D = dropped_item.get_node("AnimatedSprite2D")
 	
 	dropped_item.add_to_group("item")
 	dropped_item.clicked.connect(main_scene._on_item_clicked)
