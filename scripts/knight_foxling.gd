@@ -9,7 +9,7 @@ extends CharacterBody2D
 # Movement
 @export var speed: float = 150.0
 @export var patrol_radius: float = 100.0
-@export var sight_range: float = 30.0
+@export var sight_range: float = 60.0
 @onready var sight: RayCast2D = $Sight
 
 # State management
@@ -113,12 +113,49 @@ func check_for_enemies() -> void:
 
 func chase_enemy(delta: float) -> void:
     print("Chasing enemy")
-    pass
+    # Check if target still exists
+    if not is_instance_valid(current_target):
+        current_state = State.RETURNING
+        current_target = null
+        return
+    
+    var to_enemy = current_target.global_position - global_position
+    var distance = to_enemy.length()
+    
+    # Lost sight - return home
+    if distance > sight_range*2.0:
+        current_state = State.RETURNING
+        current_target = null
+        return
+    
+    # Move toward enemy
+    var direction = sign(to_enemy.x)
+    velocity.x = direction * speed
+
+    # Chase until at attack range
+    if distance > attack_range:
+        velocity.x = direction * speed
+    else:
+        velocity.x = 0  # Stop at attack distance
+    
+    
+    # Attack if in range and cooldown ready
+    if distance <= attack_range and attack_timer <= 0:
+        # Deal damage and apply slow
+        current_target.take_damage(damage)
+        if current_target.has_method("apply_slow"):
+            current_target.apply_slow(enemy_slow_amount, 2.0)  # slow for 2 seconds
+        attack_timer = attack_cooldown
+
+    attack_timer -= delta
+    sight.target_position = Vector2(direction * sight_range, 0)
+    move_and_slide()
     # Move toward current_target
     # If in attack_range, switch to ATTACKING
     # If enemy dead or out of sight, switch to RETURNING
 
 func attack_enemy(delta: float) -> void:
+    print("Attacking enemy")
     pass
     # Apply slow to enemy
     # Deal damage if attack_timer <= 0

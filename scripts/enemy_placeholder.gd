@@ -29,8 +29,8 @@ var main_scene : Node2D
 signal enemy_died
 
 
-func take_damage() -> void:
-	health_bar.value = max(health_bar.value - damage_per_click, 0)
+func take_damage(damage: float) -> void:
+	health_bar.value = max(health_bar.value - damage, 0)
 
 func drop_item() -> void:
 	var dropped_item : RigidBody2D = drop_items.pick_random().instantiate()
