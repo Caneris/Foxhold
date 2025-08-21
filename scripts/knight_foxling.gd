@@ -9,7 +9,8 @@ extends CharacterBody2D
 # Movement
 @export var speed: float = 150.0
 @export var patrol_radius: float = 100.0
-@export var sight_range: float = 200.0
+@export var sight_range: float = 30.0
+@onready var sight: RayCast2D = $Sight
 
 # State management
 enum State { IDLE, CHASING, ATTACKING, RETURNING }
@@ -40,6 +41,10 @@ func _ready() -> void:
     _decide_next_action()
     add_to_group("foxlings")
     add_to_group("knights")
+
+    # set up sight raycast
+    sight.collide_with_areas = false  # Only detect bodies
+    sight.collide_with_bodies = true
 
 func _physics_process(delta: float) -> void:
     # attack_timer -= delta
@@ -95,12 +100,19 @@ func _decide_next_action() -> void:
 
 
 func check_for_enemies() -> void:
-    pass
-    # Get all enemies in sight range
+    
+    sight.target_position = Vector2(patrol_direction * sight_range, 0)
+    sight.force_raycast_update()
+
+    var collider = sight.get_collider()
+    if collider and collider.is_in_group("enemy"):
+        current_target = collider
+        current_state = State.CHASING
     # Find nearest one
     # Set as current_target and switch to CHASING
 
 func chase_enemy(delta: float) -> void:
+    print("Chasing enemy")
     pass
     # Move toward current_target
     # If in attack_range, switch to ATTACKING
