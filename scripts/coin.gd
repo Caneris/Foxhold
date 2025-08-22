@@ -7,7 +7,7 @@ var throwing : bool = false
 
 var drag_offset := Vector2.ZERO
 
-@export var max_throw_speed : float = 300.0
+@export var max_throw_speed : float = 150.0
 @export var min_throw_speed : float = 100.0
 
 func _ready() -> void:
