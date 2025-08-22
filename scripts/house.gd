@@ -36,7 +36,9 @@ var menu_item_costs = {
 
 
 func _ready() -> void:
-	menu = get_tree().current_scene.get_node("UI_Layer/UI/HouseMenu")
+	# Create a unique menu for this house instead of sharing
+	menu = PopupMenu.new()
+	get_tree().current_scene.get_node("UI_Layer/UI").add_child(menu)
 	_populate_house_menu()
 	
 	input_event.connect(_on_house_input_event)
@@ -84,7 +86,7 @@ func _spawn_foxling(type : String) -> void:
 	
 	var foxling : CharacterBody2D = foxling_scenes[type].instantiate()
 	foxling.position = global_position + Vector2(0, -50)  # Spawn
-	add_child(foxling)
+	get_tree().current_scene.add_child(foxling)
 	n_foxlings += 1
 
 
