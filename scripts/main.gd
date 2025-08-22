@@ -133,7 +133,7 @@ func _create_house_item(house_id : int, cost: int, type: String) -> void:
 			else:
 				print("Not enough coins to upgrade house!")
 		"Knight_Foxling", "Collector_Foxling":
-			if coin_count >= cost and house_container.get_child(house_id).max_foxlings > 0:
+			if coin_count >= cost and house.n_foxlings < house.max_foxlings:
 				update_coin_count(-cost)
 				house._spawn_foxling(type)
 			else:

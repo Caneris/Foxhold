@@ -84,7 +84,7 @@ func _spawn_foxling(type : String) -> void:
 	
 	var foxling : CharacterBody2D = foxling_scenes[type].instantiate()
 	foxling.position = global_position + Vector2(0, -50)  # Spawn
-	get_parent().add_child(foxling)
+	add_child(foxling)
 	n_foxlings += 1
 
 
