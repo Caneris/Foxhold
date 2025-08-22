@@ -2,7 +2,7 @@ extends Area2D
 
 # house id
 var house_id : int
-var max_foxlings : int = 2
+var max_foxlings : int = 5
 var n_foxlings : int = 0
 
 signal menu_item_selected(house_id, cost, menu_item_type)
@@ -14,6 +14,11 @@ signal menu_item_selected(house_id, cost, menu_item_type)
 	#"Knight_Foxling": preload("res://scenes/knight_foxling.tscn"),
 	#"Collector_Foxling": preload("res://scenes/collector_foxling.tscn")
 #}
+
+
+var foxling_scenes = {
+	"Knight_Foxling": preload("res://scenes/knight_foxling.tscn")
+}
 
 
 var menu_item_ids = {
@@ -73,6 +78,14 @@ func _upgrade_house() -> void:
 
 func _spawn_foxling(type : String) -> void:
 	print("create a foxling of type ", type)
+	if n_foxlings >= max_foxlings:
+		print("Max foxlings reached for this house!")
+		return
+	
+	var foxling : CharacterBody2D = foxling_scenes[type].instantiate()
+	foxling.position = global_position + Vector2(0, -50)  # Spawn
+	get_parent().add_child(foxling)
+	n_foxlings += 1
 
 
 func _populate_house_menu() -> void:
