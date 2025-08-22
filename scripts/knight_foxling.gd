@@ -123,11 +123,9 @@ func search_for_enemies() -> void:
 
     # get current direction of the raycast
     var direction = sign(sight.target_position.x)
-    print("Searching in direction: ", direction)
     if is_searching:
         check_for_enemies(direction)
         search_timer -= get_process_delta_time()
-        print("Search timer: ", search_timer)
         if search_timer <= 0.0:
             is_searching = false
             current_state = State.RETURNING
@@ -136,7 +134,6 @@ func search_for_enemies() -> void:
         # Start searching for enemies
         is_searching = true
         search_timer = SEARCH_DELAY
-        print("Searching for enemies...")  # Debug message
 
 func chase_enemy(delta: float) -> void:
     # Check if target still exists
@@ -191,7 +188,6 @@ func return_home(delta: float) -> void:
 
     var to_home = home_position - global_position
     var distance = abs(to_home.x)
-    print("Returning home, distance: ", distance)
     if distance < 10.0:  # Close enough to home
         current_state = State.IDLE
         velocity.x = 0  # Stop moving
