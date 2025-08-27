@@ -38,17 +38,20 @@ texture = SubResource("CanvasTexture_v30as")
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+mouse_filter = 2
 
 [node name="HealthBar" type="ProgressBar" parent="Control"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 0
-offset_left = -30.0
-offset_top = -24.0
-offset_right = 30.0
-offset_bottom = -20.0
+offset_left = -14.0
+offset_top = -8.0
+offset_right = 46.0
+offset_bottom = -4.0
 theme_override_styles/background = SubResource("StyleBoxFlat_v30as")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ycbwg")
 value = 50.0
