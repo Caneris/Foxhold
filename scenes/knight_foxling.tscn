@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dq7yrhnplr61o" path="res://scripts/knight_foxling.gd" id="1_0w4h4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uvnab"]
-size = Vector2(32, 32)
+size = Vector2(16, 16)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_250ro"]
 
@@ -17,7 +17,7 @@ shape = SubResource("RectangleShape2D_uvnab")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(5.48691e-06, 0.736003, 0.0629369, 1)
-scale = Vector2(32, 32)
+scale = Vector2(16, 16)
 texture = SubResource("CanvasTexture_250ro")
 
 [node name="Sight" type="RayCast2D" parent="."]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cojp2nac3arah" path="res://scripts/heart.gd" id="1_v30as"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jmd42"]
-size = Vector2(76, 76)
+size = Vector2(32, 32)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_v30as"]
 
@@ -32,7 +32,7 @@ shape = SubResource("RectangleShape2D_jmd42")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0.912659, 0.22057, 0.207099, 1)
-scale = Vector2(76, 76)
+scale = Vector2(32, 32)
 texture = SubResource("CanvasTexture_v30as")
 
 [node name="Control" type="Control" parent="."]
@@ -43,11 +43,12 @@ offset_bottom = 40.0
 
 [node name="HealthBar" type="ProgressBar" parent="Control"]
 unique_name_in_owner = true
+texture_filter = 1
 layout_mode = 0
-offset_left = -68.0
-offset_top = -60.0
-offset_right = 69.0
-offset_bottom = -48.0
+offset_left = -30.0
+offset_top = -24.0
+offset_right = 30.0
+offset_bottom = -20.0
 theme_override_styles/background = SubResource("StyleBoxFlat_v30as")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ycbwg")
 value = 50.0

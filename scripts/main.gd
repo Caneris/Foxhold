@@ -10,7 +10,7 @@ extends Node2D
 
 @onready var heart: Area2D = %Heart
 @onready var ui: Control = $UI_Layer/UI
-@onready var ui_coin_count_label: Control = $UI_Layer/UI/CoinCountLabel
+@onready var ui_coin_count_label: Control = $UI_Layer/UI/BottomPanel/HBoxContainer/NinePatchRect/StatsSection/CoinCountLabel
 @onready var house_container: Node2D = $HouseContainer
 @onready var enemy_spawner: Node2D = $EnemySpawner
 
@@ -63,6 +63,9 @@ func _ready() -> void:
 	var vp := get_viewport()
 	vp.physics_object_picking_sort = true
 	vp.physics_object_picking_first_only = true
+
+	# initialize coin count display
+	ui_coin_count_label.text = "coin count: " + str(coin_count)
 	
 	# connect ui and enemy spawner signals
 	enemy_spawner.wave_countdown_started.connect(ui._on_countdown_started)
@@ -79,7 +82,7 @@ func _ready() -> void:
 
 func update_coin_count(amount: int) -> void:
 	coin_count += amount
-	ui_coin_count_label.text = "COIN COUNT: " + str(coin_count)
+	ui_coin_count_label.text = "coin count: " + str(coin_count)
 
 func _on_item_clicked(item: RigidBody2D) -> void:
 	if !dragged_item:
@@ -112,9 +115,7 @@ func _create_item(cost: int, type: String) -> void:
 	match type:
 		"House":
 			if try_create_house():
-				coin_count -= cost
-				print("new coin count: " + str(coin_count))
-				ui_coin_count_label.text = "COIN COUNT: " + str(coin_count)
+				update_coin_count(-cost)
 		"Tower":
 			pass
 		"Wall":
