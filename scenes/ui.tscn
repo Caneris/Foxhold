@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cirhxs55at7w7"]
+[gd_scene load_steps=4 format=3 uid="uid://cirhxs55at7w7"]
 
 [ext_resource type="Script" uid="uid://ci8rvsl7jj13i" path="res://scripts/ui.gd" id="1_nt7q6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nt7q6"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_xlq6p"]
 
@@ -11,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_nt7q6")
 
 [node name="BottomPanel" type="Panel" parent="."]
@@ -21,6 +24,7 @@ anchor_bottom = 1.0
 offset_top = 526.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel"]
 layout_mode = 1
@@ -32,23 +36,32 @@ grow_vertical = 2
 
 [node name="StatsSection" type="VBoxContainer" parent="BottomPanel/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Panel" type="Panel" parent="BottomPanel/HBoxContainer/StatsSection"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nt7q6")
+
+[node name="WaveNumberLabel" type="Label" parent="BottomPanel/HBoxContainer/StatsSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "WAVE NUMBER:"
+
+[node name="CoinCountLabel2" type="Label" parent="BottomPanel/HBoxContainer/StatsSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "COIN COUNT:"
+
+[node name="EnemyCountLabel" type="Label" parent="BottomPanel/HBoxContainer/StatsSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "ENEMY COUNT:"
 
 [node name="ActionSection" type="VBoxContainer" parent="BottomPanel/HBoxContainer"]
 layout_mode = 2
-
-[node name="CoinCountLabel" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.873
-anchor_right = 1.0
-anchor_bottom = 0.043
-offset_left = 1059.0
-offset_top = 40.0
-offset_right = 1216.0
-offset_bottom = 74.0
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 24
-text = "COIN COUNT:"
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
 
 [node name="HeartMenu" type="PopupMenu" parent="."]
 title = "HeartMenu"
