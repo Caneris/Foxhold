@@ -11,6 +11,12 @@ signal menu_item_selected(cost, menu_item_type)
 
 #var mouse_over_heart : bool = false
 
+# buttons from ui panel
+@onready var build_house_button: Button = get_tree().current_scene.get_node("UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/BuildHouseButton")
+@onready var build_tower_button: Button = get_tree().current_scene.get_node("UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/BuildTowerButton")
+@onready var build_wall_button: Button = get_tree().current_scene.get_node("UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/BuildWallButton")
+
+
 var menu_item_ids = {
 	"House": 0,
 	"Tower": 1,
@@ -38,6 +44,10 @@ func _ready() -> void:
 	#menu.mouse_exited.connect(_on_menu_mouse_exited)
 	
 	menu.id_pressed.connect(_on_menu_item_selected)
+	
+	build_house_button.pressed.connect(func(): _create_item(menu_item_costs[0], "House"))
+	build_tower_button.pressed.connect(func(): _create_item(menu_item_costs[1], "Tower"))
+	build_wall_button.pressed.connect(func(): _create_item(menu_item_costs[2], "Wall"))
 
 func _on_heart_input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():

@@ -88,7 +88,6 @@ patch_margin_right = 4
 patch_margin_bottom = 4
 
 [node name="HeartActionSection" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground"]
-visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -125,6 +124,7 @@ size_flags_vertical = 4
 text = "Tower"
 
 [node name="HouseActionSection" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground"]
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -159,7 +159,7 @@ custom_minimum_size = Vector2(60, 50)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-text = "Collector
+text = "Runner
 "
 
 [node name="PauseSectionBackground" type="NinePatchRect" parent="BottomPanel/HBoxContainer"]
