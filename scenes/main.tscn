@@ -14,7 +14,6 @@ scale = Vector2(1, 1.00743)
 script = ExtResource("1_tipki")
 
 [node name="UI_Layer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="UI" parent="UI_Layer" instance=ExtResource("2_85g3d")]
 

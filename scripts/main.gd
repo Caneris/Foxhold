@@ -10,7 +10,7 @@ extends Node2D
 
 @onready var heart: Area2D = %Heart
 @onready var ui: Control = $UI_Layer/UI
-@onready var ui_coin_count_label: Control = $UI_Layer/UI/BottomPanel/HBoxContainer/NinePatchRect/StatsSection/CoinCountLabel
+@onready var ui_coin_count_label: Control = $UI_Layer/UI/BottomPanel/HBoxContainer/StatsSectionBackground/StatsSection/CoinCountLabel
 @onready var house_container: Node2D = $HouseContainer
 @onready var enemy_spawner: Node2D = $EnemySpawner
 

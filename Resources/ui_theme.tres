@@ -1126,7 +1126,7 @@ cache/0/11/0/glyphs/268435535/texture_idx = 0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pt20x"]
 content_margin_left = 10.0
-content_margin_top = 4.0
+content_margin_bottom = 2.0
 draw_center = false
 border_color = Color(0.884491, 0.770177, 0.756127, 1)
 border_blend = true
