@@ -34,30 +34,22 @@ var building_scenes = {
 	#"Wall": preload("res://scenes/wall.tscn")
 }
 
+
+# focus variables and constants
+
+enum FocusType { HEART, HOUSE }
+var current_focus_type: FocusType = FocusType.HEART
+var current_focused_house_id: int = -1  # Only relevant when focus is HOUSE
+
+# ui action sections
+@onready var heart_action_section: Control = $UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection
+@onready var house_action_section: Control = $UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if dragged_item and !event.is_pressed():
 			dragged_item.drop(Input.get_last_mouse_velocity())
 			dragged_item = null
-		#elif event.is_pressed():
-			#var mouse_pos := get_global_mouse_position()
-			#var state_space := get_world_2d().direct_space_state 
-			#
-			## parameter setting for state_space.intersect_point()
-			#set_intersect_params(mouse_pos)
-			#
-			#var result := state_space.intersect_point(intersect_params, 32)
-			#var res_len : int = result.size()
-			#print("number of enemy node: " + str(res_len))
-			#if result.size() > 0:
-				#var enemy = result[0].collider
-				#enemy.take_damage()
-
-#func set_intersect_params(mouse_pos : Vector2) -> void:
-	#intersect_params.position = mouse_pos
-	#intersect_params.collide_with_areas = false
-	#intersect_params.collide_with_bodies = true
-	#intersect_params.collision_mask = 1 << 2
 
 func _ready() -> void:
 	var vp := get_viewport()
@@ -78,6 +70,17 @@ func _ready() -> void:
 	for node in get_tree().get_nodes_in_group("item"):
 		print(node.is_in_group("item"))
 		node.clicked.connect(_on_item_clicked)
+
+
+func set_focus(focus_type: FocusType, house_id: int = -1) -> void:
+	current_focus_type = focus_type
+	current_focused_house_id = house_id
+	_update_ui_visibility()
+
+
+func _update_ui_visibility() -> void:
+	heart_action_section.visible = (current_focus_type == FocusType.HEART)
+	house_action_section.visible = (current_focus_type == FocusType.HOUSE)
 
 
 func update_coin_count(amount: int) -> void:
