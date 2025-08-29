@@ -37,9 +37,10 @@ var building_scenes = {
 
 # focus variables and constants
 
-enum FocusType { HEART, HOUSE }
+enum FocusType { HEART, HOUSE, WALL, TOWER }
 var current_focus_type: FocusType = FocusType.HEART
-var current_focused_house_id: int = -1  # Only relevant when focus is HOUSE
+var focusable_structures: Array = []
+var current_focus_index: int = 0
 
 # ui action sections
 @onready var heart_action_section: Control = $UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection
@@ -50,6 +51,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		if dragged_item and !event.is_pressed():
 			dragged_item.drop(Input.get_last_mouse_velocity())
 			dragged_item = null
+	
+	if event is InputEventKey and event.is_pressed():
+		match event.keycode:
+			KEY_A or KEY_LEFT:
+				pass
+
 
 func _ready() -> void:
 	var vp := get_viewport()
@@ -71,11 +78,38 @@ func _ready() -> void:
 		print(node.is_in_group("item"))
 		node.clicked.connect(_on_item_clicked)
 
+	# setup focus system
+	_setup_focus_system()
 
-func set_focus(focus_type: FocusType, house_id: int = -1) -> void:
+
+func _setup_focus_system() -> void:
+	# Get all focusable structures and sort by x position
+	var structures := get_tree().get_nodes_in_group("focusable_structures")
+	print("Found %d focusable structures" % focusable_structures.size())
+	structures.sort_custom(func(a, b): return a.global_position.x < b.global_position.x)
+
+	# store for cycling
+	focusable_structures = structures
+	print("Found %d focusable structures" % focusable_structures.size())
+
+
+func set_focus(focus_type: FocusType, structure_id: int = -1) -> void:
 	current_focus_type = focus_type
-	current_focused_house_id = house_id
+	current_focus_index = structure_id
 	_update_ui_visibility()
+
+
+func _focus_structure_at_index(index: int) -> void:
+	var structure = focusable_structures[index]
+
+	if structure.is_in_group("heart"):
+		set_focus(FocusType.HEART)
+	elif structure.is_in_group("house"):
+		set_focus(FocusType.HOUSE, structure.house_id)
+	elif structure.is_in_group("tower"):
+		set_focus(FocusType.TOWER, structure.tower_id)  # when you add towers
+	elif structure.is_in_group("wall"):
+		set_focus(FocusType.WALL, structure.wall_id)    # when you add walls
 
 
 func _update_ui_visibility() -> void:
