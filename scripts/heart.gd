@@ -6,6 +6,7 @@ signal menu_item_selected(cost, menu_item_type)
 
 # id in the structures array in main.gd
 var structure_index : int = -1
+var focused: bool = false
 
 # get main scene
 @onready var main_scene = get_tree().current_scene
@@ -59,6 +60,18 @@ func _ready() -> void:
 	build_wall_button.pressed.connect(func(): _create_item(menu_item_costs[2], "Wall"))
 
 
+func set_focused(is_focused: bool) -> void:
+	if focused == is_focused:
+		return  # No change, skip animation
+
+	focused = is_focused
+
+	if focused:
+		show_outline()
+	else:
+		hide_outline()
+
+
 func _set_outline_thickness(thickness: float) -> void:
 	shader_material.set_shader_parameter("thickness", thickness)
 
@@ -70,7 +83,7 @@ func show_outline() -> void:
 
 func hide_outline() -> void:
 	var tween = create_tween()
-	tween.tween_method(_set_outline_thickness, shader_material.get_shader_parameter("thickness"), 0.0, 0.2)
+	tween.tween_method(_set_outline_thickness, 2.0, 0.0, 0.2)
 
 
 func _on_heart_input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:

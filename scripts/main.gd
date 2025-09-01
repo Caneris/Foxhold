@@ -117,18 +117,23 @@ func _setup_focus_system() -> void:
 
 
 func set_focus(focus_type: FocusType, structure_id: int = -1) -> void:
+
+	# Set all structures to unfocused
+	for structure in focusable_structures:
+		structure.set_focused(false)
+
 	# store old focus index
 	old_focus_index = current_focus_index
 	current_focus_type = focus_type
 	current_focus_index = structure_id
 
-	# Hide outline on previously focused structure
-	if old_focus_index >= 0 and old_focus_index < focusable_structures.size():
-		focusable_structures[old_focus_index].hide_outline()
+	# # Hide outline on previously focused structure
+	# if old_focus_index >= 0 and old_focus_index < focusable_structures.size():
+	# 	focusable_structures[old_focus_index].hide_outline()
 
 	# Show outline on newly focused structure
 	if current_focus_index >= 0 and current_focus_index < focusable_structures.size():
-		focusable_structures[current_focus_index].show_outline()
+		focusable_structures[current_focus_index].set_focused(true)
 
 	_update_ui_visibility()
 
