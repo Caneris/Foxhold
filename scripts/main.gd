@@ -43,6 +43,7 @@ var focusable_structures: Array = []
 var old_focus_index: int = -1
 var current_focus_index: int = -1
 var focused_structure: Node = null
+var focus_outline_thickness: float = 1.0
 
 # ui action sections
 @onready var heart_action_section: Control = $UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection
@@ -88,7 +89,7 @@ func _ready() -> void:
 
 
 func _cycle_focus_left() -> void:
-	current_focus_index = (current_focus_index - 1) % focusable_structures.size()
+	current_focus_index = (current_focus_index - 1 + focusable_structures.size()) % focusable_structures.size()
 	_focus_structure_at_index(current_focus_index)
 
 

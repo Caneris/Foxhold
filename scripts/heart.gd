@@ -78,12 +78,12 @@ func _set_outline_thickness(thickness: float) -> void:
 
 func show_outline() -> void:
 	var tween = create_tween()
-	tween.tween_method(_set_outline_thickness, 0.0, 2.0, 0.3) # animate to thickness 2.0 over 0.3 seconds
+	tween.tween_method(_set_outline_thickness, 0.0, main_scene.focus_outline_thickness, 0.3) # animate to thickness 2.0 over 0.3 seconds
 
 
 func hide_outline() -> void:
 	var tween = create_tween()
-	tween.tween_method(_set_outline_thickness, 2.0, 0.0, 0.2)
+	tween.tween_method(_set_outline_thickness, main_scene.focus_outline_thickness, 0.0, 0.2)
 
 
 func _on_heart_input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
