@@ -40,7 +40,7 @@ var building_scenes = {
 enum FocusType { HEART, HOUSE, WALL, TOWER }
 var current_focus_type: FocusType = FocusType.HEART
 var focusable_structures: Array = []
-var current_focus_index: int = 0
+var current_focus_index: int = -1
 
 # ui action sections
 @onready var heart_action_section: Control = $UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection
@@ -85,7 +85,6 @@ func _ready() -> void:
 func _setup_focus_system() -> void:
 	# Get all focusable structures and sort by x position
 	var structures := get_tree().get_nodes_in_group("focusable_structures")
-	print("Found %d focusable structures" % focusable_structures.size())
 	structures.sort_custom(func(a, b): return a.global_position.x < b.global_position.x)
 
 	# store for cycling
@@ -105,11 +104,11 @@ func _focus_structure_at_index(index: int) -> void:
 	if structure.is_in_group("heart"):
 		set_focus(FocusType.HEART)
 	elif structure.is_in_group("house"):
-		set_focus(FocusType.HOUSE, structure.house_id)
+		set_focus(FocusType.HOUSE, index)
 	elif structure.is_in_group("tower"):
-		set_focus(FocusType.TOWER, structure.tower_id)  # when you add towers
+		set_focus(FocusType.TOWER, index)  # when you add towers
 	elif structure.is_in_group("wall"):
-		set_focus(FocusType.WALL, structure.wall_id)    # when you add walls
+		set_focus(FocusType.WALL, index)    # when you add walls
 
 
 func _update_ui_visibility() -> void:
@@ -152,6 +151,7 @@ func _create_item(cost: int, type: String) -> void:
 	match type:
 		"House":
 			if try_create_house():
+				_setup_focus_system()
 				update_coin_count(-cost)
 		"Tower":
 			pass
