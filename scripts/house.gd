@@ -5,10 +5,14 @@ var house_id : int
 var max_foxlings : int = 5
 var n_foxlings : int = 0
 
+# id in the structures array in main.gd
+var structure_index : int = -1
+
 signal menu_item_selected(house_id, cost, menu_item_type)
 
 @onready var menu : PopupMenu
-
+@onready var main_scene = get_tree().current_scene
+@onready var shader_material : ShaderMaterial = $Sprite2D.material
 
 #@export var foxling_scenes = {
 	#"Knight_Foxling": preload("res://scenes/knight_foxling.tscn"),
@@ -45,9 +49,27 @@ func _ready() -> void:
 	menu.id_pressed.connect(_on_menu_item_selected)
 
 
+func _set_outline_thickness(thickness: float) -> void:
+	shader_material.set_shader_parameter("thickness", thickness)
+
+
+func show_outline() -> void:
+	var tween = create_tween()
+	tween.tween_method(_set_outline_thickness, 0.0, 2.0, 0.3) # animate to thickness 2.0 over 0.3 seconds
+
+
+func hide_outline() -> void:
+	var tween = create_tween()
+	tween.tween_method(_set_outline_thickness, shader_material.get_shader_parameter("thickness"), 0.0, 0.2)
+
+
 func _on_house_input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
 		_show_menu_at_mouse()
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+		# Left click focuses this house
+		print("Focus house " + str(house_id) + " at index " + str(structure_index))
+		main_scene.set_focus(main_scene.FocusType.HOUSE, structure_index)
 
 
 func _show_menu_at_mouse() -> void:

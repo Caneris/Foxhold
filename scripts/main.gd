@@ -40,7 +40,9 @@ var building_scenes = {
 enum FocusType { HEART, HOUSE, WALL, TOWER }
 var current_focus_type: FocusType = FocusType.HEART
 var focusable_structures: Array = []
+var old_focus_index: int = -1
 var current_focus_index: int = -1
+var focused_structure: Node = null
 
 # ui action sections
 @onready var heart_action_section: Control = $UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection
@@ -52,10 +54,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			dragged_item.drop(Input.get_last_mouse_velocity())
 			dragged_item = null
 	
-	if event is InputEventKey and event.is_pressed():
-		match event.keycode:
-			KEY_A or KEY_LEFT:
-				pass
+	# Add focus switching using input actions
+	if Input.is_action_just_pressed("ui_left"):
+		print("left pressed")
+		_cycle_focus_left()
+	elif Input.is_action_just_pressed("ui_right"):
+		print("right pressed")
+		_cycle_focus_right()
 
 
 func _ready() -> void:
@@ -82,19 +87,49 @@ func _ready() -> void:
 	_setup_focus_system()
 
 
+func _cycle_focus_left() -> void:
+	current_focus_index = (current_focus_index - 1) % focusable_structures.size()
+	_focus_structure_at_index(current_focus_index)
+
+
+func _cycle_focus_right() -> void:
+	current_focus_index = (current_focus_index + 1) % focusable_structures.size()
+	_focus_structure_at_index(current_focus_index)
+
+
 func _setup_focus_system() -> void:
 	# Get all focusable structures and sort by x position
 	var structures := get_tree().get_nodes_in_group("focusable_structures")
 	structures.sort_custom(func(a, b): return a.global_position.x < b.global_position.x)
 
-	# store for cycling
+	# Store for cycling
 	focusable_structures = structures
-	print("Found %d focusable structures" % focusable_structures.size())
+
+	# Find heart index and loop through structures to assign indices
+	for i in range(focusable_structures.size()):
+
+		focusable_structures[i].structure_index = i
+
+		if focusable_structures[i].is_in_group("heart"):
+			current_focus_index = i
+
+	print("Found %d focusable structures, heart at index %d" % [focusable_structures.size(), current_focus_index])
 
 
 func set_focus(focus_type: FocusType, structure_id: int = -1) -> void:
+	# store old focus index
+	old_focus_index = current_focus_index
 	current_focus_type = focus_type
 	current_focus_index = structure_id
+
+	# Hide outline on previously focused structure
+	if old_focus_index >= 0 and old_focus_index < focusable_structures.size():
+		focusable_structures[old_focus_index].hide_outline()
+
+	# Show outline on newly focused structure
+	if current_focus_index >= 0 and current_focus_index < focusable_structures.size():
+		focusable_structures[current_focus_index].show_outline()
+
 	_update_ui_visibility()
 
 
@@ -102,7 +137,7 @@ func _focus_structure_at_index(index: int) -> void:
 	var structure = focusable_structures[index]
 
 	if structure.is_in_group("heart"):
-		set_focus(FocusType.HEART)
+		set_focus(FocusType.HEART, index)
 	elif structure.is_in_group("house"):
 		set_focus(FocusType.HOUSE, index)
 	elif structure.is_in_group("tower"):

@@ -1,11 +1,53 @@
-[gd_scene load_steps=6 format=3 uid="uid://dlbyw26fe20vd"]
+[gd_scene load_steps=13 format=3 uid="uid://dlbyw26fe20vd"]
 
 [ext_resource type="Script" uid="uid://cojp2nac3arah" path="res://scripts/heart.gd" id="1_v30as"]
+[ext_resource type="Shader" uid="uid://bffojwotabgha" path="res://shaders/outline.gdshader" id="2_ycbwg"]
+[ext_resource type="Texture2D" uid="uid://bi0fepwpydfyi" path="res://assets/heart.png" id="3_krgnv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jmd42"]
-size = Vector2(32, 32)
+size = Vector2(28, 32)
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_v30as"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_txm48"]
+shader = ExtResource("2_ycbwg")
+shader_parameter/clr = Color(1, 1, 1, 1)
+shader_parameter/type = 1
+shader_parameter/thickness = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_krgnv"]
+atlas = ExtResource("3_krgnv")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txm48"]
+atlas = ExtResource("3_krgnv")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8nnyc"]
+atlas = ExtResource("3_krgnv")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4mtg8"]
+atlas = ExtResource("3_krgnv")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u10h0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_krgnv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txm48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8nnyc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4mtg8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v30as"]
 bg_color = Color(0.203922, 0.137255, 0.137255, 0.360784)
@@ -30,10 +72,12 @@ script = ExtResource("1_v30as")
 z_index = 1
 shape = SubResource("RectangleShape2D_jmd42")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(0.912659, 0.22057, 0.207099, 1)
-scale = Vector2(32, 32)
-texture = SubResource("CanvasTexture_v30as")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_txm48")
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_u10h0")
+frame_progress = 0.637108
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -48,9 +92,9 @@ mouse_filter = 2
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 0
-offset_left = -14.0
+offset_left = -5.0
 offset_top = -8.0
-offset_right = 46.0
+offset_right = 36.0
 offset_bottom = -4.0
 theme_override_styles/background = SubResource("StyleBoxFlat_v30as")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ycbwg")

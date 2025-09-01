@@ -1,11 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://cagc640uyr0gl"]
+[gd_scene load_steps=7 format=3 uid="uid://cagc640uyr0gl"]
 
 [ext_resource type="Script" uid="uid://dy4dyp3sytag5" path="res://scripts/house.gd" id="1_d7po0"]
+[ext_resource type="Texture2D" uid="uid://bdbcqj2l568wd" path="res://assets/pixel_house_24x24.png" id="2_qtlar"]
+[ext_resource type="Shader" uid="uid://bffojwotabgha" path="res://shaders/outline.gdshader" id="2_rk7hg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_se78b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x8wvn"]
-size = Vector2(32, 32)
+size = Vector2(57, 51)
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_x8wvn"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3bgk5"]
+resource_local_to_scene = true
+shader = ExtResource("2_rk7hg")
+shader_parameter/clr = Color(1, 1, 1, 1)
+shader_parameter/type = 1
+shader_parameter/thickness = 0.0
 
 [node name="House" type="Area2D" groups=["focusable_structures", "house"]]
 z_index = -1
@@ -15,12 +24,14 @@ collision_mask = 0
 script = ExtResource("1_d7po0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 z_index = 1
-position = Vector2(0, -16)
+material = SubResource("ShaderMaterial_se78b")
+position = Vector2(1.5, -25.5)
 shape = SubResource("RectangleShape2D_x8wvn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.330827, 0.492065, 0.931673, 1)
-position = Vector2(0, -16)
-scale = Vector2(32, 32)
-texture = SubResource("CanvasTexture_x8wvn")
+material = SubResource("ShaderMaterial_3bgk5")
+position = Vector2(0, -27)
+scale = Vector2(3, 3)
+texture = ExtResource("2_qtlar")

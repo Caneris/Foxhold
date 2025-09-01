@@ -4,10 +4,17 @@ signal coin_in_heart(coin)
 signal menu_item_selected(cost, menu_item_type)
 
 
+# id in the structures array in main.gd
+var structure_index : int = -1
+
+# get main scene
+@onready var main_scene = get_tree().current_scene
+
 @export var max_health : float = 20.0
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var menu : PopupMenu
-@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var shader_material : ShaderMaterial = $AnimatedSprite2D.material
 
 #var mouse_over_heart : bool = false
 
@@ -31,6 +38,8 @@ var menu_item_costs = {
 
 
 func _ready() -> void:
+
+	animated_sprite.play("default")
 	health_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	menu = get_tree().current_scene.get_node("UI_Layer/UI/HeartMenu")
 	_populate_heart_menu()
@@ -49,9 +58,28 @@ func _ready() -> void:
 	build_tower_button.pressed.connect(func(): _create_item(menu_item_costs[1], "Tower"))
 	build_wall_button.pressed.connect(func(): _create_item(menu_item_costs[2], "Wall"))
 
+
+func _set_outline_thickness(thickness: float) -> void:
+	shader_material.set_shader_parameter("thickness", thickness)
+
+
+func show_outline() -> void:
+	var tween = create_tween()
+	tween.tween_method(_set_outline_thickness, 0.0, 2.0, 0.3) # animate to thickness 2.0 over 0.3 seconds
+
+
+func hide_outline() -> void:
+	var tween = create_tween()
+	tween.tween_method(_set_outline_thickness, shader_material.get_shader_parameter("thickness"), 0.0, 0.2)
+
+
 func _on_heart_input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
 		_show_menu_at_mouse()
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+		# Left click focuses this heart
+		print("Focus heart at index " + str(structure_index))
+		main_scene.set_focus(main_scene.FocusType.HEART, structure_index)
 
 
 func _show_menu_at_mouse() -> void:
@@ -134,7 +162,7 @@ func _try_hide_menu() -> void:
 	var menu_rect : Rect2 = Rect2(menu.position, menu.size)
 	
 	# build heart rect
-	var tex_size : Vector2 = sprite_2d.texture.get_size() * sprite_2d.global_scale
+	var tex_size : Vector2 = animated_sprite.texture.get_size() * animated_sprite.global_scale
 	var heart_tl : Vector2 = global_position - tex_size * 0.5
 	var heart_rect : Rect2 = Rect2(heart_tl, tex_size)
 	
