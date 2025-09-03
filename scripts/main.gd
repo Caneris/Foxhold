@@ -92,9 +92,9 @@ func _ready() -> void:
 
 func _on_ui_action_pressed(action_type: String) -> void:
 	print("Main received action: " + action_type)
-	# if current_focus_index >= 0 and current_focus_index < focusable_structures.size():
-	# 	# var focused_structure = focusable_structures[current_focus_index]
-	# 	focused_structure.handle_ui_action(action_type)
+	if current_focus_index >= 0 and current_focus_index < focusable_structures.size():
+		# var focused_structure = focusable_structures[current_focus_index]
+		focused_structure.handle_ui_action(action_type)
 
 
 func _cycle_focus_left() -> void:
