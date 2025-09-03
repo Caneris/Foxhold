@@ -123,7 +123,7 @@ func _setup_focus_system() -> void:
 		if focusable_structures[i].is_in_group("heart"):
 			current_focus_index = i
 
-	print("Found %d focusable structures, heart at index %d" % [focusable_structures.size(), current_focus_index])
+	# print("Found %d focusable structures, heart at index %d" % [focusable_structures.size(), current_focus_index])
 
 
 func set_focus(focus_type: FocusType, structure_id: int = -1) -> void:
@@ -196,7 +196,7 @@ func _selected_house_menu_item(house_id: int, cost: int, menu_item_type: String)
 
 
 func _create_item(cost: int, type: String) -> void:
-	print("main: A " + str(type) + " will be created!")
+	# print("main: A " + str(type) + " will be created!")
 	
 	match type:
 		"House":
@@ -210,7 +210,7 @@ func _create_item(cost: int, type: String) -> void:
 
 
 func _create_house_item(house_id : int, cost: int, type: String) -> void:
-	print("main: A " + str(type) + " will be created for house " + str(house_id) + "!")
+	# print("main: A " + str(type) + " will be created for house " + str(house_id) + "!")
 	var house : Area2D = house_array[house_id]
 	match type:
 		"House_Upgrade":
