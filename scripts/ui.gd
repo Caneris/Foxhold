@@ -10,10 +10,10 @@ signal action_button_pressed(action_type: String)
 
 # var focused_structure_type : String = "Heart" # Default focused structure type
 
-# # Heart Menu Buttons
-# @onready var build_house_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/BuildHouseButton
-# @onready var build_tower_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/BuildTowerButton
-# @onready var build_wall_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/BuildWallButton
+# Heart Menu Buttons
+@onready var build_house_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/BuildHouseButton
+@onready var build_tower_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/BuildTowerButton
+@onready var build_wall_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/BuildWallButton
 
 
 # func _ready() -> void:
@@ -29,6 +29,11 @@ func _ready() -> void:
 	upgrade_house_button.pressed.connect(func(): action_button_pressed.emit("House_Upgrade"))
 	recruit_knight_button.pressed.connect(func(): action_button_pressed.emit("Knight_Foxling"))
 	recruit_collector_button.pressed.connect(func(): action_button_pressed.emit("Collector_Foxling"))
+
+	# Heart action buttons
+	build_house_button.pressed.connect(func(): action_button_pressed.emit("House"))
+	build_tower_button.pressed.connect(func(): action_button_pressed.emit("Tower"))
+	build_wall_button.pressed.connect(func(): action_button_pressed.emit("Wall"))
 
 func _on_countdown_started(duration : float) -> void:
 	break_timer_circle.max_value = duration

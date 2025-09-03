@@ -20,9 +20,9 @@ var focused: bool = false
 #var mouse_over_heart : bool = false
 
 # buttons from ui panel
-@onready var build_house_button: Button = get_tree().current_scene.get_node("UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/BuildHouseButton")
-@onready var build_tower_button: Button = get_tree().current_scene.get_node("UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/BuildTowerButton")
-@onready var build_wall_button: Button = get_tree().current_scene.get_node("UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/BuildWallButton")
+# @onready var build_house_button: Button = get_tree().current_scene.get_node("UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/BuildHouseButton")
+# @onready var build_tower_button: Button = get_tree().current_scene.get_node("UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/BuildTowerButton")
+# @onready var build_wall_button: Button = get_tree().current_scene.get_node("UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/BuildWallButton")
 
 
 var menu_item_ids = {
@@ -55,9 +55,17 @@ func _ready() -> void:
 	
 	menu.id_pressed.connect(_on_menu_item_selected)
 	
-	build_house_button.pressed.connect(func(): _create_item(menu_item_costs[0], "House"))
-	build_tower_button.pressed.connect(func(): _create_item(menu_item_costs[1], "Tower"))
-	build_wall_button.pressed.connect(func(): _create_item(menu_item_costs[2], "Wall"))
+	# build_house_button.pressed.connect(func(): _create_item(menu_item_costs[0], "House"))
+	# build_tower_button.pressed.connect(func(): _create_item(menu_item_costs[1], "Tower"))
+	# build_wall_button.pressed.connect(func(): _create_item(menu_item_costs[2], "Wall"))
+
+
+func handle_ui_action(action_type: String) -> void:
+	var cost = menu_item_costs[menu_item_ids[action_type]]
+
+	# Emit signal to main for coin checking and deduction
+	# menu_item_selected.emit(cost, action_type)
+	_create_item(cost, action_type)
 
 
 func set_focused(is_focused: bool) -> void:
@@ -124,19 +132,7 @@ func _on_menu_item_selected(id: int) -> void:
 
 
 func _create_item(cost: int, type: String) -> void:
-	#print("Created an item of type " + str(type) + "!")
-	#print("It costs " + str(cost) + " coins")
 	menu_item_selected.emit(cost, type)
-
-#func _create_tower(cost: int) -> void:
-	#print("Created a tower!")
-	#print("It costs " + str(cost) + " coins")
-	#menu_item_selected.emit(cost)
-#
-#func _create_wall(cost: int) -> void:
-	#print("Created a wall!")
-	#print("It costs " + str(cost) + " coins")
-	#menu_item_selected.emit(cost)
 
 
 func take_damage(damage: float) -> void:
