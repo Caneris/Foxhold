@@ -71,6 +71,7 @@ func _ready() -> void:
 
 	# initialize coin count display
 	ui_coin_count_label.text = "coin count: " + str(coin_count)
+	ui.action_button_pressed.connect(_on_ui_action_pressed)
 	
 	# connect ui and enemy spawner signals
 	enemy_spawner.wave_countdown_started.connect(ui._on_countdown_started)
@@ -87,6 +88,13 @@ func _ready() -> void:
 	# setup focus system
 	_setup_focus_system()
 	_focus_structure_at_index(current_focus_index)
+
+
+func _on_ui_action_pressed(action_type: String) -> void:
+	print("Main received action: " + action_type)
+	# if current_focus_index >= 0 and current_focus_index < focusable_structures.size():
+	# 	# var focused_structure = focusable_structures[current_focus_index]
+	# 	focused_structure.handle_ui_action(action_type)
 
 
 func _cycle_focus_left() -> void:

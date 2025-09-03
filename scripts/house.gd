@@ -15,12 +15,6 @@ signal menu_item_selected(house_id, cost, menu_item_type)
 @onready var main_scene = get_tree().current_scene
 @onready var shader_material : ShaderMaterial = $Sprite2D.material
 
-
-# buttons from ui panel
-@onready var upgrade_house_button: Button = get_tree().current_scene.get_node("UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/UpgradeHouseButton")
-@onready var recruit_knight_button: Button = get_tree().current_scene.get_node("UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/RecruitKnightButton")
-@onready var recruit_collector_button: Button = get_tree().current_scene.get_node("UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/RecruitCollectorButton")
-
 #@export var foxling_scenes = {
 	#"Knight_Foxling": preload("res://scenes/knight_foxling.tscn"),
 	#"Collector_Foxling": preload("res://scenes/collector_foxling.tscn")
@@ -54,6 +48,13 @@ func _ready() -> void:
 	
 	input_event.connect(_on_house_input_event)
 	menu.id_pressed.connect(_on_menu_item_selected)
+
+
+func handle_ui_action(action_type: String) -> void:
+	var cost = menu_item_costs[menu_item_ids[action_type]]
+
+	# Emit signal to main for coin checking and deduction
+	menu_item_selected.emit(house_id, cost, action_type)
 
 
 func set_focused(is_focused: bool) -> void:
