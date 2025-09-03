@@ -42,7 +42,7 @@ var current_focus_type: FocusType = FocusType.HEART
 var focusable_structures: Array = []
 var old_focus_index: int = -1
 var current_focus_index: int = 0
-var focused_structure: Node = null
+# var focused_structure: Node = null
 var focus_outline_thickness: float = 1.0
 
 # ui action sections
@@ -93,7 +93,7 @@ func _ready() -> void:
 func _on_ui_action_pressed(action_type: String) -> void:
 	print("Main received action: " + action_type)
 	if current_focus_index >= 0 and current_focus_index < focusable_structures.size():
-		# var focused_structure = focusable_structures[current_focus_index]
+		var focused_structure = focusable_structures[current_focus_index]
 		focused_structure.handle_ui_action(action_type)
 
 
