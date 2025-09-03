@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # Combat stats
 @export var damage: int = 5
-@export var attack_range: float = 50.0
+@export var attack_range: float = 10.0
 @export var attack_cooldown: float = 1.0
 @export var enemy_slow_amount: float = 0.5  # 50% speed
 
@@ -40,6 +40,8 @@ var has_reversed: bool = false
 
 
 func _ready() -> void:
+
+    attack_range = attack_range + randfn(0, 2.0)  # Add some randomness to attack range
     home_position = global_position
     # Randomize initial patrol radius
     current_patrol_radius = patrol_radius * randf_range(0.95, 1.05)

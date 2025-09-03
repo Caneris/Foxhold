@@ -29,6 +29,7 @@ size = Vector2(16, 16)
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_4v77h")
+attack_range = 30.0
 max_health = 12
 damage_per_click = 3
 drop_items = Array[PackedScene]([ExtResource("2_yo5jk")])
