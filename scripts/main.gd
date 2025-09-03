@@ -41,7 +41,7 @@ enum FocusType { HEART, HOUSE, WALL, TOWER }
 var current_focus_type: FocusType = FocusType.HEART
 var focusable_structures: Array = []
 var old_focus_index: int = -1
-var current_focus_index: int = -1
+var current_focus_index: int = 0
 var focused_structure: Node = null
 var focus_outline_thickness: float = 1.0
 
@@ -86,6 +86,7 @@ func _ready() -> void:
 
 	# setup focus system
 	_setup_focus_system()
+	_focus_structure_at_index(current_focus_index)
 
 
 func _cycle_focus_left() -> void:
