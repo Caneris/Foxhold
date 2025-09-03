@@ -1,12 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://bbv0ca7fihjcf"]
+[gd_scene load_steps=5 format=3 uid="uid://bbv0ca7fihjcf"]
+
+[ext_resource type="Script" uid="uid://b8c544kuek1sx" path="res://scripts/collector_foxling.gd" id="1_yyeoi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uvnab"]
 size = Vector2(16, 16)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_250ro"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_7groc"]
+radius = 30.0167
+
 [node name="CollectorFoxling" type="CharacterBody2D"]
 collision_layer = 64
+script = ExtResource("1_yyeoi")
 
 [node name="GoldPosition" type="Marker2D" parent="."]
 position = Vector2(0, -13)
@@ -20,5 +26,9 @@ modulate = Color(1, 1, 0, 1)
 scale = Vector2(16, 16)
 texture = SubResource("CanvasTexture_250ro")
 
-[node name="Sight" type="RayCast2D" parent="."]
-collision_mask = 4
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_7groc")
