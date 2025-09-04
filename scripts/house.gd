@@ -11,7 +11,6 @@ var focused: bool = false
 
 signal menu_item_selected(house_id, cost, menu_item_type)
 
-@onready var menu : PopupMenu
 @onready var main_scene = get_tree().current_scene
 @onready var shader_material : ShaderMaterial = $Sprite2D.material
 
@@ -41,13 +40,8 @@ var menu_item_costs = {
 
 
 func _ready() -> void:
-	# Create a unique menu for this house instead of sharing
-	menu = PopupMenu.new()
-	get_tree().current_scene.get_node("UI_Layer/UI").add_child(menu)
-	_populate_house_menu()
-	
+
 	input_event.connect(_on_house_input_event)
-	menu.id_pressed.connect(_on_menu_item_selected)
 
 
 func handle_ui_action(action_type: String) -> void:
@@ -84,17 +78,15 @@ func hide_outline() -> void:
 
 
 func _on_house_input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
-		_show_menu_at_mouse()
-	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
 		# Left click focuses this house
 		print("Focus house " + str(house_id) + " at index " + str(structure_index))
 		main_scene.set_focus(main_scene.FocusType.HOUSE, structure_index)
 
 
-func _show_menu_at_mouse() -> void:
-	menu.position = get_global_mouse_position()
-	menu.show()
+# func _show_menu_at_mouse() -> void:
+# 	menu.position = get_global_mouse_position()
+# 	menu.show()
 
 
 func _on_menu_item_selected(id: int) -> void:
@@ -130,17 +122,3 @@ func _spawn_foxling(type : String) -> void:
 	foxling.position = global_position + Vector2(0, -50)  # Spawn
 	get_tree().current_scene.add_child(foxling)
 	n_foxlings += 1
-
-
-func _populate_house_menu() -> void:
-	menu.clear()
-	_add_menu_item("House_Upgrade")
-	menu.add_separator()  # This adds the horizontal line
-	_add_menu_item("Knight_Foxling")
-	_add_menu_item("Collector_Foxling")
-
-
-func _add_menu_item(item_name: String) -> void:
-	var id : int = menu_item_ids[item_name]
-	var display_name = item_name.replace("_", " ")  # Convert underscores to spaces for display
-	menu.add_item(display_name + " (" + str(menu_item_costs[id]) + " coins)", id)
