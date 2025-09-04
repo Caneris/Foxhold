@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2rt5cmjacwdg"]
+[gd_scene load_steps=10 format=3 uid="uid://b2rt5cmjacwdg"]
 
 [ext_resource type="PackedScene" uid="uid://dxdixvw4t64ag" path="res://scenes/floor.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://bvyiyyx04otg5" path="res://scripts/main.gd" id="1_tipki"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bx271cpci77bt" path="res://scenes/enemy_spawner.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://b57d0lhm3n03w" path="res://scenes/player.tscn" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://dit852ngrx8tm" path="res://scenes/coin.tscn" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://bbv0ca7fihjcf" path="res://scenes/collector_foxling.tscn" id="9_85g3d"]
 
 [node name="Main" type="Node2D"]
 scale = Vector2(1, 1.00743)
@@ -63,3 +64,6 @@ position = Vector2(128, 431.792)
 
 [node name="Position2" type="Marker2D" parent="HousePositions"]
 position = Vector2(471, 431.792)
+
+[node name="CollectorFoxling" parent="." instance=ExtResource("9_85g3d")]
+position = Vector2(148, 208.451)
