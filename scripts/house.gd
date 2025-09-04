@@ -122,3 +122,6 @@ func _spawn_foxling(type : String) -> void:
 	foxling.position = global_position + Vector2(0, -50)  # Spawn
 	get_tree().current_scene.add_child(foxling)
 	n_foxlings += 1
+
+	if type == "Collector_Foxling":
+		foxling.coin_deposited.connect(main_scene._coin_entered_heart)
