@@ -2,7 +2,7 @@ extends Area2D
 
 # house id
 var house_id : int
-var max_foxlings : int = 5
+@export var max_foxlings : int = 5
 var n_foxlings : int = 0
 
 # id in the structures array in main.gd
