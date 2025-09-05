@@ -66,4 +66,5 @@ position = Vector2(128, 431.792)
 position = Vector2(471, 431.792)
 
 [node name="CollectorFoxling" parent="." instance=ExtResource("9_85g3d")]
+visible = false
 position = Vector2(148, 208.451)

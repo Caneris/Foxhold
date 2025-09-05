@@ -21,7 +21,8 @@ signal menu_item_selected(house_id, cost, menu_item_type)
 
 
 var foxling_scenes = {
-	"Knight_Foxling": preload("res://scenes/knight_foxling.tscn")
+	"Knight_Foxling": preload("res://scenes/knight_foxling.tscn"),
+	"Collector_Foxling": preload("res://scenes/collector_foxling.tscn")
 }
 
 
@@ -46,7 +47,7 @@ func _ready() -> void:
 
 func handle_ui_action(action_type: String) -> void:
 	var cost = menu_item_costs[menu_item_ids[action_type]]
-
+	print("House ", house_id, " selected action: ", action_type, " with cost: ", cost)
 	# Emit signal to main for coin checking and deduction
 	menu_item_selected.emit(house_id, cost, action_type)
 

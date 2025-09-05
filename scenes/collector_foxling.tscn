@@ -14,7 +14,7 @@ radius = 30.0167
 collision_layer = 64
 script = ExtResource("1_yyeoi")
 speed = 80.0
-patrol_radius = 40.0
+patrol_radius = 65.0
 
 [node name="CoinPosition" type="Marker2D" parent="."]
 position = Vector2(0, -13)
