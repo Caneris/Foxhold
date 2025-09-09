@@ -36,3 +36,10 @@ material = SubResource("ShaderMaterial_3bgk5")
 position = Vector2(0, -27)
 scale = Vector2(3, 3)
 texture = ExtResource("2_qtlar")
+
+[node name="FoxlingNumberLabel" type="Label" parent="."]
+offset_left = -29.0
+offset_top = -78.0
+offset_right = 30.0
+offset_bottom = -55.0
+text = "🦊 0 / 3"

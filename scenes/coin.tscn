@@ -57,6 +57,7 @@ animations = [{
 size = Vector2(11, 11)
 
 [node name="Coin" type="RigidBody2D" groups=["coin", "item"]]
+z_index = 5
 collision_layer = 8
 collision_mask = 3
 mass = 10.0
