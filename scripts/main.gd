@@ -35,6 +35,13 @@ var building_scenes = {
 }
 
 
+# building mode and placement variables
+var building_mode: bool = false
+var building_preview: Node2D = null
+var grid_size: int = 64
+var house_floor_y: float = 233.267
+var grid_dots: Array[Sprite2D] = []
+
 # focus variables and constants
 
 enum FocusType { HEART, HOUSE, WALL, TOWER }
@@ -88,6 +95,18 @@ func _ready() -> void:
 	# setup focus system
 	_setup_focus_system()
 	_focus_structure_at_index(current_focus_index)
+
+
+func _process(delta: float) -> void:
+	if building_mode and building_preview:
+		var mouse_pos = get_global_mouse_position()
+		building_preview.position.x = mouse_pos.x
+
+func _create_building_preview():
+	building_preview = building_scenes["House"].instantiate()
+	building_preview.modulate.a = 0.5  # Make it semi-transparent
+	add_child(building_preview)
+	building_preview.position.y = house_floor_y
 
 
 func _on_ui_action_pressed(action_type: String) -> void:
@@ -200,9 +219,11 @@ func _create_item(cost: int, type: String) -> void:
 	
 	match type:
 		"House":
-			if try_create_house():
-				_setup_focus_system()
-				update_coin_count(-cost)
+			# if try_create_house():
+			# 	_setup_focus_system()
+			# 	update_coin_count(-cost)
+			if coin_count >= cost:
+				pass
 		"Tower":
 			pass
 		"Wall":
