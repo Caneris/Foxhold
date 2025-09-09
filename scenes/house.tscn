@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cagc640uyr0gl"]
 
 [ext_resource type="Script" uid="uid://dy4dyp3sytag5" path="res://scripts/house.gd" id="1_d7po0"]
-[ext_resource type="Texture2D" uid="uid://dswyte3ekqmdl" path="res://assets/pixel_house_24x24.png" id="2_qtlar"]
+[ext_resource type="Texture2D" uid="uid://bdbcqj2l568wd" path="res://assets/pixel_house_24x24.png" id="2_qtlar"]
 [ext_resource type="Shader" uid="uid://bffojwotabgha" path="res://shaders/outline.gdshader" id="2_rk7hg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_se78b"]
