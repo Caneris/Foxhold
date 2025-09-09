@@ -4,6 +4,7 @@ extends Area2D
 var house_id : int
 @export var max_foxlings : int = 5
 var n_foxlings : int = 0
+var level : int = 1
 
 # id in the structures array in main.gd
 var structure_index : int = -1
@@ -13,6 +14,7 @@ signal menu_item_selected(house_id, cost, menu_item_type)
 
 @onready var main_scene = get_tree().current_scene
 @onready var shader_material : ShaderMaterial = $Sprite2D.material
+@onready var foxling_number_label : Label = $FoxlingNumberLabel
 
 #@export var foxling_scenes = {
 	#"Knight_Foxling": preload("res://scenes/knight_foxling.tscn"),
@@ -43,6 +45,7 @@ var menu_item_costs = {
 func _ready() -> void:
 
 	input_event.connect(_on_house_input_event)
+	update_foxling_number_label()
 
 
 func handle_ui_action(action_type: String) -> void:
@@ -111,7 +114,10 @@ func _on_menu_item_selected(id: int) -> void:
 
 func _upgrade_house() -> void:
 	print("upgrade house!")
-
+	level += 1
+	max_foxlings += 2
+	update_foxling_number_label()
+	# You can add more upgrade logic here (e.g., change appearance, stats, etc.)
 
 func _spawn_foxling(type : String) -> void:
 	print("create a foxling of type ", type)
@@ -126,3 +132,9 @@ func _spawn_foxling(type : String) -> void:
 
 	if type == "Collector_Foxling":
 		foxling.coin_deposited.connect(main_scene._coin_entered_heart)
+
+	update_foxling_number_label()
+
+
+func update_foxling_number_label() -> void:
+	foxling_number_label.text = "🦊" + str(n_foxlings) + "/" + str(max_foxlings)
