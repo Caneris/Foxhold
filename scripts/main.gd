@@ -37,7 +37,7 @@ var building_scenes = {
 
 # building mode and placement variables
 var building_mode: bool = false
-var building_preview: Node2D = null
+var building_preview: Area2D = null  # Changed to Area2D to match house scene root
 var grid_size: int = 64
 var house_floor_y: float = 233.267
 var grid_dots: Array[Sprite2D] = []
@@ -70,6 +70,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		print("right pressed")
 		_cycle_focus_right()
 
+	if building_mode and event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			_place_building()
+		elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			_cancel_building()
+
 
 func _ready() -> void:
 	var vp := get_viewport()
@@ -101,16 +107,64 @@ func _process(delta: float) -> void:
 	if building_mode and building_preview:
 		var mouse_pos = get_global_mouse_position()
 		building_preview.position.x = mouse_pos.x
+		# preview cannot go out of screen (house position plus half house width, get house width from building scene)
+		var house_width = building_preview.get_node("Sprite2D").texture.get_size().x
+		var house_scale = building_preview.get_node("Sprite2D").scale.x
+		var scaled_house_width = house_width * house_scale
+		if building_preview.position.x < scaled_house_width / 2:
+			building_preview.position.x = scaled_house_width / 2
+		elif building_preview.position.x > get_viewport_rect().size.x - scaled_house_width / 2:
+			building_preview.position.x = get_viewport_rect().size.x - scaled_house_width / 2
+
+
+func snap_to_grid(x_pos: float) -> float:
+	return round(x_pos / grid_size) * grid_size
+
 
 func _create_building_preview():
 	building_preview = building_scenes["House"].instantiate()
 	building_preview.modulate.a = 0.5  # Make it semi-transparent
 	add_child(building_preview)
 	building_preview.position.y = house_floor_y
+	# Disable UI so buttons cannot be clicked while preview is active
+	_set_ui_interactable(false)
+
+
+func _place_building() -> void:
+	print("Placing building at: " + str(building_preview.position))
+	if building_preview:
+		var final_global_position = building_preview.global_position
+		building_preview.modulate.a = 1.0  # Make it solid
+		building_preview.house_id = n_house
+		house_array.append(building_preview)
+		building_preview.menu_item_selected.connect(_selected_house_menu_item)
+		# # Reparent while keeping global transform so it doesn't jump/disappear
+		building_preview.reparent(house_container, true)
+		building_preview.global_position = final_global_position
+		n_house += 1
+		building_preview = null
+		building_mode = false
+		# Re-enable UI after placement
+		_set_ui_interactable(true)
+		_setup_focus_system()
+
+
+func _cancel_building() -> void:
+	if building_preview:
+		building_preview.queue_free()
+		building_preview = null
+	building_mode = false
+	# Re-enable UI after cancel
+	_set_ui_interactable(true)
+	# refund coins?
 
 
 func _on_ui_action_pressed(action_type: String) -> void:
 	print("Main received action: " + action_type)
+	# Ignore UI actions while placing a building
+	if building_mode:
+		print("Ignoring UI action while in building mode")
+		return
 	if current_focus_index >= 0 and current_focus_index < focusable_structures.size():
 		var focused_structure = focusable_structures[current_focus_index]
 		focused_structure.handle_ui_action(action_type)
@@ -223,7 +277,9 @@ func _create_item(cost: int, type: String) -> void:
 			# 	_setup_focus_system()
 			# 	update_coin_count(-cost)
 			if coin_count >= cost:
-				pass
+				building_mode = true
+				update_coin_count(-cost)
+				_create_building_preview()
 		"Tower":
 			pass
 		"Wall":
@@ -262,3 +318,18 @@ func try_create_house() -> bool:
 	house.global_position = house_positions[n_house].global_position
 	n_house += 1
 	return true
+
+# Helper: recursively enable/disable interactive UI controls (buttons/etc.)
+func _set_ui_interactable(enabled: bool) -> void:
+	# start from the main UI control so we affect only UI elements
+	_set_ui_node_interactable(ui, enabled)
+
+func _set_ui_node_interactable(node: Node, enabled: bool) -> void:
+	if node is Button:
+		node.disabled = not enabled
+	elif node is BaseButton: # cover other button types
+		node.disabled = not enabled
+	# recurse into child controls
+	if node is Control:
+		for child in node.get_children():
+			_set_ui_node_interactable(child, enabled)
