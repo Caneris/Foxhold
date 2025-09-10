@@ -106,7 +106,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if building_mode and building_preview:
 		var mouse_pos = get_global_mouse_position()
-		building_preview.position.x = mouse_pos.x
+		# snap preview X to grid
+		var snapped_x = snap_to_grid(mouse_pos.x)
+		building_preview.position.x = snapped_x
 		# preview cannot go out of screen (house position plus half house width, get house width from building scene)
 		var house_width = building_preview.get_node("Sprite2D").texture.get_size().x
 		var house_scale = building_preview.get_node("Sprite2D").scale.x
