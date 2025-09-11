@@ -106,7 +106,9 @@ func spawn_enemy(spawn_index) -> void:
 func _on_enemy_died() -> void:
 	print("enemy died signal")
 	n_current -= 1
-	if n_current == 0:
+	var n_remaining : int = n_this_wave - n_spawned + n_current
+	if n_remaining == 0:
+		print("wave complete")
 		_wave_complete()
 
 
