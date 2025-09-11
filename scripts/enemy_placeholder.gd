@@ -9,6 +9,11 @@ extends CharacterBody2D
 @export var damage_per_click: int = 5
 @export var drop_items : Array[PackedScene]
 
+# slowdown variables
+var original_speed: float
+var is_slowed: bool = false
+var slowdown_timer: Timer
+
 
 # pixels/sec² — by default Godot’s 2D gravity
 @export var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -27,8 +32,47 @@ var main_scene : Node2D
 signal enemy_died
 
 
+func _ready() -> void:
+
+	attack_range = attack_range + randfn(0, 2)
+
+	main_scene = get_tree().current_scene
+	# Cache Heart instance
+	heart_node = get_tree().get_root().get_node("Main/Heart") as Area2D
+	sight.collide_with_areas = true
+	initiate_health(max_health)
+	
+	# ignore mouse on the entire Control/HealthBar
+	$Control.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	health_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	click_area.input_pickable = true
+	click_area.input_event.connect(_on_click_area_input)
+
+	# setup slowdown timer variables
+	original_speed = speed
+	slowdown_timer = Timer.new()
+	add_child(slowdown_timer)
+	slowdown_timer.one_shot = true
+	slowdown_timer.timeout.connect(_on_slowdown_timeout)
+
+
+func apply_slow(slowdown_factor: float = 0.3, duration: float = 1.5) -> void:
+	if not is_slowed:
+		is_slowed = true
+		speed = original_speed * slowdown_factor
+		slowdown_timer.wait_time = duration
+		slowdown_timer.start()
+
+
+func _on_slowdown_timeout() -> void:
+	speed = original_speed
+	is_slowed = false
+
+
 func take_damage(damage: float) -> void:
 	health_bar.value = max(health_bar.value - damage, 0)
+
 
 func drop_item() -> void:
 	var dropped_item : RigidBody2D = drop_items.pick_random().instantiate()
@@ -70,24 +114,6 @@ func _on_click_area_input(viewport: Viewport, event: InputEvent, shape_idx: int)
 func initiate_health(value) -> void:
 	health_bar.max_value = max_health
 	health_bar.value = value
-
-
-func _ready() -> void:
-
-	attack_range = attack_range + randfn(0, 2)
-
-	main_scene = get_tree().current_scene
-	# Cache Heart instance
-	heart_node = get_tree().get_root().get_node("Main/Heart") as Area2D
-	sight.collide_with_areas = true
-	initiate_health(max_health)
-	
-	# ignore mouse on the entire Control/HealthBar
-	$Control.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	health_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
-	click_area.input_pickable = true
-	click_area.input_event.connect(_on_click_area_input)
 
 
 func _physics_process(delta: float) -> void:
