@@ -38,8 +38,8 @@ var building_scenes = {
 # building mode and placement variables
 var building_mode: bool = false
 var building_preview: Area2D = null  # Changed to Area2D to match house scene root
-var grid_size: int = 64
-var house_floor_y: float = 233.267
+@export var grid_size: int = 64
+@export var house_floor_y: float = 233.267
 var grid_dots: Array[Sprite2D] = []
 # pending cost for an in-progress building preview (refunded on cancel)
 var pending_build_cost: int = 0

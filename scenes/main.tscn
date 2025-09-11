@@ -12,6 +12,7 @@
 [node name="Main" type="Node2D"]
 scale = Vector2(1, 1.00743)
 script = ExtResource("1_tipki")
+grid_size = 40
 grid_dot_color = Color(0.478431, 1, 1, 0.25098)
 grid_dot_highlight_color = Color(0.957859, 0.643239, 1.54018e-06, 0.878431)
 grid_dot_radius = 1.0
