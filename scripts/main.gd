@@ -41,6 +41,8 @@ var building_preview: Area2D = null  # Changed to Area2D to match house scene ro
 var grid_size: int = 64
 var house_floor_y: float = 233.267
 var grid_dots: Array[Sprite2D] = []
+# pending cost for an in-progress building preview (refunded on cancel)
+var pending_build_cost: int = 0
 
 # grid dot visuals
 @export var grid_dot_color: Color = Color(1, 1, 1, 0.25)
@@ -178,6 +180,7 @@ func _place_building() -> void:
 		# Re-enable UI after placement
 		_set_ui_interactable(true)
 		_setup_focus_system()
+		pending_build_cost = 0
 
 
 func _cancel_building() -> void:
@@ -188,8 +191,10 @@ func _cancel_building() -> void:
 	queue_redraw()  # Clear the grid
 	# Re-enable UI after cancel
 	_set_ui_interactable(true)
-	# refund coins?
-
+	# refund coins
+	if pending_build_cost > 0:
+		update_coin_count(pending_build_cost)
+		pending_build_cost = 0
 
 func _on_ui_action_pressed(action_type: String) -> void:
 	print("Main received action: " + action_type)
@@ -311,6 +316,7 @@ func _create_item(cost: int, type: String) -> void:
 			if coin_count >= cost:
 				building_mode = true
 				update_coin_count(-cost)
+				pending_build_cost = cost
 				_create_building_preview()
 		"Tower":
 			pass
