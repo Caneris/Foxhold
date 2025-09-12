@@ -43,6 +43,12 @@ var building_preview: Area2D = null  # Changed to Area2D to match house scene ro
 var grid_dots: Array[Sprite2D] = []
 # pending cost for an in-progress building preview (refunded on cancel)
 var pending_build_cost: int = 0
+# overlapping variables
+var is_overlapping: bool = false
+var overlapping_areas: Array = []
+# preview colors
+var preview_normal_color: Color = Color(1, 1, 1, 0.5)
+var preview_error_color: Color = Color(1, 0, 0, 0.5)
 
 # grid dot visuals
 @export var grid_dot_color: Color = Color(1, 1, 1, 0.25)
@@ -130,6 +136,20 @@ func _process(delta: float) -> void:
 			queue_redraw()
 
 
+func _on_preview_area_entered(area: Area2D):
+	if area.is_in_group("focusable_structure"):
+		overlapping_areas.append(area)
+		is_overlapping = true
+		building_preview.modulate = preview_error_color
+
+
+func _on_preview_area_exited(area: Area2D):
+	overlapping_areas.erase(area)
+	if overlapping_areas.is_empty():
+		is_overlapping = false
+		building_preview.modulate = preview_normal_color
+
+
 func _draw() -> void:
 	# Only draw grid dots during building mode
 	if not building_mode:
@@ -155,14 +175,23 @@ func snap_to_grid(x_pos: float) -> float:
 
 func _create_building_preview():
 	building_preview = building_scenes["House"].instantiate()
-	building_preview.modulate.a = 0.5  # Make it semi-transparent
+	# building_preview.modulate.a = 0.5  # Make it semi-transparent
+	building_preview.modulate = preview_normal_color
 	add_child(building_preview)
 	building_preview.position.y = house_floor_y
 	# Disable UI so buttons cannot be clicked while preview is active
 	_set_ui_interactable(false)
+	# Connect area signals for overlap detection
+	building_preview.body_entered.connect(_on_preview_area_entered)
+	building_preview.body_exited.connect(_on_preview_area_exited)
 
 
 func _place_building() -> void:
+
+	if is_overlapping:
+		print("Cannot place building here, overlapping with another structure.")
+		return
+
 	print("Placing building at: " + str(building_preview.position))
 	if building_preview:
 		var final_global_position = building_preview.global_position

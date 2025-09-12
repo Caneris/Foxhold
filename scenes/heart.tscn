@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cojp2nac3arah" path="res://scripts/heart.gd" id="1_v30as"]
 [ext_resource type="Shader" uid="uid://bffojwotabgha" path="res://shaders/outline.gdshader" id="2_ycbwg"]
-[ext_resource type="Texture2D" uid="uid://bi0fepwpydfyi" path="res://assets/heart.png" id="3_krgnv"]
+[ext_resource type="Texture2D" uid="uid://crpdlmuyoq6d8" path="res://assets/heart.png" id="3_krgnv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jmd42"]
 size = Vector2(28, 32)
