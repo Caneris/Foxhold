@@ -137,6 +137,7 @@ func _process(delta: float) -> void:
 
 
 func _on_preview_area_entered(area: Area2D):
+	print("Area entered: " + str(area))
 	if area.is_in_group("focusable_structure"):
 		overlapping_areas.append(area)
 		is_overlapping = true
@@ -175,6 +176,7 @@ func snap_to_grid(x_pos: float) -> float:
 
 func _create_building_preview():
 	building_preview = building_scenes["House"].instantiate()
+	building_preview.collision_mask = 16
 	# building_preview.modulate.a = 0.5  # Make it semi-transparent
 	building_preview.modulate = preview_normal_color
 	add_child(building_preview)
@@ -182,8 +184,8 @@ func _create_building_preview():
 	# Disable UI so buttons cannot be clicked while preview is active
 	_set_ui_interactable(false)
 	# Connect area signals for overlap detection
-	building_preview.body_entered.connect(_on_preview_area_entered)
-	building_preview.body_exited.connect(_on_preview_area_exited)
+	building_preview.area_entered.connect(_on_preview_area_entered)
+	building_preview.area_exited.connect(_on_preview_area_exited)
 
 
 func _place_building() -> void:
