@@ -47,8 +47,8 @@ var pending_build_cost: int = 0
 var is_overlapping: bool = false
 var overlapping_areas: Array = []
 # preview colors
-var preview_normal_color: Color = Color(1, 1, 1, 0.5)
-var preview_error_color: Color = Color(1, 0, 0, 0.5)
+@onready var preview_normal_color: Color = Color(1, 1, 1, 0.5)
+@onready var preview_error_color: Color = Color(1, 0, 0, 0.5)
 
 # grid dot visuals
 @export var grid_dot_color: Color = Color(1, 1, 1, 0.25)
