@@ -33,7 +33,7 @@ position = Vector2(650, -200)
 
 [node name="Heart" parent="." instance=ExtResource("3_sugp2")]
 unique_name_in_owner = true
-position = Vector2(314, 217.385)
+position = Vector2(320, 217.385)
 
 [node name="EnemyContainer" type="Node2D" parent="."]
 z_index = 10

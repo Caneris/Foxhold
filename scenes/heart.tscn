@@ -64,7 +64,7 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [node name="Heart" type="Area2D" groups=["focusable_structures", "heart"]]
-collision_layer = 2
+collision_layer = 18
 collision_mask = 13
 script = ExtResource("1_v30as")
 

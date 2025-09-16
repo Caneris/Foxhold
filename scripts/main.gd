@@ -138,17 +138,17 @@ func _process(delta: float) -> void:
 
 func _on_preview_area_entered(area: Area2D):
 	print("Area entered: " + str(area))
-	if area.is_in_group("focusable_structure"):
+	if area.is_in_group("focusable_structures"):
 		overlapping_areas.append(area)
 		is_overlapping = true
-		building_preview.modulate = preview_error_color
+		building_preview.get_node("Sprite2D").modulate = preview_error_color
 
 
 func _on_preview_area_exited(area: Area2D):
 	overlapping_areas.erase(area)
 	if overlapping_areas.is_empty():
 		is_overlapping = false
-		building_preview.modulate = preview_normal_color
+		building_preview.get_node("Sprite2D").modulate = preview_normal_color
 
 
 func _draw() -> void:
