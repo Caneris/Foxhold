@@ -1123,6 +1123,16 @@ cache/0/11/0/glyphs/268435535/offset = Vector2(0, -9)
 cache/0/11/0/glyphs/268435535/size = Vector2(4, 10)
 cache/0/11/0/glyphs/268435535/uv_rect = Rect2(78, 11, 4, 10)
 cache/0/11/0/glyphs/268435535/texture_idx = 0
+cache/0/11/0/glyphs/402653187/advance = Vector2(2.859375, 11.0625)
+cache/0/11/0/glyphs/402653187/offset = Vector2(0, 0)
+cache/0/11/0/glyphs/402653187/size = Vector2(0, 0)
+cache/0/11/0/glyphs/402653187/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/11/0/glyphs/402653187/texture_idx = -1
+cache/0/11/0/glyphs/134217731/advance = Vector2(2.859375, 11.0625)
+cache/0/11/0/glyphs/134217731/offset = Vector2(0, 0)
+cache/0/11/0/glyphs/134217731/size = Vector2(0, 0)
+cache/0/11/0/glyphs/134217731/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/11/0/glyphs/134217731/texture_idx = -1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pt20x"]
 content_margin_left = 10.0
