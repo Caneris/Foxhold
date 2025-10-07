@@ -2,9 +2,9 @@ extends CharacterBody2D
 
 @export var heart_path : NodePath
 @export var speed : float = 100.0
-@export var attack_range : float = 10
+@export var attack_range : float = 3
 @export var attack_damage : int = 1
-@export var attack_interval : float = 2.0
+@export var attack_interval : float = 1.2  # Changed to match animation duration (10 frames at 12 fps)
 @export var max_health : int = 10
 @export var damage_per_click: int = 5
 @export var drop_items : Array[PackedScene]
@@ -28,9 +28,12 @@ var main_scene : Node2D
 @onready var sight: RayCast2D = $Sight
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var click_area: Area2D = $Area2D
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D  # Add this line
 
 signal enemy_died
 
+
+var pending_damage: int = 0
 
 func _ready() -> void:
 
@@ -55,6 +58,10 @@ func _ready() -> void:
 	add_child(slowdown_timer)
 	slowdown_timer.one_shot = true
 	slowdown_timer.timeout.connect(_on_slowdown_timeout)
+
+	# Connect to animation signals
+	animated_sprite.animation_finished.connect(_on_animation_finished)
+	animated_sprite.frame_changed.connect(_on_animation_frame_changed)
 
 
 func apply_slow(slowdown_factor: float = 0.3, duration: float = 1.5) -> void:
@@ -149,6 +156,17 @@ func _physics_process(delta: float) -> void:
 func _try_attack(delta) -> void:
 	if attack_cooldown <= 0.0:
 		attack_cooldown = attack_interval
-		heart_node.take_damage(attack_damage)
+		animated_sprite.play("attack")
+		pending_damage = attack_damage  # Store damage to apply later
 	else:
 		attack_cooldown -= delta
+
+func _on_animation_frame_changed() -> void:
+	# Apply damage between frame 7 and 8 (when frame becomes 7)
+	if animated_sprite.animation == "attack" and animated_sprite.frame == 7 and pending_damage > 0:
+		heart_node.take_damage(pending_damage)
+		pending_damage = 0
+
+func _on_animation_finished() -> void:
+	if animated_sprite.animation == "attack":
+		animated_sprite.play("default")  # Return to default animation after attack

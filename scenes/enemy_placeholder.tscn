@@ -234,10 +234,11 @@ corner_radius_bottom_left = 2
 size = Vector2(16, 16)
 
 [node name="EnemyPlaceholder" type="CharacterBody2D" groups=["enemy"]]
+scale = Vector2(2, 2)
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_4v77h")
-attack_range = 30.0
+attack_range = 10.0
 max_health = 12
 damage_per_click = 3
 drop_items = Array[PackedScene]([ExtResource("2_yo5jk")])
@@ -250,7 +251,8 @@ shape = SubResource("RectangleShape2D_4v77h")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_t1l7j")
-frame_progress = 0.63246435
+animation = &"attack"
+frame_progress = 0.5779343
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false

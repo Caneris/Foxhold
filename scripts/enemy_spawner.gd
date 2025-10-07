@@ -99,6 +99,18 @@ func spawn_enemy(spawn_index) -> void:
 	enemy_container.move_child(enemy, 0)
 	enemy.global_position = spawn_points[spawn_index].global_position
 	
+	# animate spawned enemy (default of animated sprite is "default")
+	var animated_sprite := enemy.get_node_or_null("AnimatedSprite2D")
+	if animated_sprite is AnimatedSprite2D:
+		animated_sprite.play("default")
+		
+		# Make the sprite point towards the heart
+		var heart = get_node_or_null("../Heart") # Adjust path as needed
+		if heart:
+			var direction = (heart.global_position - enemy.global_position).normalized()
+			# flip the sprite based on X direction
+			animated_sprite.flip_h = direction.x >= 0
+	
 	# connect death signal
 	enemy.enemy_died.connect(_on_enemy_died)
 
