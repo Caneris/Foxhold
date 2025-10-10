@@ -104,6 +104,11 @@ func _create_item(cost: int, type: String) -> void:
 
 func take_damage(damage: float) -> void:
 	health_bar.value = max(health_bar.value - damage, 0)
+	# Flash white to indicate damage taken
+	var tween = create_tween()
+	# tween.tween_property(animated_sprite, "modulate", Color(1.5, 0.5, 0.5, 1), 0.1)
+	tween.tween_property(animated_sprite, "modulate", Color(3.0, 3.0, 3.0, 1), 0.1)
+	tween.tween_property(animated_sprite, "modulate", Color(1, 1, 1, 1), 0.1)
 
 
 func initiate_health(value: float) -> void:
