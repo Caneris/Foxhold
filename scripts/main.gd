@@ -123,8 +123,10 @@ func _process(delta: float) -> void:
 		var snapped_x = snap_to_grid(mouse_pos.x)
 		building_preview.position.x = snapped_x
 		# preview cannot go out of screen (house position plus half house width, get house width from building scene)
-		var house_width = building_preview.get_node("Sprite2D").texture.get_size().x
-		var house_scale = building_preview.get_node("Sprite2D").scale.x
+		var animated_sprite = building_preview.get_node("Sprite2D")
+		var current_texture = animated_sprite.sprite_frames.get_frame_texture(animated_sprite.animation, animated_sprite.frame)
+		var house_width = current_texture.get_size().x
+		var house_scale = animated_sprite.scale.x
 		var scaled_house_width = house_width * house_scale
 		if building_preview.position.x < scaled_house_width / 2:
 			building_preview.position.x = scaled_house_width / 2
@@ -170,6 +172,7 @@ func _draw() -> void:
 		var highlight_pos := Vector2(local_x, house_floor_y)
 		draw_circle(highlight_pos, grid_dot_radius * 1.8, grid_dot_highlight_color)
 
+
 func snap_to_grid(x_pos: float) -> float:
 	return round(x_pos / grid_size) * grid_size
 
@@ -204,6 +207,11 @@ func _place_building() -> void:
 		# # Reparent while keeping global transform so it doesn't jump/disappear
 		building_preview.reparent(house_container, true)
 		building_preview.global_position = final_global_position
+
+		# get animatedsprite2d node from building preview
+		var bp_animated_sprite : AnimatedSprite2D = building_preview.get_node("Sprite2D")
+		bp_animated_sprite.play("default")
+
 		n_house += 1
 		building_preview = null
 		building_mode = false

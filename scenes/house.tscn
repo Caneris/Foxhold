@@ -1,13 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://cagc640uyr0gl"]
+[gd_scene load_steps=12 format=3 uid="uid://cagc640uyr0gl"]
 
 [ext_resource type="Script" uid="uid://dy4dyp3sytag5" path="res://scripts/house.gd" id="1_d7po0"]
-[ext_resource type="Texture2D" uid="uid://dswyte3ekqmdl" path="res://assets/pixel_house_24x24.png" id="2_qtlar"]
+[ext_resource type="Texture2D" uid="uid://cgf40hhvuxc2a" path="res://assets/foxling_house-Sheet.png" id="2_qtlar"]
 [ext_resource type="Shader" uid="uid://bffojwotabgha" path="res://shaders/outline.gdshader" id="2_rk7hg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_se78b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x8wvn"]
-size = Vector2(57, 51)
+size = Vector2(58, 71)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3bgk5"]
 resource_local_to_scene = true
@@ -15,6 +15,42 @@ shader = ExtResource("2_rk7hg")
 shader_parameter/clr = Color(1, 1, 1, 1)
 shader_parameter/type = 1
 shader_parameter/thickness = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rk7hg"]
+atlas = ExtResource("2_qtlar")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_se78b"]
+atlas = ExtResource("2_qtlar")
+region = Rect2(40, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bgk5"]
+atlas = ExtResource("2_qtlar")
+region = Rect2(80, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f74lx"]
+atlas = ExtResource("2_qtlar")
+region = Rect2(120, 0, 40, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ptc3g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rk7hg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_se78b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3bgk5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f74lx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="House" type="Area2D" groups=["focusable_structures", "house"]]
 z_index = -1
@@ -25,21 +61,21 @@ script = ExtResource("1_d7po0")
 max_foxlings = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 z_index = 1
 material = SubResource("ShaderMaterial_se78b")
-position = Vector2(1.5, -25.5)
+position = Vector2(-2, -35.5)
 shape = SubResource("RectangleShape2D_x8wvn")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 material = SubResource("ShaderMaterial_3bgk5")
-position = Vector2(0, -27)
-scale = Vector2(3, 3)
-texture = ExtResource("2_qtlar")
+position = Vector2(0, -40.000004)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_ptc3g")
 
 [node name="FoxlingNumberLabel" type="Label" parent="."]
-offset_left = -29.0
-offset_top = -78.0
-offset_right = 30.0
-offset_bottom = -55.0
+offset_left = -31.0
+offset_top = -99.0
+offset_right = 28.0
+offset_bottom = -76.0
 text = "🦊 0 / 3"
