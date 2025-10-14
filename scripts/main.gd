@@ -131,6 +131,8 @@ func _ready() -> void:
 	# connect to enemy spawner wave starting signal
 	enemy_spawner.wave_starting.connect(_on_wave_starting)
 
+	_update_all_cost_labels()
+
 
 func _process(delta: float) -> void:
 	if building_mode and building_preview:
@@ -187,9 +189,9 @@ func _update_heart_cost_labels() -> void:
 	var wall_cost = heart.menu_item_costs[2]
 
 	# Assuming you have Label nodes for each cost in the UI
-	var house_cost_label: Label = ui.upgrade_house_cost_label
-	var tower_cost_label: Label = ui.recruit_knight_cost_label
-	var wall_cost_label: Label = ui.recruit_collector_cost_label
+	var house_cost_label: Label = ui.build_house_cost_label
+	var tower_cost_label: Label = ui.build_tower_cost_label
+	var wall_cost_label: Label = ui.build_wall_cost_label
 
 	house_cost_label.text = str(house_cost)
 	tower_cost_label.text = str(tower_cost)
