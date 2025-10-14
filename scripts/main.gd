@@ -69,6 +69,19 @@ var focus_outline_thickness: float = 1.0
 @onready var heart_action_section: Control = $UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection
 @onready var house_action_section: Control = $UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection
 
+
+# cost inflation variables
+var base_costs = {
+	"House": 2,
+	"Tower": 10,
+	"Wall": 25,
+	"House_Upgrade": 5,
+	"Knight_Foxling": 3,
+	"Collector_Foxling": 2
+}
+var cost_inflation_rate: float = 0.15
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if dragged_item and !event.is_pressed():
@@ -115,6 +128,9 @@ func _ready() -> void:
 	_setup_focus_system()
 	_focus_structure_at_index(current_focus_index)
 
+	# connect to enemy spawner wave starting signal
+	enemy_spawner.wave_starting.connect(_on_wave_starting)
+
 
 func _process(delta: float) -> void:
 	if building_mode and building_preview:
@@ -136,6 +152,66 @@ func _process(delta: float) -> void:
 		if building_mode:
 			# ensure grid is drawn while in building mode
 			queue_redraw()
+
+
+func _on_wave_starting() -> void:
+	_apply_cost_inflation()
+	_update_all_cost_labels()
+
+
+func _apply_cost_inflation() -> void:
+	var wave : int = enemy_spawner.wave_number
+	var multiplier : float = (1.0 + cost_inflation_rate) ** (wave - 1)
+
+	# update heart costs
+	heart.menu_item_costs[0] = roundi(base_costs["House"] * multiplier)          # House
+	heart.menu_item_costs[1] = roundi(base_costs["Tower"] * multiplier)          # Tower
+	heart.menu_item_costs[2] = roundi(base_costs["Wall"] * multiplier)           # Wall
+
+	# update house costs
+	for house in house_array:
+		house.menu_item_costs[0] = roundi(base_costs["House_Upgrade"] * multiplier)  # House Upgrade
+		house.menu_item_costs[1] = roundi(base_costs["Knight_Foxling"] * multiplier)   # Knight Foxling
+		house.menu_item_costs[2] = roundi(base_costs["Collector_Foxling"] * multiplier) # Collector Foxling
+
+func _update_all_cost_labels() -> void:
+	_update_heart_cost_labels()
+	_update_house_cost_labels()
+
+
+func _update_heart_cost_labels() -> void:
+	print("Updating heart cost labels")
+	# Update heart action section cost labels
+	var house_cost = heart.menu_item_costs[0]
+	var tower_cost = heart.menu_item_costs[1]
+	var wall_cost = heart.menu_item_costs[2]
+
+	# Assuming you have Label nodes for each cost in the UI
+	var house_cost_label: Label = ui.upgrade_house_cost_label
+	var tower_cost_label: Label = ui.recruit_knight_cost_label
+	var wall_cost_label: Label = ui.recruit_collector_cost_label
+
+	house_cost_label.text = str(house_cost)
+	tower_cost_label.text = str(tower_cost)
+	wall_cost_label.text = str(wall_cost)
+
+
+func _update_house_cost_labels() -> void:
+	if house_array.is_empty():
+		return
+	
+	var upgrade_cost = house_array[0].menu_item_costs[0]
+	var knight_cost = house_array[0].menu_item_costs[1]
+	var collector_cost = house_array[0].menu_item_costs[2]
+
+	# Assuming you have Label nodes for each cost in the UI
+	var upgrade_cost_label: Label = ui.upgrade_house_cost_label
+	var knight_cost_label: Label = ui.recruit_knight_cost_label
+	var collector_cost_label: Label = ui.recruit_collector_cost_label
+
+	upgrade_cost_label.text = str(upgrade_cost)
+	knight_cost_label.text = str(knight_cost)
+	collector_cost_label.text = str(collector_cost)
 
 
 func _on_preview_area_entered(area: Area2D):
@@ -234,6 +310,7 @@ func _cancel_building() -> void:
 	if pending_build_cost > 0:
 		update_coin_count(pending_build_cost)
 		pending_build_cost = 0
+
 
 func _on_ui_action_pressed(action_type: String) -> void:
 	print("Main received action: " + action_type)

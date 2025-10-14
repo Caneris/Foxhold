@@ -4,17 +4,26 @@ extends Control
 
 signal action_button_pressed(action_type: String)
 
-@onready var upgrade_house_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/UpgradeHouseButton
-@onready var recruit_knight_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/RecruitKnightButton
-@onready var recruit_collector_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/RecruitCollectorButton
+@onready var upgrade_house_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer/UpgradeHouseButton
+@onready var recruit_knight_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer2/RecruitKnightButton
+@onready var recruit_collector_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer3/RecruitCollectorButton
+
+# house menu cost labels
+@onready var upgrade_house_cost_label: Label = $BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer/HBoxContainer/Label
+@onready var recruit_knight_cost_label: Label = $BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer2/HBoxContainer/Label
+@onready var recruit_collector_cost_label: Label = $BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer3/HBoxContainer/Label
 
 # var focused_structure_type : String = "Heart" # Default focused structure type
 
 # Heart Menu Buttons
-@onready var build_house_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/BuildHouseButton
-@onready var build_tower_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/BuildTowerButton
-@onready var build_wall_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/BuildWallButton
+@onready var build_house_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer/BuildHouseButton
+@onready var build_tower_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer3/BuildTowerButton
+@onready var build_wall_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer2/BuildWallButton
 
+# Heart menu cost labels
+@onready var build_house_cost_label: Label = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer/HBoxContainer/Label
+@onready var build_tower_cost_label: Label = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer3/HBoxContainer/Label
+@onready var build_wall_cost_label: Label = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer2/HBoxContainer/Label
 
 # func _ready() -> void:
 
