@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CostData" load_steps=2 format=3 uid="uid://cdqyltm26qfh0"]
+
+[ext_resource type="Script" uid="uid://cnktbn1ywvyuw" path="res://scripts/cost_data.gd" id="1_ot1xr"]
+
+[resource]
+script = ExtResource("1_ot1xr")
+base_costs = {
+"Collector_Foxling": 2,
+"House": 2,
+"House_Upgrade": 5,
+"Knight_Foxling": 3,
+"Tower": 10,
+"Wall": 25
+}
