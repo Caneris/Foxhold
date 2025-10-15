@@ -84,7 +84,7 @@ text = "enemy count: "
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.5
+size_flags_stretch_ratio = 3.0
 texture = ExtResource("3_yev5y")
 region_rect = Rect2(33, 0, 32, 32)
 patch_margin_left = 4
@@ -102,7 +102,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-theme_override_constants/separation = 30
+theme_override_constants/separation = 24
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection"]
@@ -181,6 +181,34 @@ layout_mode = 2
 text = "2"
 
 [node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_wm3ai")
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HealHeartButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer4"]
+custom_minimum_size = Vector2(60, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_type_variation = &"HealButton"
+text = "Heal"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer4/HBoxContainer"]
+layout_mode = 2
+text = "2"
+
+[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer4/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -286,7 +314,6 @@ texture = SubResource("AtlasTexture_wm3ai")
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.5
 texture = ExtResource("3_yev5y")
 region_rect = Rect2(0, 0, 32, 32)
 patch_margin_left = 5

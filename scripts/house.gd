@@ -36,9 +36,9 @@ var menu_item_ids = {
 
 
 var menu_item_costs = {
-	0: 5,  # House Upgrade cost
-	1: 3,  # Knight Foxling cost
-	2: 2    # Collector Foxling cost
+	0: 0,  # House Upgrade cost
+	1: 0,  # Knight Foxling cost
+	2: 0   # Collector Foxling cost
 }
 
 
@@ -46,6 +46,17 @@ func _ready() -> void:
 
 	input_event.connect(_on_house_input_event)
 	update_foxling_number_label()
+
+	_initialize_costs()
+
+
+func _initialize_costs() -> void:
+	print("Initializing costs for house ", house_id)
+	var wave : int = main_scene.enemy_spawner.wave_number
+	print("Current wave: ", wave)
+	menu_item_costs[0] = main_scene.cost_data.get_inflated_cost("House_Upgrade", wave)  # House Upgrade
+	menu_item_costs[1] = main_scene.cost_data.get_inflated_cost("Knight_Foxling", wave)   # Knight Foxling
+	menu_item_costs[2] = main_scene.cost_data.get_inflated_cost("Collector_Foxling", wave) # Collector Foxling
 
 
 func handle_ui_action(action_type: String) -> void:

@@ -69,6 +69,8 @@ var focus_outline_thickness: float = 1.0
 @onready var heart_action_section: Control = $UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection
 @onready var house_action_section: Control = $UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection
 
+# cost data resource
+@export var cost_data: CostData
 
 # cost inflation variables
 var base_costs = {
@@ -163,18 +165,17 @@ func _on_wave_starting() -> void:
 
 func _apply_cost_inflation() -> void:
 	var wave : int = enemy_spawner.wave_number
-	var multiplier : float = (1.0 + cost_inflation_rate) ** (wave - 1)
 
 	# update heart costs
-	heart.menu_item_costs[0] = roundi(base_costs["House"] * multiplier)          # House
-	heart.menu_item_costs[1] = roundi(base_costs["Tower"] * multiplier)          # Tower
-	heart.menu_item_costs[2] = roundi(base_costs["Wall"] * multiplier)           # Wall
+	heart.menu_item_costs[0] = cost_data.get_inflated_cost("House", wave)          # House
+	heart.menu_item_costs[1] = cost_data.get_inflated_cost("Tower", wave)          # Tower
+	heart.menu_item_costs[2] = cost_data.get_inflated_cost("Wall", wave)           # Wall
 
 	# update house costs
 	for house in house_array:
-		house.menu_item_costs[0] = roundi(base_costs["House_Upgrade"] * multiplier)  # House Upgrade
-		house.menu_item_costs[1] = roundi(base_costs["Knight_Foxling"] * multiplier)   # Knight Foxling
-		house.menu_item_costs[2] = roundi(base_costs["Collector_Foxling"] * multiplier) # Collector Foxling
+		house.menu_item_costs[0] = cost_data.get_inflated_cost("House_Upgrade", wave)  # House Upgrade
+		house.menu_item_costs[1] = cost_data.get_inflated_cost("Knight_Foxling", wave)   # Knight Foxling
+		house.menu_item_costs[2] = cost_data.get_inflated_cost("Collector_Foxling", wave) # Collector Foxling
 
 func _update_all_cost_labels() -> void:
 	_update_heart_cost_labels()
@@ -188,14 +189,9 @@ func _update_heart_cost_labels() -> void:
 	var tower_cost = heart.menu_item_costs[1]
 	var wall_cost = heart.menu_item_costs[2]
 
-	# Assuming you have Label nodes for each cost in the UI
-	var house_cost_label: Label = ui.build_house_cost_label
-	var tower_cost_label: Label = ui.build_tower_cost_label
-	var wall_cost_label: Label = ui.build_wall_cost_label
-
-	house_cost_label.text = str(house_cost)
-	tower_cost_label.text = str(tower_cost)
-	wall_cost_label.text = str(wall_cost)
+	ui.build_house_cost_label.text = str(house_cost)
+	ui.build_tower_cost_label.text = str(tower_cost)
+	ui.build_wall_cost_label.text = str(wall_cost)
 
 
 func _update_house_cost_labels() -> void:
@@ -289,6 +285,9 @@ func _place_building() -> void:
 		# get animatedsprite2d node from building preview
 		var bp_animated_sprite : AnimatedSprite2D = building_preview.get_node("Sprite2D")
 		bp_animated_sprite.play("default")
+
+		# update cost labels
+		_update_house_cost_labels()
 
 		n_house += 1
 		building_preview = null
