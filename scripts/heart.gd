@@ -16,7 +16,7 @@ var focused: bool = false
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var shader_material : ShaderMaterial = $AnimatedSprite2D.material
 
-@export var heal_perc : float = 0.10  # Heal 10% of max health
+@export var heal_perc : float = 0.25  # Heal 10% of max health
 
 
 var menu_item_ids = {
