@@ -5,6 +5,7 @@ extends Resource
     "House": 50,
     "Tower": 100,
     "Wall": 75,
+    "Heal": 30,
     "House_Upgrade": 80,
     "Knight_Foxling": 120,
     "Collector_Foxling": 90

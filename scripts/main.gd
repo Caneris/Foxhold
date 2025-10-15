@@ -439,6 +439,9 @@ func _create_item(cost: int, type: String) -> void:
 			pass
 		"Wall":
 			pass
+		"Heal":
+			heart.heal_heart()
+			update_coin_count(-cost)
 
 
 func _create_house_item(house_id : int, cost: int, type: String) -> void:

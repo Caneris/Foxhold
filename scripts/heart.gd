@@ -16,17 +16,21 @@ var focused: bool = false
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var shader_material : ShaderMaterial = $AnimatedSprite2D.material
 
+@export var heal_perc : float = 0.10  # Heal 10% of max health
+
 
 var menu_item_ids = {
 	"House": 0,
 	"Tower": 1,
-	"Wall": 2
+	"Wall": 2,
+	"Heal": 3
 }
 
 var menu_item_costs = {
 	0: 2, # House cost
 	1: 10, # Tower cost
-	2: 25 # Wall cost
+	2: 25, # Wall cost
+	3: 5   # Heal cost
 }
 
 
@@ -96,10 +100,21 @@ func _on_menu_item_selected(id: int) -> void:
 			_create_item(cost, "Tower")
 		2:
 			_create_item(cost, "Wall")
+		3:
+			_create_item(cost, "Heal")
 
 
 func _create_item(cost: int, type: String) -> void:
 	menu_item_selected.emit(cost, type)
+
+
+func heal_heart() -> void:
+	var heal_amount = heal_perc * max_health
+	health_bar.value = min(health_bar.value + heal_amount, max_health)
+	# Flash green to indicate healing
+	var tween = create_tween()
+	tween.tween_property(animated_sprite, "modulate", Color(0.5, 1.5, 0.5, 1), 0.1)
+	tween.tween_property(animated_sprite, "modulate", Color(1, 1, 1, 1), 0.1)
 
 
 func take_damage(damage: float) -> void:

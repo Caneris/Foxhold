@@ -19,11 +19,13 @@ signal action_button_pressed(action_type: String)
 @onready var build_house_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer/BuildHouseButton
 @onready var build_tower_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer3/BuildTowerButton
 @onready var build_wall_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer2/BuildWallButton
+@onready var heal_heart_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer4/HealHeartButton
 
 # Heart menu cost labels
 @onready var build_house_cost_label: Label = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer/HBoxContainer/Label
 @onready var build_tower_cost_label: Label = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer3/HBoxContainer/Label
 @onready var build_wall_cost_label: Label = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer2/HBoxContainer/Label
+@onready var heal_heart_cost_label: Label = $BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer4/HBoxContainer/Label
 
 # func _ready() -> void:
 
@@ -43,6 +45,7 @@ func _ready() -> void:
 	build_house_button.pressed.connect(func(): action_button_pressed.emit("House"))
 	build_tower_button.pressed.connect(func(): action_button_pressed.emit("Tower"))
 	build_wall_button.pressed.connect(func(): action_button_pressed.emit("Wall"))
+	heal_heart_button.pressed.connect(func(): action_button_pressed.emit("Heal"))
 
 func _on_countdown_started(duration : float) -> void:
 	break_timer_circle.max_value = duration
