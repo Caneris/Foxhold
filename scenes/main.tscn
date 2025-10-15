@@ -13,15 +13,15 @@
 [sub_resource type="Resource" id="Resource_ya4ey"]
 script = ExtResource("2_choun")
 base_costs = {
-"Collector_Foxling": 5,
-"Heal": 3,
-"House": 5,
-"House_Upgrade": 10,
-"Knight_Foxling": 5,
-"Tower": 10,
-"Wall": 15
+"Collector_Foxling": 2,
+"Heal": 1,
+"House": 3,
+"House_Upgrade": 3,
+"Knight_Foxling": 2,
+"Tower": 4,
+"Wall": 5
 }
-inflation_rate = 0.2
+inflation_rate = 0.05
 metadata/_custom_type_script = "uid://cnktbn1ywvyuw"
 
 [node name="Main" type="Node2D"]
@@ -60,7 +60,7 @@ position = Vector2(0, -198.525)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_jyhfs")]
 position = Vector2(0, 63.528)
-break_interval = 10.0
+break_interval = 15.0
 spawn_points_path = Array[NodePath]([NodePath("Position1"), NodePath("Position2")])
 enemy_container_path = NodePath("../EnemyContainer")
 

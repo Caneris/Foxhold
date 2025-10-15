@@ -170,6 +170,7 @@ func _apply_cost_inflation() -> void:
 	heart.menu_item_costs[0] = cost_data.get_inflated_cost("House", wave)          # House
 	heart.menu_item_costs[1] = cost_data.get_inflated_cost("Tower", wave)          # Tower
 	heart.menu_item_costs[2] = cost_data.get_inflated_cost("Wall", wave)           # Wall
+	heart.menu_item_costs[3] = cost_data.get_inflated_cost("Heal", wave)           # Heal
 
 	# update house costs
 	for house in house_array:
@@ -178,6 +179,7 @@ func _apply_cost_inflation() -> void:
 		house.menu_item_costs[2] = cost_data.get_inflated_cost("Collector_Foxling", wave) # Collector Foxling
 
 func _update_all_cost_labels() -> void:
+	_apply_cost_inflation()
 	_update_heart_cost_labels()
 	_update_house_cost_labels()
 
@@ -188,10 +190,12 @@ func _update_heart_cost_labels() -> void:
 	var house_cost = heart.menu_item_costs[0]
 	var tower_cost = heart.menu_item_costs[1]
 	var wall_cost = heart.menu_item_costs[2]
+	var heal_cost = heart.menu_item_costs[3]
 
 	ui.build_house_cost_label.text = str(house_cost)
 	ui.build_tower_cost_label.text = str(tower_cost)
 	ui.build_wall_cost_label.text = str(wall_cost)
+	ui.heal_heart_cost_label.text = str(heal_cost)
 
 
 func _update_house_cost_labels() -> void:
@@ -274,7 +278,11 @@ func _place_building() -> void:
 	print("Placing building at: " + str(building_preview.position))
 	if building_preview:
 		var final_global_position = building_preview.global_position
-		building_preview.modulate.a = 1.0  # Make it solid
+		
+		# reset modulate to solid
+		building_preview.modulate = Color(1, 1, 1, 1)  # Make it solid
+		building_preview.get_node("Sprite2D").modulate = Color(1, 1, 1, 1)
+		
 		building_preview.house_id = n_house
 		house_array.append(building_preview)
 		building_preview.menu_item_selected.connect(_selected_house_menu_item)

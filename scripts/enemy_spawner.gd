@@ -16,11 +16,11 @@ var enemy_container : Node2D
 var spawn_timer : Timer
 
 var wave_number : int = 0
-var n_base : int = 5
+var n_base : int = 2 # base number of enemies per wave
 var n_this_wave : int
 var n_current : int = 0
 var n_spawned : int = 0
-var enemy_growth_rate : float = 0.2
+@export var enemy_growth_rate : float = 0.2
 
 var break_timer : Timer
 
