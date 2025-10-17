@@ -149,6 +149,10 @@ func _physics_process(delta: float) -> void:
 	if sight.is_colliding() and col.is_in_group("heart"):
 		velocity.x = 0.0
 		_try_attack(delta)
+	elif sight.is_colliding() and col.is_in_group("wall"):
+		print("Wall in the way")
+		velocity.x = 0.0
+		_try_attack(delta)
 	else:
 		velocity.x = dir.x * speed
 		move_and_slide()
@@ -164,7 +168,9 @@ func _try_attack(delta) -> void:
 func _on_animation_frame_changed() -> void:
 	# Apply damage between frame 7 and 8 (when frame becomes 7)
 	if animated_sprite.animation == "attack" and animated_sprite.frame == 7 and pending_damage > 0:
-		heart_node.take_damage(pending_damage)
+		var col = sight.get_collider()
+		if col and col.has_method("take_damage"):
+			col.take_damage(pending_damage)
 		pending_damage = 0
 
 func _on_animation_finished() -> void:

@@ -239,7 +239,7 @@ collision_layer = 4
 collision_mask = 35
 script = ExtResource("1_4v77h")
 speed = 80.0
-attack_range = 7.0
+attack_range = 6.0
 damage_per_click = 3
 drop_items = Array[PackedScene]([ExtResource("2_yo5jk")])
 
@@ -262,7 +262,7 @@ scale = Vector2(16, 16)
 texture = SubResource("CanvasTexture_drc24")
 
 [node name="Sight" type="RayCast2D" parent="."]
-collision_mask = 2
+collision_mask = 34
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
