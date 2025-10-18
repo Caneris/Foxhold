@@ -74,3 +74,6 @@ position = Vector2(128, 431.792)
 
 [node name="Position2" type="Marker2D" parent="HousePositions"]
 position = Vector2(471, 431.792)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
