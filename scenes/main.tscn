@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2rt5cmjacwdg"]
+[gd_scene load_steps=10 format=3 uid="uid://b2rt5cmjacwdg"]
 
 [ext_resource type="PackedScene" uid="uid://dxdixvw4t64ag" path="res://scenes/floor.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://bvyiyyx04otg5" path="res://scripts/main.gd" id="1_tipki"]
 [ext_resource type="PackedScene" uid="uid://cirhxs55at7w7" path="res://scenes/ui.tscn" id="2_85g3d"]
-[ext_resource type="Script" path="res://scripts/cost_data.gd" id="2_choun"]
+[ext_resource type="Script" uid="uid://cnktbn1ywvyuw" path="res://scripts/cost_data.gd" id="2_choun"]
 [ext_resource type="PackedScene" uid="uid://dlbyw26fe20vd" path="res://scenes/heart.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bx271cpci77bt" path="res://scenes/enemy_spawner.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://b57d0lhm3n03w" path="res://scenes/player.tscn" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://ckxt7xyn3omwu" path="res://scenes/wall.tscn" id="8_tipki"]
 
 [sub_resource type="Resource" id="Resource_ya4ey"]
 script = ExtResource("2_choun")
