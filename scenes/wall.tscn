@@ -1,7 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://ckxt7xyn3omwu"]
+[gd_scene load_steps=16 format=3 uid="uid://ckxt7xyn3omwu"]
 
 [ext_resource type="Script" uid="uid://350td0tmwfhc" path="res://scripts/wall.gd" id="1_2ktk7"]
+[ext_resource type="Shader" uid="uid://bffojwotabgha" path="res://shaders/outline.gdshader" id="1_e00m8"]
 [ext_resource type="Texture2D" uid="uid://bb80lxkpest17" path="res://assets/Wall.png" id="1_wykyb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tdtm6"]
+shader = ExtResource("1_e00m8")
+shader_parameter/clr = Color(0, 0, 0, 1)
+shader_parameter/type = 2
+shader_parameter/thickness = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ktk7"]
 size = Vector2(33, 48)
@@ -82,7 +89,8 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[node name="Wall" type="Area2D" groups=["wall"]]
+[node name="Wall" type="Area2D" groups=["focusable_structures", "wall"]]
+material = SubResource("ShaderMaterial_tdtm6")
 collision_layer = 32
 collision_mask = 4
 script = ExtResource("1_2ktk7")

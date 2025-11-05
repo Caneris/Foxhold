@@ -1,17 +1,47 @@
 extends Area2D
 
+# id in the structures array in main.gd
+var structure_index : int = -1
+var focused: bool = false
 
 @export var max_health: int = 100
 var is_destroyed: bool = false
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var health_bar: ProgressBar = %HealthBar
-var damage_tween: Tween  # Add this line
-
+var damage_tween: Tween  # Add this 
+@onready var shader_material : ShaderMaterial = $AnimatedSprite2D.material
+@onready var main_scene = get_tree().current_scene
 
 func _ready() -> void:
     _set_destroyed(false)
     health_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
     initiate_health(max_health)
+
+
+func set_focused(is_focused: bool) -> void:
+    if focused == is_focused:
+        return  # No change, skip animation
+
+    focused = is_focused
+
+    if focused:
+        show_outline()
+    else:
+        hide_outline()
+
+
+func _set_outline_thickness(thickness: float) -> void:
+    shader_material.set_shader_parameter("thickness", thickness)
+
+
+func show_outline() -> void:
+    var tween = create_tween()
+    tween.tween_method(_set_outline_thickness, 0.0, main_scene.focus_outline_thickness, 0.3) # animate to thickness 2.0 over 0.3 seconds
+
+
+func hide_outline() -> void:
+    var tween = create_tween()
+    tween.tween_method(_set_outline_thickness, main_scene.focus_outline_thickness, 0.0, 0.2)
 
 
 func initiate_health(value: int) -> void:

@@ -78,3 +78,6 @@ position = Vector2(471, 431.792)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
+
+[node name="Wall" parent="." instance=ExtResource("8_tipki")]
+position = Vector2(180, 201.50284)
