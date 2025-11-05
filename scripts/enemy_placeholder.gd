@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var speed : float = 100.0
 @export var attack_range : float = 3
 @export var attack_damage : int = 1
-@export var attack_interval : float = 1.2  # Changed to match animation duration (10 frames at 12 fps)
+var attack_interval : float # Changed to match animation duration, get frame count / fps in ready function
 @export var max_health : int = 10
 @export var damage_per_click: int = 5
 @export var drop_items : Array[PackedScene]
@@ -62,6 +62,13 @@ func _ready() -> void:
 	# Connect to animation signals
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 	animated_sprite.frame_changed.connect(_on_animation_frame_changed)
+
+	if animated_sprite.sprite_frames.has_animation("attack"):
+		var frame_count = animated_sprite.sprite_frames.get_frame_count("attack")
+		var fps = animated_sprite.sprite_frames.get_animation_speed("attack")
+		attack_interval = frame_count / fps
+	else:
+		attack_interval = 1.0  # Default to 1 second if animation not found
 
 
 func apply_slow(slowdown_factor: float = 0.3, duration: float = 1.5) -> void:
@@ -160,6 +167,7 @@ func _physics_process(delta: float) -> void:
 func _try_attack(delta) -> void:
 	if attack_cooldown <= 0.0:
 		attack_cooldown = attack_interval
+		# animated_sprite.stop() 
 		animated_sprite.play("attack")
 		pending_damage = attack_damage  # Store damage to apply later
 	else:
