@@ -13,81 +13,81 @@ var damage_tween: Tween  # Add this
 @onready var main_scene = get_tree().current_scene
 
 func _ready() -> void:
-    _set_destroyed(false)
-    health_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
-    initiate_health(max_health)
+	_set_destroyed(false)
+	health_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	initiate_health(max_health)
 
 
 func set_focused(is_focused: bool) -> void:
-    if focused == is_focused:
-        return  # No change, skip animation
+	if focused == is_focused:
+		return  # No change, skip animation
 
-    focused = is_focused
+	focused = is_focused
 
-    if focused:
-        show_outline()
-    else:
-        hide_outline()
+	if focused:
+		show_outline()
+	else:
+		hide_outline()
 
 
 func _set_outline_thickness(thickness: float) -> void:
-    shader_material.set_shader_parameter("thickness", thickness)
+	shader_material.set_shader_parameter("thickness", thickness)
 
 
 func show_outline() -> void:
-    var tween = create_tween()
-    tween.tween_method(_set_outline_thickness, 0.0, main_scene.focus_outline_thickness, 0.3) # animate to thickness 2.0 over 0.3 seconds
+	var tween = create_tween()
+	tween.tween_method(_set_outline_thickness, 0.0, main_scene.focus_outline_thickness, 0.3) # animate to thickness 2.0 over 0.3 seconds
 
 
 func hide_outline() -> void:
-    var tween = create_tween()
-    tween.tween_method(_set_outline_thickness, main_scene.focus_outline_thickness, 0.0, 0.2)
+	var tween = create_tween()
+	tween.tween_method(_set_outline_thickness, main_scene.focus_outline_thickness, 0.0, 0.2)
 
 
 func initiate_health(value: int) -> void:
-    health_bar.max_value = max_health
-    health_bar.value = value
+	health_bar.max_value = max_health
+	health_bar.value = value
 
 
 func take_damage(amount: int):
-    if is_destroyed:
-        return  # Can't damage a destroyed wall
-    
-    health_bar.value = max(health_bar.value - amount, 0)
+	if is_destroyed:
+		return  # Can't damage a destroyed wall
+	
+	health_bar.value = max(health_bar.value - amount, 0)
 
-    # Kill any existing tween before creating a new one
-    if damage_tween:
-        damage_tween.kill()
-    
-    # Reset to base color first, then flash
-    animated_sprite.modulate = Color(1, 1, 1, 1)
-    
-    damage_tween = create_tween()
-    damage_tween.tween_property(animated_sprite, "modulate", Color(3.0, 3.0, 3.0, 1), 0.1)
-    damage_tween.tween_property(animated_sprite, "modulate", Color(1, 1, 1, 1), 0.1)
+	# Kill any existing tween before creating a new one
+	if damage_tween:
+		damage_tween.kill()
+	
+	# Reset to base color first, then flash
+	animated_sprite.modulate = Color(1, 1, 1, 1)
+	
+	damage_tween = create_tween()
+	damage_tween.tween_property(animated_sprite, "modulate", Color(3.0, 3.0, 3.0, 1), 0.1)
+	damage_tween.tween_property(animated_sprite, "modulate", Color(1, 1, 1, 1), 0.1)
 
-    if health_bar.value <= 0:
-        _set_destroyed(true)
+	if health_bar.value <= 0:
+		_set_destroyed(true)
 
 
 func _set_destroyed(destroyed: bool):
-    is_destroyed = destroyed
-    $CollisionShape2D.set_deferred("disabled", destroyed)
+	is_destroyed = destroyed
+	$CollisionShape2D.set_deferred("disabled", destroyed)
 
-    if destroyed:
-        $AnimatedSprite2D.play("destroyed")
-    else:
-        $AnimatedSprite2D.play("default")  # or "intact"/"normal"
+	if destroyed:
+		$AnimatedSprite2D.play("destroyed")
+	else:
+		$AnimatedSprite2D.play("default")  # or "intact"/"normal"
 
 
 func repair(amount: int):
-    health_bar.value = min(health_bar.value + amount, max_health)
+	health_bar.value = min(health_bar.value + amount, max_health)
 
-    if is_destroyed and health_bar.value > 0:
-        _set_destroyed(false)
+	if is_destroyed and health_bar.value > 0:
+		_set_destroyed(false)
 
 
 func rebuild():
-    if is_destroyed:
-        health_bar.value = max_health
-        _set_destroyed(false)
+	if is_destroyed:
+		health_bar.value = max_health
+		_set_destroyed(false)
