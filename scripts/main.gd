@@ -30,6 +30,7 @@ var house_array : Array[Area2D] = []
 
 var building_scenes = {
 	"House": preload("res://scenes/house.tscn"),
+	"Wall": preload("res://scenes/wall.tscn")
 	#"Tower": preload("res://scenes/tower.tscn"),
 	#"Wall": preload("res://scenes/wall.tscn")
 }
@@ -64,6 +65,7 @@ var old_focus_index: int = -1
 var current_focus_index: int = 0
 # var focused_structure: Node = null
 var focus_outline_thickness: float = 1.0
+var building_type : String = ""
 
 # ui action sections
 @onready var heart_action_section: Control = $UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection
@@ -256,7 +258,7 @@ func snap_to_grid(x_pos: float) -> float:
 
 
 func _create_building_preview():
-	building_preview = building_scenes["House"].instantiate()
+	building_preview = building_scenes[building_type].instantiate()
 	building_preview.collision_mask = 16
 	# building_preview.modulate.a = 0.5  # Make it semi-transparent
 	building_preview.modulate = preview_normal_color
@@ -440,13 +442,19 @@ func _create_item(cost: int, type: String) -> void:
 			# 	update_coin_count(-cost)
 			if coin_count >= cost:
 				building_mode = true
+				building_type = "House"
 				update_coin_count(-cost)
 				pending_build_cost = cost
 				_create_building_preview()
 		"Tower":
 			pass
 		"Wall":
-			pass
+			if coin_count >= cost:
+				building_mode = true
+				building_type = "Wall"
+				update_coin_count(-cost)
+				pending_build_cost = cost
+				_create_building_preview()
 		"Heal":
 			heart.heal_heart()
 			update_coin_count(-cost)

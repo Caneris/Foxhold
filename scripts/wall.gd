@@ -6,10 +6,10 @@ var focused: bool = false
 
 @export var max_health: int = 100
 var is_destroyed: bool = false
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animated_sprite: AnimatedSprite2D = $Sprite2D
 @onready var health_bar: ProgressBar = %HealthBar
 var damage_tween: Tween  # Add this 
-@onready var shader_material : ShaderMaterial = $AnimatedSprite2D.material
+@onready var shader_material : ShaderMaterial = $Sprite2D.material
 @onready var main_scene = get_tree().current_scene
 
 func _ready() -> void:
@@ -83,9 +83,9 @@ func _set_destroyed(destroyed: bool):
 	$CollisionShape2D.set_deferred("disabled", destroyed)
 
 	if destroyed:
-		$AnimatedSprite2D.play("destroyed")
+		$Sprite2D.play("destroyed")
 	else:
-		$AnimatedSprite2D.play("default")  # or "intact"/"normal"
+		$Sprite2D.play("default")  # or "intact"/"normal"
 
 
 func repair(amount: int):
