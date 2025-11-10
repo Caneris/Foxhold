@@ -16,6 +16,14 @@ func _ready() -> void:
 	_set_destroyed(false)
 	health_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	initiate_health(max_health)
+	input_event.connect(_on_wall_input_event)
+
+
+func _on_wall_input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+		# Left click focuses this wall
+		print("Focus wall at index " + str(structure_index))
+		main_scene.set_focus(main_scene.FocusType.WALL, structure_index)
 
 
 func set_focused(is_focused: bool) -> void:
