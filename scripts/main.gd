@@ -285,12 +285,18 @@ func _place_building() -> void:
 		building_preview.modulate = Color(1, 1, 1, 1)  # Make it solid
 		building_preview.get_node("Sprite2D").modulate = Color(1, 1, 1, 1)
 		
-		building_preview.house_id = n_house
-		house_array.append(building_preview)
-		building_preview.menu_item_selected.connect(_selected_house_menu_item)
-		# # Reparent while keeping global transform so it doesn't jump/disappear
-		building_preview.reparent(house_container, true)
-		building_preview.global_position = final_global_position
+		if building_type == "House":
+			building_preview.house_id = n_house
+			house_array.append(building_preview)
+			building_preview.menu_item_selected.connect(_selected_house_menu_item)
+			# # Reparent while keeping global transform so it doesn't jump/disappear
+			building_preview.reparent(house_container, true)
+			building_preview.global_position = final_global_position
+			n_house += 1
+		else:
+			# For walls and other structures, just reparent to main scene
+			building_preview.reparent(self, true)
+			building_preview.global_position = final_global_position
 
 		# get animatedsprite2d node from building preview
 		var bp_animated_sprite : AnimatedSprite2D = building_preview.get_node("Sprite2D")
@@ -298,8 +304,6 @@ func _place_building() -> void:
 
 		# update cost labels
 		_update_house_cost_labels()
-
-		n_house += 1
 		building_preview = null
 		building_mode = false
 		queue_redraw()  # Clear the grid
@@ -479,19 +483,19 @@ func _create_house_item(house_id : int, cost: int, type: String) -> void:
 				print("Not enough coins or max foxlings reached!")
 
 
-func try_create_house() -> bool:
-	if n_house >= house_positions.size():
-		return false # no spots left
+# func try_create_house() -> bool:
+# 	if n_house >= house_positions.size():
+# 		return false # no spots left
 
-	var house : Area2D = building_scenes["House"].instantiate()
-	house_container.add_child(house)
-	house.house_id = n_house
-	house_array.append(house)
-	# connect house menu item selected signal to main script
-	house.menu_item_selected.connect(_selected_house_menu_item)
-	house.global_position = house_positions[n_house].global_position
-	n_house += 1
-	return true
+# 	var house : Area2D = building_scenes["House"].instantiate()
+# 	house_container.add_child(house)
+# 	house.house_id = n_house
+# 	house_array.append(house)
+# 	# connect house menu item selected signal to main script
+# 	house.menu_item_selected.connect(_selected_house_menu_item)
+# 	house.global_position = house_positions[n_house].global_position
+# 	n_house += 1
+# 	return true
 
 # Helper: recursively enable/disable interactive UI controls (buttons/etc.)
 func _set_ui_interactable(enabled: bool) -> void:
