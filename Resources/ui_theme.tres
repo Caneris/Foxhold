@@ -1,4 +1,7 @@
-[gd_resource type="Theme" load_steps=8 format=4 uid="uid://xuvuht6ohmhu"]
+[gd_resource type="Theme" load_steps=9 format=4 uid="uid://xuvuht6ohmhu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_khvw3"]
+bg_color = Color(0.6156863, 0.16862746, 0, 0.76862746)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pkys1"]
 bg_color = Color(0.1882353, 0.43137255, 0.23137255, 0.76862746)
@@ -1186,6 +1189,8 @@ corner_radius_bottom_left = 4
 [resource]
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/font_sizes/font_size = 12
+DestroyButton/base_type = &"Button"
+DestroyButton/styles/normal = SubResource("StyleBoxFlat_khvw3")
 HealButton/base_type = &"Button"
 HealButton/styles/normal = SubResource("StyleBoxFlat_pkys1")
 Label/colors/font_color = Color(0, 0, 0, 1)

@@ -8,6 +8,7 @@
 size = Vector2(33, 48)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e00m8"]
+resource_local_to_scene = true
 shader = ExtResource("1_e00m8")
 shader_parameter/clr = Color(1, 1, 1, 1)
 shader_parameter/type = 1

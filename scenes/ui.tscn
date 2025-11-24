@@ -93,7 +93,6 @@ patch_margin_right = 4
 patch_margin_bottom = 4
 
 [node name="HeartActionSection" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground"]
-visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -215,7 +214,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_wm3ai")
 
-[node name="HeartActionSection2" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground"]
+[node name="WallActionSection2" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground"]
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -228,110 +228,85 @@ size_flags_stretch_ratio = 2.0
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection2"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BuildHouseButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection2/VBoxContainer"]
+[node name="BuildHouseButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection2/VBoxContainer"]
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-text = "House"
+text = "Upgrade"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection2/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection2/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "2"
 
-[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection2/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_wm3ai")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection2"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection2"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="BuildWallButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection2/VBoxContainer2"]
+[node name="BuildWallButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection2/VBoxContainer2"]
 texture_filter = 1
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-text = "Wall"
+theme_type_variation = &"DestroyButton"
+text = "Destroy"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection2/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection2/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection2/VBoxContainer2/HBoxContainer"]
+[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection2/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 text = "2"
 
-[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection2/VBoxContainer2/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection2/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_wm3ai")
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection2"]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="BuildTowerButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection2/VBoxContainer3"]
-texture_filter = 1
-custom_minimum_size = Vector2(60, 40)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-text = "Tower"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection2/VBoxContainer3"]
+[node name="VBoxContainer4" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection2"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection2/VBoxContainer3/HBoxContainer"]
-layout_mode = 2
-text = "2"
-
-[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection2/VBoxContainer3/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = SubResource("AtlasTexture_wm3ai")
-
-[node name="VBoxContainer4" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection2"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="HealHeartButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection2/VBoxContainer4"]
+[node name="RepairWallButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection2/VBoxContainer4"]
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_type_variation = &"HealButton"
-text = "Heal"
+text = "Repair
+"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection2/VBoxContainer4"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection2/VBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection2/VBoxContainer4/HBoxContainer"]
+[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection2/VBoxContainer4/HBoxContainer"]
 layout_mode = 2
 text = "2"
 
-[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection2/VBoxContainer4/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection2/VBoxContainer4/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
