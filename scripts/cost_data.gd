@@ -8,7 +8,10 @@ extends Resource
     "Heal": 30,
     "House_Upgrade": 80,
     "Knight_Foxling": 120,
-    "Collector_Foxling": 90
+    "Collector_Foxling": 90,
+    "Upgrade_Wall": 60,
+    "Destroy_Wall": 20,
+    "Repair_Wall": 40
 }
 
 @export var inflation_rate : float = 0.15

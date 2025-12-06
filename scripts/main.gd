@@ -265,6 +265,7 @@ func snap_to_grid(x_pos: float) -> float:
 func _create_building_preview():
 	building_preview = building_scenes[building_type].instantiate()
 	building_preview.collision_mask = 16
+	building_preview.collision_layer = 0
 	# building_preview.modulate.a = 0.5  # Make it semi-transparent
 	building_preview.modulate = preview_normal_color
 	add_child(building_preview)
@@ -302,6 +303,9 @@ func _place_building() -> void:
 			# For walls and other structures, just reparent to main scene
 			building_preview.reparent(self, true)
 			building_preview.global_position = final_global_position
+			if building_type == "Wall":
+				# Add to focusable structures group for focus system
+				building_preview.collision_layer = 6
 
 		# get animatedsprite2d node from building preview
 		var bp_animated_sprite : AnimatedSprite2D = building_preview.get_node("Sprite2D")

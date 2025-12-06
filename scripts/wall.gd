@@ -11,13 +11,21 @@ var is_destroyed: bool = false
 var damage_tween: Tween  # Add this 
 @onready var shader_material : ShaderMaterial = $Sprite2D.material
 @onready var main_scene = get_tree().current_scene
+var heart_position_x : float
 
 func _ready() -> void:
 	_set_destroyed(false)
 	health_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	initiate_health(max_health)
 	input_event.connect(_on_wall_input_event)
+	heart_position_x = main_scene.heart.global_position.x
 
+func _process(delta: float) -> void:
+	if global_position.x < heart_position_x:
+		animated_sprite.flip_h = true  # Wall is left of heart, flip sprite
+	else:
+		animated_sprite.flip_h = false  # Wall is right of heart, normal orientation
+	
 
 func _on_wall_input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
