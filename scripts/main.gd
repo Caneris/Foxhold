@@ -70,6 +70,7 @@ var building_type : String = ""
 # ui action sections
 @onready var heart_action_section: Control = $UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection
 @onready var house_action_section: Control = $UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection
+@onready var wall_action_section: Control = $UI_Layer/UI/BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection
 
 # cost data resource
 @export var cost_data: CostData
@@ -216,6 +217,10 @@ func _update_house_cost_labels() -> void:
 	upgrade_cost_label.text = str(upgrade_cost)
 	knight_cost_label.text = str(knight_cost)
 	collector_cost_label.text = str(collector_cost)
+
+
+func update_wall_cost_labels() -> void:
+	pass
 
 
 func _on_preview_area_entered(area: Area2D):
@@ -405,6 +410,7 @@ func _focus_structure_at_index(index: int) -> void:
 func _update_ui_visibility() -> void:
 	heart_action_section.visible = (current_focus_type == FocusType.HEART)
 	house_action_section.visible = (current_focus_type == FocusType.HOUSE)
+	wall_action_section.visible = (current_focus_type == FocusType.WALL)
 
 
 func update_coin_count(amount: int) -> void:
