@@ -4,11 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://cgf40hhvuxc2a" path="res://assets/foxling_house-Sheet.png" id="2_qtlar"]
 [ext_resource type="Shader" uid="uid://bffojwotabgha" path="res://shaders/outline.gdshader" id="2_rk7hg"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_se78b"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x8wvn"]
-size = Vector2(58, 71)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3bgk5"]
 resource_local_to_scene = true
 shader = ExtResource("2_rk7hg")
@@ -52,6 +47,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_se78b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x8wvn"]
+size = Vector2(58, 71)
+
 [node name="House" type="Area2D" groups=["focusable_structures", "house"]]
 z_index = -1
 texture_filter = 1
@@ -60,18 +60,18 @@ collision_mask = 17
 script = ExtResource("1_d7po0")
 max_foxlings = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-z_index = 1
-material = SubResource("ShaderMaterial_se78b")
-position = Vector2(-2, -35.5)
-shape = SubResource("RectangleShape2D_x8wvn")
-
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_3bgk5")
 position = Vector2(0, -40.000004)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ptc3g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+material = SubResource("ShaderMaterial_se78b")
+position = Vector2(-2, -35.5)
+shape = SubResource("RectangleShape2D_x8wvn")
 
 [node name="FoxlingNumberLabel" type="Label" parent="."]
 offset_left = -31.0

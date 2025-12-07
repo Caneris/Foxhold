@@ -315,13 +315,14 @@ func _place_building() -> void:
 			# # Reparent while keeping global transform so it doesn't jump/disappear
 			building_preview.reparent(house_container, true)
 			building_preview.global_position = final_global_position
+			building_preview.collision_layer = 16 # to not collide with enemies
 			n_house += 1
 		elif building_type == "Wall":
 			# For walls and other structures, just reparent to main scene
 			building_preview.reparent(wall_container, true)
 			building_preview.global_position = final_global_position
 			wall_array.append(building_preview)
-			building_preview.collision_layer = 6 # to not collide with enemies
+			building_preview.collision_layer = 32 # to not collide with enemies
 
 		# get animatedsprite2d node from building preview
 		var bp_animated_sprite : AnimatedSprite2D = building_preview.get_node("Sprite2D")
