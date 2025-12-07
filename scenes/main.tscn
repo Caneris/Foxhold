@@ -53,6 +53,8 @@ position = Vector2(-0.411221, 133.011)
 [node name="HouseContainer" type="Node2D" parent="."]
 position = Vector2(0, -198.525)
 
+[node name="WallContainer" type="Node2D" parent="."]
+
 [node name="EnemySpawner" parent="." instance=ExtResource("4_jyhfs")]
 position = Vector2(0, 63.528)
 break_interval = 15.0

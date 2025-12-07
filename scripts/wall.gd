@@ -13,6 +13,21 @@ var damage_tween: Tween  # Add this
 @onready var main_scene = get_tree().current_scene
 var heart_position_x : float
 
+# menu item costs etc
+var menu_item_ids = {
+	"Upgrade_Wall": 0,
+	"Destroy_Wall": 1,
+	"Repair_Wall": 2
+}
+
+
+var menu_item_costs = {
+	0: 0,  # Wall Upgrade cost
+	1: 0,  # Wall Destroy cost
+	2: 0   # Wall Repair cost
+}
+
+
 func _ready() -> void:
 	_set_destroyed(false)
 	health_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -20,12 +35,23 @@ func _ready() -> void:
 	input_event.connect(_on_wall_input_event)
 	heart_position_x = main_scene.heart.global_position.x
 
+	initialize_costs()
+
 func _process(delta: float) -> void:
 	if global_position.x < heart_position_x:
 		animated_sprite.flip_h = true  # Wall is left of heart, flip sprite
 	else:
 		animated_sprite.flip_h = false  # Wall is right of heart, normal orientation
-	
+
+
+func initialize_costs() -> void:
+	print("Initializing costs for wall at index ", structure_index)
+	var wave : int = main_scene.enemy_spawner.wave_number
+	# list menu item costs
+	menu_item_costs[0] = main_scene.cost_data.get_inflated_cost("Upgrade_Wall", wave)  # Wall Upgrade
+	menu_item_costs[1] = main_scene.cost_data.get_inflated_cost("Destroy_Wall", wave)   # Wall Destroy
+	menu_item_costs[2] = main_scene.cost_data.get_inflated_cost("Repair_Wall", wave)    # Wall Repair
+	print("Wall menu item costs: ", menu_item_costs)
 
 func _on_wall_input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():

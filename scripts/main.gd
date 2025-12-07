@@ -12,6 +12,7 @@ extends Node2D
 @onready var ui: Control = $UI_Layer/UI
 @onready var ui_coin_count_label: Control = $UI_Layer/UI/BottomPanel/HBoxContainer/StatsSectionBackground/StatsSection/CoinCountLabel
 @onready var house_container: Node2D = $HouseContainer
+@onready var wall_container: Node2D = $WallContainer
 @onready var enemy_spawner: Node2D = $EnemySpawner
 
 
@@ -21,6 +22,7 @@ var dragged_item : RigidBody2D
 var intersect_params : PhysicsPointQueryParameters2D
 var n_house : int = 0
 var house_array : Array[Area2D] = []
+var wall_array : Array[Area2D] = []
 
 
 @onready var house_positions: Array[Marker2D] = [
@@ -185,6 +187,7 @@ func _update_all_cost_labels() -> void:
 	_apply_cost_inflation()
 	_update_heart_cost_labels()
 	_update_house_cost_labels()
+	_update_wall_cost_labels()
 
 
 func _update_heart_cost_labels() -> void:
@@ -219,8 +222,22 @@ func _update_house_cost_labels() -> void:
 	collector_cost_label.text = str(collector_cost)
 
 
-func update_wall_cost_labels() -> void:
-	pass
+func _update_wall_cost_labels() -> void:
+	if wall_array.is_empty():
+		return
+
+	var upgrade_cost = wall_array[0].menu_item_costs[0]
+	var destroy_cost = wall_array[0].menu_item_costs[1]
+	var repair_cost = wall_array[0].menu_item_costs[2]
+
+	# Assuming you have Label nodes for each cost in the UI
+	var upgrade_cost_label: Label = ui.upgrade_wall_cost_label
+	var destroy_cost_label: Label = ui.destroy_wall_cost_label
+	var repair_cost_label: Label = ui.repair_wall_cost_label
+
+	upgrade_cost_label.text = str(upgrade_cost)
+	destroy_cost_label.text = str(destroy_cost)
+	repair_cost_label.text = str(repair_cost)
 
 
 func _on_preview_area_entered(area: Area2D):
@@ -299,20 +316,19 @@ func _place_building() -> void:
 			building_preview.reparent(house_container, true)
 			building_preview.global_position = final_global_position
 			n_house += 1
-		else:
+		elif building_type == "Wall":
 			# For walls and other structures, just reparent to main scene
-			building_preview.reparent(self, true)
+			building_preview.reparent(wall_container, true)
 			building_preview.global_position = final_global_position
-			if building_type == "Wall":
-				# Add to focusable structures group for focus system
-				building_preview.collision_layer = 6
+			wall_array.append(building_preview)
+			building_preview.collision_layer = 6 # to not collide with enemies
 
 		# get animatedsprite2d node from building preview
 		var bp_animated_sprite : AnimatedSprite2D = building_preview.get_node("Sprite2D")
 		bp_animated_sprite.play("default")
 
 		# update cost labels
-		_update_house_cost_labels()
+		_update_all_cost_labels()
 		building_preview = null
 		building_mode = false
 		queue_redraw()  # Clear the grid
