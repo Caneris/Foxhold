@@ -157,7 +157,6 @@ func _physics_process(delta: float) -> void:
 		velocity.x = 0.0
 		_try_attack(delta)
 	elif sight.is_colliding() and col.is_in_group("wall"):
-		print("Wall in the way")
 		velocity.x = 0.0
 		_try_attack(delta)
 	else:

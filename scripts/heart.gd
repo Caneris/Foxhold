@@ -89,7 +89,6 @@ func hide_outline() -> void:
 func _on_heart_input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
 		# Left click focuses this heart
-		print("Focus heart at index " + str(structure_index))
 		main_scene.set_focus(main_scene.FocusType.HEART, structure_index)
 
 
@@ -123,7 +122,6 @@ func take_damage(damage: float) -> void:
 	health_bar.value = max(health_bar.value - damage, 0)
 	var tween := create_tween()
 	# set parallel to true to run both tweens at the same time
-	print("Heart took damage: " + str(damage))
 	tween.tween_property(animated_sprite, "modulate", Color(3.0, 3.0, 3.0, 1), 0.1)
 	tween.tween_property(animated_sprite, "modulate", Color(1, 1, 1, 1), 0.1)
 
