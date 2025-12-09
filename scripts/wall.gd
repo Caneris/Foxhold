@@ -114,7 +114,7 @@ func take_damage(amount: int):
 
 func _set_destroyed(destroyed: bool):
 	is_destroyed = destroyed
-	$CollisionShape2D.set_deferred("disabled", destroyed)
+	# $CollisionShape2D.set_deferred("disabled", destroyed)
 
 	if destroyed:
 		$Sprite2D.play("destroyed")

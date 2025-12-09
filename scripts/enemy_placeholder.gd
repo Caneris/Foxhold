@@ -157,8 +157,14 @@ func _physics_process(delta: float) -> void:
 		velocity.x = 0.0
 		_try_attack(delta)
 	elif sight.is_colliding() and col.is_in_group("wall"):
-		velocity.x = 0.0
-		_try_attack(delta)
+		if col.is_destroyed:
+			velocity.x = dir.x * speed
+			move_and_slide()
+			return  # Don't attack walls, just move
+		else:
+			# If wall is not destroyed, stop moving and attack
+			velocity.x = 0.0
+			_try_attack(delta)
 	else:
 		velocity.x = dir.x * speed
 		move_and_slide()
