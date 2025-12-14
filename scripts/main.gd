@@ -21,6 +21,7 @@ var coin_count : int = 10
 var dragged_item : RigidBody2D
 var intersect_params : PhysicsPointQueryParameters2D
 var n_house : int = 0
+var n_wall : int = 0
 var house_array : Array[Area2D] = []
 var wall_array : Array[Area2D] = []
 
@@ -318,11 +319,14 @@ func _place_building() -> void:
 			building_preview.collision_layer = 16 # to not collide with enemies
 			n_house += 1
 		elif building_type == "Wall":
+			building_preview.wall_id = n_wall
+			wall_array.append(building_preview)
+			building_preview.menu_item_selected.connect(_selected_wall_menu_item)
 			# For walls and other structures, just reparent to main scene
 			building_preview.reparent(wall_container, true)
 			building_preview.global_position = final_global_position
-			wall_array.append(building_preview)
 			building_preview.collision_layer = 32 # to not collide with enemies
+			n_wall += 1
 
 		# get animatedsprite2d node from building preview
 		var bp_animated_sprite : AnimatedSprite2D = building_preview.get_node("Sprite2D")
@@ -462,6 +466,13 @@ func _selected_house_menu_item(house_id: int, cost: int, menu_item_type: String)
 	else:
 		_create_house_item(house_id, cost, menu_item_type)
 
+func _selected_wall_menu_item(wall_id: int, cost: int, menu_item_type: String) -> void:
+	print("Wall " + str(wall_id) + " selected item: " + str(menu_item_type) + " with cost: " + str(cost))
+	if cost > coin_count:
+		print("Not enough coins!")
+	else:
+		pass
+		# _create_wall_item(wall_id, cost, menu_item_type)
 
 func _create_item(cost: int, type: String) -> void:
 	# print("main: A " + str(type) + " will be created!")

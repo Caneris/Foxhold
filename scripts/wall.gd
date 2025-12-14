@@ -1,6 +1,7 @@
 extends Area2D
 
 # id in the structures array in main.gd
+var wall_id : int
 var structure_index : int = -1
 var focused: bool = false
 
@@ -27,6 +28,8 @@ var menu_item_costs = {
 	2: 0   # Wall Repair cost
 }
 
+signal menu_item_selected(wall_id, cost, menu_item_type)
+
 
 func _ready() -> void:
 	_set_destroyed(false)
@@ -36,6 +39,7 @@ func _ready() -> void:
 	heart_position_x = main_scene.heart.global_position.x
 
 	initialize_costs()
+
 
 func _process(delta: float) -> void:
 	if global_position.x < heart_position_x:
@@ -52,6 +56,17 @@ func initialize_costs() -> void:
 	menu_item_costs[1] = main_scene.cost_data.get_inflated_cost("Destroy_Wall", wave)   # Wall Destroy
 	menu_item_costs[2] = main_scene.cost_data.get_inflated_cost("Repair_Wall", wave)    # Wall Repair
 	print("Wall menu item costs: ", menu_item_costs)
+
+
+func handle_ui_action(action_type:String) -> void:
+	var menu_item_type : int = menu_item_ids.get(action_type, -1)
+	if menu_item_type == -1:
+		print("Unknown wall action type: ", action_type)
+		return
+	
+	var cost : int = menu_item_costs[menu_item_type]
+	menu_item_selected.emit(wall_id, cost, action_type)
+
 
 func _on_wall_input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
