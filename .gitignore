@@ -4,3 +4,5 @@ mono/
 *.import
 *.log
 *.tmp
+.vscode/
+.vscode/settings.json
