@@ -5,6 +5,7 @@ var house_id : int
 @export var max_foxlings : int = 5
 var n_foxlings : int = 0
 var level : int = 1
+var paid_cost : int = 0
 
 # id in the structures array in main.gd
 var structure_index : int = -1
