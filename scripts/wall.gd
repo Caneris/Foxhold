@@ -154,4 +154,5 @@ func rebuild():
 
 
 func destroy() -> void: # destroyed by player not enemy
+	remove_from_group("focusable_structures")
 	queue_free()

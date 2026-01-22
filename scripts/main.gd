@@ -474,13 +474,22 @@ func _selected_wall_menu_item(wall_id: int, cost: int, menu_item_type: String) -
 		"Wall_Destroy":
 			print("it works!!")
 			var wall = wall_array[wall_id]
+			# var focused_structure = focusable_structures[current_focus_index]
 			var refund : int = wall.paid_cost
 			# var refund = calculate_refund(wall)
 			update_coin_count(refund)
 			wall.destroy()
 			wall_array.erase(wall)
-			_setup_focus_system()
-			set_focus(FocusType.HEART)
+			n_wall -= 1
+
+			for i in range(wall_array.size()):
+				wall_array[i].wall_id = i
+
+			# focusable_structures.erase(focused_structure)
+			call_deferred("_setup_focus_system")
+			# _setup_focus_system()
+			call_deferred("set_focus", FocusType.HEART)
+			# set_focus(FocusType.HEART)
 
 	# if cost > coin_count:
 	# 	print("Not enough coins!")
