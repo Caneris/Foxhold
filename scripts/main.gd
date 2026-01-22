@@ -317,6 +317,7 @@ func _place_building() -> void:
 			building_preview.reparent(house_container, true)
 			building_preview.global_position = final_global_position
 			building_preview.collision_layer = 16 # to not collide with enemies
+			building_preview.paid_cost = pending_build_cost
 			n_house += 1
 		elif building_type == "Wall":
 			building_preview.wall_id = n_wall
@@ -326,6 +327,7 @@ func _place_building() -> void:
 			building_preview.reparent(wall_container, true)
 			building_preview.global_position = final_global_position
 			building_preview.collision_layer = 32 # to not collide with enemies
+			building_preview.paid_cost = pending_build_cost
 			n_wall += 1
 
 		# get animatedsprite2d node from building preview
@@ -468,10 +470,22 @@ func _selected_house_menu_item(house_id: int, cost: int, menu_item_type: String)
 
 func _selected_wall_menu_item(wall_id: int, cost: int, menu_item_type: String) -> void:
 	print("Wall " + str(wall_id) + " selected item: " + str(menu_item_type) + " with cost: " + str(cost))
-	if cost > coin_count:
-		print("Not enough coins!")
-	else:
-		pass
+	match menu_item_type:
+		"Wall_Destroy":
+			print("it works!!")
+			var wall = wall_array[wall_id]
+			var refund : int = wall.paid_cost
+			# var refund = calculate_refund(wall)
+			update_coin_count(refund)
+			wall.destroy()
+			wall_array.erase(wall)
+			_setup_focus_system()
+			set_focus(FocusType.HEART)
+
+	# if cost > coin_count:
+	# 	print("Not enough coins!")
+	# else:
+	# 	pass
 		# _create_wall_item(wall_id, cost, menu_item_type)
 
 func _create_item(cost: int, type: String) -> void:

@@ -4,6 +4,7 @@ extends Area2D
 var wall_id : int
 var structure_index : int = -1
 var focused: bool = false
+var paid_cost : int = 0
 
 @export var max_health: int = 100
 var is_destroyed: bool = false
@@ -16,9 +17,9 @@ var heart_position_x : float
 
 # menu item costs etc
 var menu_item_ids = {
-	"Upgrade_Wall": 0,
-	"Destroy_Wall": 1,
-	"Repair_Wall": 2
+	"Wall_Upgrade": 0,
+	"Wall_Destroy": 1,
+	"Wall_Repair": 2
 }
 
 
@@ -59,7 +60,9 @@ func initialize_costs() -> void:
 
 
 func handle_ui_action(action_type:String) -> void:
+	print("action_type: ", action_type)
 	var menu_item_type : int = menu_item_ids.get(action_type, -1)
+	print("menu item type:", menu_item_type)
 	if menu_item_type == -1:
 		print("Unknown wall action type: ", action_type)
 		return
@@ -148,3 +151,7 @@ func rebuild():
 	if is_destroyed:
 		health_bar.value = max_health
 		_set_destroyed(false)
+
+
+func destroy() -> void: # destroyed by player not enemy
+	queue_free()
