@@ -7,7 +7,10 @@ var focused: bool = false
 var paid_cost : int = 0
 
 @export var max_health: int = 100
+@export var repair_perc: float = 0.25
+
 var is_destroyed: bool = false
+
 @onready var animated_sprite: AnimatedSprite2D = $Sprite2D
 @onready var health_bar: ProgressBar = %HealthBar
 var damage_tween: Tween  # Add this 
@@ -129,6 +132,9 @@ func take_damage(amount: int):
 	if health_bar.value <= 0:
 		_set_destroyed(true)
 
+	if focused:
+		main_scene.update_focused_wall_labels()
+
 
 func _set_destroyed(destroyed: bool):
 	is_destroyed = destroyed
@@ -156,3 +162,17 @@ func rebuild():
 func destroy() -> void: # destroyed by player not enemy
 	remove_from_group("focusable_structures")
 	queue_free()
+
+
+func repair_wall() -> void:
+	var repair_amount = int(repair_perc * max_health)
+	health_bar.value = min(health_bar.value + repair_amount, max_health)
+
+	# If wall was destroyed, restore it
+	if is_destroyed and health_bar.value > 0:
+		_set_destroyed(false)  # This already calls animated_sprite.play("default")
+
+	# Flash green to indicate repair
+	var tween = create_tween()
+	tween.tween_property(animated_sprite, "modulate", Color(0.5, 1.5, 0.5, 1), 0.1)
+	tween.tween_property(animated_sprite, "modulate", Color(1, 1, 1, 1), 0.1)

@@ -435,10 +435,13 @@ func _focus_structure_at_index(index: int) -> void:
 
 
 func _update_ui_visibility() -> void:
+
+	if current_focus_type == FocusType.WALL:
+		update_focused_wall_labels()
+
 	heart_action_section.visible = (current_focus_type == FocusType.HEART)
 	house_action_section.visible = (current_focus_type == FocusType.HOUSE)
 	wall_action_section.visible = (current_focus_type == FocusType.WALL)
-
 
 func update_coin_count(amount: int) -> void:
 	coin_count += amount
@@ -470,26 +473,45 @@ func _selected_house_menu_item(house_id: int, cost: int, menu_item_type: String)
 
 func _selected_wall_menu_item(wall_id: int, cost: int, menu_item_type: String) -> void:
 	print("Wall " + str(wall_id) + " selected item: " + str(menu_item_type) + " with cost: " + str(cost))
-	match menu_item_type:
-		"Wall_Destroy":
-			var wall = wall_array[wall_id]
-			var refund : int = wall.paid_cost
-			update_coin_count(refund)
-			wall.destroy()
-			wall_array.erase(wall)
-			n_wall -= 1
+	
+	if cost < coin_count:
+		match menu_item_type:
+			"Wall_Destroy":
+				var wall = wall_array[wall_id]
+				var health_ratio : float = float(wall.health_bar.value) / float(wall.max_health)
+				var refund : int = int(health_ratio * float(wall.paid_cost))
+				update_coin_count(refund)
+				wall.destroy()
+				wall_array.erase(wall)
+				n_wall -= 1
 
-			for i in range(wall_array.size()):
-				wall_array[i].wall_id = i
+				for i in range(wall_array.size()):
+					wall_array[i].wall_id = i
 
-			call_deferred("_setup_focus_system")
-			call_deferred("set_focus", FocusType.HEART)
+				call_deferred("_setup_focus_system")
+				call_deferred("_focus_heart_after_setup")
+			"Wall_Repair":
+				var wall = wall_array[wall_id]
+				update_coin_count(-cost)
+				wall.repair_wall()
+				call_deferred("update_focused_wall_labels")
 
-	# if cost > coin_count:
-	# 	print("Not enough coins!")
-	# else:
-	# 	pass
-		# _create_wall_item(wall_id, cost, menu_item_type)
+
+func update_focused_wall_labels():
+	if current_focus_type != FocusType.WALL:
+		return
+
+	var wall = focusable_structures[current_focus_index]
+	var health_ratio = float(wall.health_bar.value) / float(wall.max_health)
+	var refund = int(health_ratio * wall.paid_cost)
+
+	ui.destroy_wall_cost_label.text = str(refund)
+
+
+func _focus_heart_after_setup() -> void:
+	var heart_index = focusable_structures.find(heart)
+	set_focus(FocusType.HEART, heart_index)
+
 
 func _create_item(cost: int, type: String) -> void:
 	# print("main: A " + str(type) + " will be created!")
