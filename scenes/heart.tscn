@@ -9,7 +9,7 @@ size = Vector2(53, 76)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_txm48"]
 shader = ExtResource("2_ycbwg")
-shader_parameter/clr = Color(1, 1, 1, 1)
+shader_parameter/clr = Color(0.29411766, 0.23921569, 0.26666668, 1)
 shader_parameter/type = 1
 shader_parameter/thickness = 0.0
 

@@ -7,7 +7,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3bgk5"]
 resource_local_to_scene = true
 shader = ExtResource("2_rk7hg")
-shader_parameter/clr = Color(1, 1, 1, 1)
+shader_parameter/clr = Color(0.3019608, 0.27058825, 0.22352941, 1)
 shader_parameter/type = 1
 shader_parameter/thickness = 0.0
 
@@ -68,6 +68,7 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ptc3g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 z_index = 1
 material = SubResource("ShaderMaterial_se78b")
 position = Vector2(-2, -35.5)

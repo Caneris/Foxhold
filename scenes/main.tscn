@@ -57,7 +57,7 @@ position = Vector2(0, -198.525)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_jyhfs")]
 position = Vector2(0, 63.528)
-break_interval = 15.0
+break_interval = 5.0
 spawn_points_path = Array[NodePath]([NodePath("Position1"), NodePath("Position2")])
 enemy_container_path = NodePath("../EnemyContainer")
 
@@ -82,3 +82,10 @@ position = Vector2(471, 431.792)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -20
+offset_right = 639.0
+offset_bottom = 356.3523
+mouse_filter = 2
+color = Color(0.94626576, 0.752794, 0.76830304, 1)
