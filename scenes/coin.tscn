@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://dit852ngrx8tm"]
 
 [ext_resource type="Script" uid="uid://usuqisd7et2x" path="res://scripts/coin.gd" id="1_i64fm"]
-[ext_resource type="Texture2D" uid="uid://djb3kyml2di08" path="res://assets/ItemSprites/coins-chests-etc-2-0.png" id="1_rwqht"]
+[ext_resource type="Texture2D" uid="uid://d38rsg5g858r4" path="res://assets/ItemSprites/coins-chests-etc-2-0.png" id="1_rwqht"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i64fm"]
 atlas = ExtResource("1_rwqht")
@@ -62,8 +62,8 @@ collision_layer = 8
 collision_mask = 3
 mass = 10.0
 script = ExtResource("1_i64fm")
-max_throw_speed = 500.0
-min_throw_speed = 300.0
+max_throw_speed = 300.0
+min_throw_speed = 150.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
