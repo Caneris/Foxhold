@@ -4,6 +4,7 @@ extends Area2D
 var house_id : int
 @export var max_foxlings : int = 5
 var n_foxlings : int = 0
+var foxlings: Array = []
 var level : int = 1
 var paid_cost : int = 0
 
@@ -32,14 +33,16 @@ var foxling_scenes = {
 var menu_item_ids = {
 	"House_Upgrade": 0,
 	"Knight_Foxling": 1,
-	"Collector_Foxling": 2
+	"Collector_Foxling": 2,
+	"House_Destroy": 3
 }
 
 
 var menu_item_costs = {
 	0: 0,  # House Upgrade cost
 	1: 0,  # Knight Foxling cost
-	2: 0   # Collector Foxling cost
+	2: 0,  # Collector Foxling cost
+	3: 0   # House Destroy cost
 }
 
 
@@ -140,6 +143,7 @@ func _spawn_foxling(type : String) -> void:
 	var foxling : CharacterBody2D = foxling_scenes[type].instantiate()
 	foxling.position = global_position + Vector2(0, -50)  # Spawn
 	get_tree().current_scene.add_child(foxling)
+	foxlings.append(foxling)
 	n_foxlings += 1
 
 	if type == "Collector_Foxling":
@@ -150,3 +154,14 @@ func _spawn_foxling(type : String) -> void:
 
 func update_foxling_number_label() -> void:
 	foxling_number_label.text = "🦊" + str(n_foxlings) + "/" + str(max_foxlings)
+
+
+func destroy() -> void:
+	for foxling in foxlings:
+		if is_instance_valid(foxling):
+			if foxling.has_method("cleanup"):
+				foxling.cleanup()
+			foxling.queue_free()
+	foxlings.clear()
+	remove_from_group("focusable_structures")
+	queue_free()

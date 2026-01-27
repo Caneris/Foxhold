@@ -151,3 +151,14 @@ func _on_detection_area_body_exited(body: Node) -> void:
 	if body == current_coin:
 		current_coin = null
 		current_state = State.RETURNING_HOME
+
+
+# collector_foxling.gd
+func cleanup() -> void:
+	if carried_coin and is_instance_valid(carried_coin):
+		carried_coin.reparent(get_tree().current_scene)
+		carried_coin.freeze = false
+		carried_coin.gravity_scale = 1
+		if carried_coin.has_node("CollisionShape2D"):
+			carried_coin.get_node("CollisionShape2D").disabled = false
+		carried_coin = null
