@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dlbyw26fe20vd" path="res://scenes/heart.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bx271cpci77bt" path="res://scenes/enemy_spawner.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://b57d0lhm3n03w" path="res://scenes/player.tscn" id="6_tefeu"]
+[ext_resource type="Script" uid="uid://dr5on1xpq0xff" path="res://scripts/camera.gd" id="7_camera"]
 
 [sub_resource type="Resource" id="Resource_ya4ey"]
 script = ExtResource("2_choun")
@@ -82,11 +83,16 @@ position = Vector2(471, 431.792)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1867910722]
 anchor_mode = 0
+script = ExtResource("7_camera")
+min_zoom = 0.75
+max_zoom = 1.5
+floor_y = 250.0
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1273648055]
-visible = false
 z_index = -20
-offset_right = 639.0
-offset_bottom = 356.3523
+offset_left = -320.0
+offset_top = -360.0
+offset_right = 960.0
+offset_bottom = 360.0
 mouse_filter = 2
 color = Color(0.94626576, 0.752794, 0.76830304, 1)
