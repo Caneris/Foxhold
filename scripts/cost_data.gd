@@ -11,7 +11,8 @@ extends Resource
     "Collector_Foxling": 90,
     "Upgrade_Wall": 60,
     "Destroy_Wall": 20,
-    "Repair_Wall": 40
+    "Repair_Wall": 40,
+    "Destroy_House": 0
 }
 
 @export var inflation_rate : float = 0.15

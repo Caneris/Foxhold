@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://ci8rvsl7jj13i" path="res://scripts/ui.gd" id="1_nt7q6"]
 [ext_resource type="Theme" uid="uid://xuvuht6ohmhu" path="res://Resources/ui_theme.tres" id="1_x4jx1"]
-[ext_resource type="Texture2D" uid="uid://dk75hfuubejl2" path="res://assets/UiSprites/Large tiles/Thick outline/tilemap.png" id="3_yev5y"]
-[ext_resource type="Texture2D" uid="uid://djb3kyml2di08" path="res://assets/ItemSprites/coins-chests-etc-2-0.png" id="4_gdt2y"]
+[ext_resource type="Texture2D" uid="uid://bh8hskgdpquf" path="res://assets/UiSprites/Large tiles/Thick outline/tilemap.png" id="3_yev5y"]
+[ext_resource type="Texture2D" uid="uid://sc6w2rrvk8my" path="res://assets/ItemSprites/coins-chests-etc-2-0.png" id="4_gdt2y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wm3ai"]
 atlas = ExtResource("4_gdt2y")
@@ -93,6 +93,7 @@ patch_margin_right = 4
 patch_margin_bottom = 4
 
 [node name="HeartActionSection" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground"]
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -313,7 +314,6 @@ size_flags_vertical = 4
 texture = SubResource("AtlasTexture_wm3ai")
 
 [node name="HouseActionSection" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground"]
-visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -403,6 +403,34 @@ layout_mode = 2
 text = "2"
 
 [node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_wm3ai")
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="DestroyHouse" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer4"]
+texture_filter = 1
+custom_minimum_size = Vector2(60, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_type_variation = &"DestroyButton"
+text = "Destroy"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer4/HBoxContainer"]
+layout_mode = 2
+text = "2"
+
+[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer4/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

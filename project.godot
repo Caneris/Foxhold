@@ -26,6 +26,10 @@ window/size/viewport_height=360
 window/size/borderless=true
 window/stretch/mode="viewport"
 
+[editor]
+
+movie_writer/movie_file="/var/home/cates/godot_projects/godot_movies/foxhold.avi"
+
 [input]
 
 ui_left={

@@ -438,6 +438,8 @@ func _update_ui_visibility() -> void:
 
 	if current_focus_type == FocusType.WALL:
 		update_focused_wall_labels()
+	elif current_focus_type == FocusType.HOUSE:
+		update_focused_house_labels()
 
 	heart_action_section.visible = (current_focus_type == FocusType.HEART)
 	house_action_section.visible = (current_focus_type == FocusType.HOUSE)
@@ -508,6 +510,14 @@ func update_focused_wall_labels():
 	ui.destroy_wall_cost_label.text = str(refund)
 
 
+func update_focused_house_labels():
+	if current_focus_type != FocusType.HOUSE:
+		return
+	var house = focusable_structures[current_focus_index]
+	var refund = house.paid_cost
+	ui.destroy_house_cost_label.text = str(refund)
+
+
 func _focus_heart_after_setup() -> void:
 	var heart_index = focusable_structures.find(heart)
 	set_focus(FocusType.HEART, heart_index)
@@ -558,6 +568,16 @@ func _create_house_item(house_id : int, cost: int, type: String) -> void:
 				house._spawn_foxling(type)
 			else:
 				print("Not enough coins or max foxlings reached!")
+		"House_Destroy":
+			var refund : int = house.paid_cost
+			update_coin_count(refund)
+			house.destroy()
+			house_array.erase(house)
+			n_house -= 1
+			for i in range(house_array.size()):
+				house_array[i].house_id = i
+			call_deferred("_setup_focus_system")
+			call_deferred("_focus_heart_after_setup")
 
 
 # func try_create_house() -> bool:
