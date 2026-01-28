@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2rt5cmjacwdg"]
+[gd_scene format=3 uid="uid://b2rt5cmjacwdg"]
 
 [ext_resource type="PackedScene" uid="uid://dxdixvw4t64ag" path="res://scenes/floor.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://bvyiyyx04otg5" path="res://scripts/main.gd" id="1_tipki"]
@@ -25,7 +25,7 @@ base_costs = {
 inflation_rate = 0.05
 metadata/_custom_type_script = "uid://cnktbn1ywvyuw"
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=1615069531]
 scale = Vector2(1, 1.00743)
 script = ExtResource("1_tipki")
 grid_size = 40
@@ -34,56 +34,57 @@ grid_dot_highlight_color = Color(0.957859, 0.643239, 1.54018e-06, 0.878431)
 grid_dot_radius = 1.0
 cost_data = SubResource("Resource_ya4ey")
 
-[node name="UI_Layer" type="CanvasLayer" parent="."]
+[node name="UI_Layer" type="CanvasLayer" parent="." unique_id=117814472]
 
-[node name="UI" parent="UI_Layer" instance=ExtResource("2_85g3d")]
+[node name="UI" parent="UI_Layer" unique_id=1898511819 instance=ExtResource("2_85g3d")]
 
-[node name="Floor" parent="." instance=ExtResource("1_0wfyh")]
+[node name="Floor" parent="." unique_id=1477375218 instance=ExtResource("1_0wfyh")]
 z_index = -2
-position = Vector2(0, 233.267)
+position = Vector2(-320, 233.267)
 
-[node name="Heart" parent="." instance=ExtResource("3_sugp2")]
+[node name="Heart" parent="." unique_id=1573853761 instance=ExtResource("3_sugp2")]
 unique_name_in_owner = true
 position = Vector2(314, 195.54726)
 
-[node name="EnemyContainer" type="Node2D" parent="."]
+[node name="EnemyContainer" type="Node2D" parent="." unique_id=499254330]
 z_index = 10
 position = Vector2(-0.411221, 133.011)
 
-[node name="HouseContainer" type="Node2D" parent="."]
+[node name="HouseContainer" type="Node2D" parent="." unique_id=832083225]
 position = Vector2(0, -198.525)
 
-[node name="WallContainer" type="Node2D" parent="."]
+[node name="WallContainer" type="Node2D" parent="." unique_id=264321752]
 
-[node name="EnemySpawner" parent="." instance=ExtResource("4_jyhfs")]
+[node name="EnemySpawner" parent="." unique_id=1205382390 instance=ExtResource("4_jyhfs")]
 position = Vector2(0, 63.528)
 break_interval = 5.0
 spawn_points_path = Array[NodePath]([NodePath("Position1"), NodePath("Position2")])
 enemy_container_path = NodePath("../EnemyContainer")
 
-[node name="Position1" type="Marker2D" parent="EnemySpawner"]
-position = Vector2(23, 133.012)
+[node name="Position1" type="Marker2D" parent="EnemySpawner" unique_id=522946850]
+position = Vector2(-250, 120)
 
-[node name="Position2" type="Marker2D" parent="EnemySpawner"]
-position = Vector2(616, 132.019)
+[node name="Position2" type="Marker2D" parent="EnemySpawner" unique_id=1490945251]
+position = Vector2(900, 120)
 
-[node name="Player" parent="." instance=ExtResource("6_tefeu")]
+[node name="Player" parent="." unique_id=1162149676 instance=ExtResource("6_tefeu")]
 unique_name_in_owner = true
 position = Vector2(-0.411221, 133.011)
 
-[node name="HousePositions" type="Node2D" parent="."]
+[node name="HousePositions" type="Node2D" parent="." unique_id=690271184]
 position = Vector2(0, -198.525)
 
-[node name="Position1" type="Marker2D" parent="HousePositions"]
-position = Vector2(128, 431.792)
+[node name="Position1" type="Marker2D" parent="HousePositions" unique_id=1409649133]
+position = Vector2(122.68, 431.792)
 
-[node name="Position2" type="Marker2D" parent="HousePositions"]
+[node name="Position2" type="Marker2D" parent="HousePositions" unique_id=1418301924]
 position = Vector2(471, 431.792)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1867910722]
 anchor_mode = 0
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1273648055]
+visible = false
 z_index = -20
 offset_right = 639.0
 offset_bottom = 356.3523
