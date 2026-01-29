@@ -183,6 +183,7 @@ func _apply_cost_inflation() -> void:
 		house.menu_item_costs[0] = cost_data.get_inflated_cost("House_Upgrade", wave)  # House Upgrade
 		house.menu_item_costs[1] = cost_data.get_inflated_cost("Knight_Foxling", wave)   # Knight Foxling
 		house.menu_item_costs[2] = cost_data.get_inflated_cost("Collector_Foxling", wave) # Collector Foxling
+		house.menu_item_costs[4] = cost_data.get_inflated_cost("Builder_Foxling", wave)   # Builder Foxling
 
 func _update_all_cost_labels() -> void:
 	_apply_cost_inflation()
@@ -212,6 +213,7 @@ func _update_house_cost_labels() -> void:
 	var upgrade_cost = house_array[0].menu_item_costs[0]
 	var knight_cost = house_array[0].menu_item_costs[1]
 	var collector_cost = house_array[0].menu_item_costs[2]
+	var builder_cost = house_array[0].menu_item_costs[4]
 
 	# Assuming you have Label nodes for each cost in the UI
 	var upgrade_cost_label: Label = ui.upgrade_house_cost_label
@@ -221,6 +223,7 @@ func _update_house_cost_labels() -> void:
 	upgrade_cost_label.text = str(upgrade_cost)
 	knight_cost_label.text = str(knight_cost)
 	collector_cost_label.text = str(collector_cost)
+	ui.recruit_builder_cost_label.text = str(builder_cost)
 
 
 func _update_wall_cost_labels() -> void:
@@ -562,7 +565,7 @@ func _create_house_item(house_id : int, cost: int, type: String) -> void:
 				house._upgrade_house()
 			else:
 				print("Not enough coins to upgrade house!")
-		"Knight_Foxling", "Collector_Foxling":
+		"Knight_Foxling", "Collector_Foxling", "Builder_Foxling":
 			if coin_count >= cost and house.n_foxlings < house.max_foxlings:
 				update_coin_count(-cost)
 				house._spawn_foxling(type)

@@ -26,7 +26,8 @@ signal menu_item_selected(house_id, cost, menu_item_type)
 
 var foxling_scenes = {
 	"Knight_Foxling": preload("res://scenes/knight_foxling.tscn"),
-	"Collector_Foxling": preload("res://scenes/collector_foxling.tscn")
+	"Collector_Foxling": preload("res://scenes/collector_foxling.tscn"),
+	"Builder_Foxling": preload("res://scenes/builder_foxling.tscn")
 }
 
 
@@ -34,7 +35,8 @@ var menu_item_ids = {
 	"House_Upgrade": 0,
 	"Knight_Foxling": 1,
 	"Collector_Foxling": 2,
-	"House_Destroy": 3
+	"House_Destroy": 3,
+	"Builder_Foxling": 4
 }
 
 
@@ -42,7 +44,8 @@ var menu_item_costs = {
 	0: 0,  # House Upgrade cost
 	1: 0,  # Knight Foxling cost
 	2: 0,  # Collector Foxling cost
-	3: 0   # House Destroy cost
+	3: 0,  # House Destroy cost
+	4: 0   # Builder Foxling cost
 }
 
 
@@ -61,6 +64,7 @@ func _initialize_costs() -> void:
 	menu_item_costs[0] = main_scene.cost_data.get_inflated_cost("House_Upgrade", wave)  # House Upgrade
 	menu_item_costs[1] = main_scene.cost_data.get_inflated_cost("Knight_Foxling", wave)   # Knight Foxling
 	menu_item_costs[2] = main_scene.cost_data.get_inflated_cost("Collector_Foxling", wave) # Collector Foxling
+	menu_item_costs[4] = main_scene.cost_data.get_inflated_cost("Builder_Foxling", wave)  # Builder Foxling
 
 
 func handle_ui_action(action_type: String) -> void:

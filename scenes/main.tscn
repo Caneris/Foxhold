@@ -12,6 +12,7 @@
 [sub_resource type="Resource" id="Resource_ya4ey"]
 script = ExtResource("2_choun")
 base_costs = {
+"Builder_Foxling": 3,
 "Collector_Foxling": 2,
 "Destroy_Wall": 0,
 "Heal": 1,

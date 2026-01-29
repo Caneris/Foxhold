@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cirhxs55at7w7"]
+[gd_scene format=3 uid="uid://cirhxs55at7w7"]
 
 [ext_resource type="Script" uid="uid://ci8rvsl7jj13i" path="res://scripts/ui.gd" id="1_nt7q6"]
 [ext_resource type="Theme" uid="uid://xuvuht6ohmhu" path="res://Resources/ui_theme.tres" id="1_x4jx1"]
@@ -11,7 +11,7 @@ region = Rect2(306, 21, 11, 11)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_xlq6p"]
 
-[node name="UI" type="Control"]
+[node name="UI" type="Control" unique_id=1339503301]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,7 +22,7 @@ mouse_filter = 2
 theme = ExtResource("1_x4jx1")
 script = ExtResource("1_nt7q6")
 
-[node name="BottomPanel" type="Panel" parent="."]
+[node name="BottomPanel" type="Panel" parent="." unique_id=863268355]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,7 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel" unique_id=584570577]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,7 +42,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="StatsSectionBackground" type="NinePatchRect" parent="BottomPanel/HBoxContainer"]
+[node name="StatsSectionBackground" type="NinePatchRect" parent="BottomPanel/HBoxContainer" unique_id=584825963]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
@@ -54,7 +54,7 @@ patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
 
-[node name="StatsSection" type="VBoxContainer" parent="BottomPanel/HBoxContainer/StatsSectionBackground"]
+[node name="StatsSection" type="VBoxContainer" parent="BottomPanel/HBoxContainer/StatsSectionBackground" unique_id=143873661]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -65,22 +65,22 @@ grow_vertical = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="WaveNumberLabel" type="Label" parent="BottomPanel/HBoxContainer/StatsSectionBackground/StatsSection"]
+[node name="WaveNumberLabel" type="Label" parent="BottomPanel/HBoxContainer/StatsSectionBackground/StatsSection" unique_id=1939430896]
 texture_filter = 1
 layout_mode = 2
 text = "wave number: "
 
-[node name="CoinCountLabel" type="Label" parent="BottomPanel/HBoxContainer/StatsSectionBackground/StatsSection"]
+[node name="CoinCountLabel" type="Label" parent="BottomPanel/HBoxContainer/StatsSectionBackground/StatsSection" unique_id=1030579196]
 texture_filter = 1
 layout_mode = 2
 text = "coint count: "
 
-[node name="EnemyCountLabel" type="Label" parent="BottomPanel/HBoxContainer/StatsSectionBackground/StatsSection"]
+[node name="EnemyCountLabel" type="Label" parent="BottomPanel/HBoxContainer/StatsSectionBackground/StatsSection" unique_id=1554112056]
 texture_filter = 1
 layout_mode = 2
 text = "enemy count: "
 
-[node name="ActionSectionBackground" type="NinePatchRect" parent="BottomPanel/HBoxContainer"]
+[node name="ActionSectionBackground" type="NinePatchRect" parent="BottomPanel/HBoxContainer" unique_id=1061790403]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
@@ -92,7 +92,7 @@ patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
 
-[node name="HeartActionSection" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground"]
+[node name="HeartActionSection" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground" unique_id=1765106405]
 visible = false
 texture_filter = 1
 layout_mode = 1
@@ -106,38 +106,38 @@ size_flags_stretch_ratio = 2.0
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection"]
+[node name="VBoxContainer" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection" unique_id=846294977]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BuildHouseButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer"]
+[node name="BuildHouseButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer" unique_id=1638901998]
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 text = "House"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer" unique_id=1585038040]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer/HBoxContainer" unique_id=1412721731]
 layout_mode = 2
 text = "2"
 
-[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer/HBoxContainer" unique_id=45303476]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_wm3ai")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection" unique_id=1272104558]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="BuildWallButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer2"]
+[node name="BuildWallButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer2" unique_id=713449548]
 texture_filter = 1
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
@@ -145,26 +145,26 @@ size_flags_horizontal = 0
 size_flags_vertical = 4
 text = "Wall"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer2" unique_id=983592897]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer2/HBoxContainer"]
+[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer2/HBoxContainer" unique_id=278739296]
 layout_mode = 2
 text = "2"
 
-[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer2/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer2/HBoxContainer" unique_id=687915452]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_wm3ai")
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection" unique_id=1096399407]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="BuildTowerButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer3"]
+[node name="BuildTowerButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer3" unique_id=742166990]
 texture_filter = 1
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
@@ -172,27 +172,27 @@ size_flags_horizontal = 0
 size_flags_vertical = 4
 text = "Tower"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer3" unique_id=991645460]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer3/HBoxContainer"]
+[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer3/HBoxContainer" unique_id=1671874823]
 layout_mode = 2
 text = "2"
 
-[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer3/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer3/HBoxContainer" unique_id=2027395948]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_wm3ai")
 
-[node name="VBoxContainer4" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection"]
+[node name="VBoxContainer4" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection" unique_id=849292978]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="HealHeartButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer4"]
+[node name="HealHeartButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer4" unique_id=1616823878]
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -200,22 +200,22 @@ size_flags_vertical = 4
 theme_type_variation = &"HealButton"
 text = "Heal"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer4"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer4" unique_id=242604452]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer4/HBoxContainer"]
+[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer4/HBoxContainer" unique_id=1840840342]
 layout_mode = 2
 text = "2"
 
-[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer4/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer4/HBoxContainer" unique_id=1908620834]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_wm3ai")
 
-[node name="WallActionSection" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground"]
+[node name="WallActionSection" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground" unique_id=25635238]
 visible = false
 texture_filter = 1
 layout_mode = 1
@@ -229,38 +229,38 @@ size_flags_stretch_ratio = 2.0
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection"]
+[node name="VBoxContainer" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection" unique_id=575463395]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="UpgradeWallButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer"]
+[node name="UpgradeWallButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer" unique_id=1951556470]
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 text = "Upgrade"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer" unique_id=119798383]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer/HBoxContainer" unique_id=232219562]
 layout_mode = 2
 text = "2"
 
-[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer/HBoxContainer" unique_id=1084922424]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_wm3ai")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection" unique_id=16344532]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="DestroyWallButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer2"]
+[node name="DestroyWallButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer2" unique_id=398492981]
 texture_filter = 1
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
@@ -269,27 +269,27 @@ size_flags_vertical = 4
 theme_type_variation = &"DestroyButton"
 text = "Destroy"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer2" unique_id=721786460]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer2/HBoxContainer"]
+[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer2/HBoxContainer" unique_id=1018602302]
 layout_mode = 2
 text = "2"
 
-[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer2/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer2/HBoxContainer" unique_id=1067982733]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_wm3ai")
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection" unique_id=1955287595]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="RepairWallButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer3"]
+[node name="RepairWallButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer3" unique_id=1611650093]
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -298,65 +298,70 @@ theme_type_variation = &"HealButton"
 text = "Repair
 "
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer3" unique_id=581907187]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer3/HBoxContainer"]
+[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer3/HBoxContainer" unique_id=119184218]
 layout_mode = 2
 text = "2"
 
-[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer3/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer3/HBoxContainer" unique_id=2093705992]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_wm3ai")
 
-[node name="HouseActionSection" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground"]
+[node name="HouseActionSection" type="GridContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground" unique_id=730914992]
 texture_filter = 1
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -158.0
+offset_top = -31.0
+offset_right = 158.0
+offset_bottom = 31.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-theme_override_constants/separation = 30
-alignment = 1
+columns = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection"]
+[node name="VBoxContainer" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection" unique_id=1572975995]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="UpgradeHouseButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer"]
+[node name="UpgradeHouseButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer" unique_id=163541950]
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 text = "Upgrade"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer" unique_id=1456514570]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer/HBoxContainer" unique_id=2002811512]
 layout_mode = 2
 text = "2"
 
-[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer/HBoxContainer" unique_id=1434812580]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_wm3ai")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection" unique_id=1571486280]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="RecruitKnightButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer2"]
+[node name="RecruitKnightButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer2" unique_id=1084633795]
 texture_filter = 1
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
@@ -365,26 +370,26 @@ size_flags_vertical = 4
 text = "Knight
 "
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer2" unique_id=281966543]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer2/HBoxContainer"]
+[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer2/HBoxContainer" unique_id=900603990]
 layout_mode = 2
 text = "2"
 
-[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer2/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer2/HBoxContainer" unique_id=700075366]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_wm3ai")
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection" unique_id=947650488]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="RecruitCollectorButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer3"]
+[node name="RecruitCollectorButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer3" unique_id=976264038]
 texture_filter = 1
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
@@ -393,26 +398,54 @@ size_flags_vertical = 4
 text = "Runner
 "
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer3" unique_id=1148684474]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer3/HBoxContainer"]
+[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer3/HBoxContainer" unique_id=305837208]
 layout_mode = 2
 text = "2"
 
-[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer3/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer3/HBoxContainer" unique_id=807007102]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_wm3ai")
 
-[node name="VBoxContainer4" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection"]
+[node name="VBoxContainer5" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection" unique_id=965881436]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="DestroyHouse" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer4"]
+[node name="RecruitBuilderButton" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer5" unique_id=1107416548]
+texture_filter = 1
+custom_minimum_size = Vector2(60, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "Builder
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer5" unique_id=2080074262]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer5/HBoxContainer" unique_id=1110440473]
+layout_mode = 2
+text = "2"
+
+[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer5/HBoxContainer" unique_id=16064439]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_wm3ai")
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection" unique_id=998424482]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="DestroyHouse" type="Button" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer4" unique_id=2099182834]
 texture_filter = 1
 custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
@@ -421,22 +454,22 @@ size_flags_vertical = 4
 theme_type_variation = &"DestroyButton"
 text = "Destroy"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer4"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer4" unique_id=296176618]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer4/HBoxContainer"]
+[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer4/HBoxContainer" unique_id=1151972468]
 layout_mode = 2
 text = "2"
 
-[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer4/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer4/HBoxContainer" unique_id=162433453]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_wm3ai")
 
-[node name="PauseSectionBackground" type="NinePatchRect" parent="BottomPanel/HBoxContainer"]
+[node name="PauseSectionBackground" type="NinePatchRect" parent="BottomPanel/HBoxContainer" unique_id=269815473]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
@@ -447,7 +480,7 @@ patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
 
-[node name="PauseSection" type="HBoxContainer" parent="BottomPanel/HBoxContainer/PauseSectionBackground"]
+[node name="PauseSection" type="HBoxContainer" parent="BottomPanel/HBoxContainer/PauseSectionBackground" unique_id=1272909692]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -458,14 +491,14 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 alignment = 1
 
-[node name="HeartMenu" type="PopupMenu" parent="."]
+[node name="HeartMenu" type="PopupMenu" parent="." unique_id=2091276842]
 oversampling_override = 1.0
 title = "HeartMenu"
 item_count = 1
 item_0/text = "House"
 item_0/id = 0
 
-[node name="HouseMenu" type="PopupMenu" parent="."]
+[node name="HouseMenu" type="PopupMenu" parent="." unique_id=493402047]
 auto_translate_mode = 1
 oversampling_override = 1.0
 title = "HeartMenu"
@@ -473,7 +506,7 @@ item_count = 1
 item_0/text = "House"
 item_0/id = 0
 
-[node name="BreakTimerCircle" type="TextureProgressBar" parent="."]
+[node name="BreakTimerCircle" type="TextureProgressBar" parent="." unique_id=1269799971]
 visible = false
 layout_mode = 0
 offset_left = 40.0

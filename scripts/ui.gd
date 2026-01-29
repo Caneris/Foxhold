@@ -7,12 +7,14 @@ signal action_button_pressed(action_type: String)
 @onready var upgrade_house_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer/UpgradeHouseButton
 @onready var recruit_knight_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer2/RecruitKnightButton
 @onready var recruit_collector_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer3/RecruitCollectorButton
+@onready var recruit_builder_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer5/RecruitBuilderButton
 @onready var destroy_house_button: Button = $BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer4/DestroyHouse
 
 # house menu cost labels
 @onready var upgrade_house_cost_label: Label = $BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer/HBoxContainer/Label
 @onready var recruit_knight_cost_label: Label = $BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer2/HBoxContainer/Label
 @onready var recruit_collector_cost_label: Label = $BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer3/HBoxContainer/Label
+@onready var recruit_builder_cost_label: Label = $BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer5/HBoxContainer/Label
 @onready var destroy_house_cost_label: Label = $BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer4/HBoxContainer/Label
 
 # var focused_structure_type : String = "Heart" # Default focused structure type
@@ -54,6 +56,7 @@ func _ready() -> void:
 	upgrade_house_button.pressed.connect(func(): action_button_pressed.emit("House_Upgrade"))
 	recruit_knight_button.pressed.connect(func(): action_button_pressed.emit("Knight_Foxling"))
 	recruit_collector_button.pressed.connect(func(): action_button_pressed.emit("Collector_Foxling"))
+	recruit_builder_button.pressed.connect(func(): action_button_pressed.emit("Builder_Foxling"))
 	destroy_house_button.pressed.connect(func(): action_button_pressed.emit("House_Destroy"))
 
 	# Heart action buttons
