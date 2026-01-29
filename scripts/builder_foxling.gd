@@ -157,8 +157,21 @@ func _apply_heal() -> void:
 
 
 # Area2D detection (for Heart which is Area2D)
+# func _on_detection_area_area_entered(area: Node2D) -> void:
+# 	if area.is_in_group("heart") or area == heart_reference:
+# 		if area not in available_structures:
+# 			available_structures.append(area)
+
+
+# func _on_detection_area_area_exited(area: Node2D) -> void:
+# 	if area in available_structures:
+# 		available_structures.erase(area)
+# 	if area == current_target:
+# 		current_target = null
+# 		current_state = State.RETURNING_HOME
+
 func _on_detection_area_area_entered(area: Node2D) -> void:
-	if area.is_in_group("heart") or area == heart_reference:
+	if area == heart_reference or area.is_in_group("heart") or area.is_in_group("walls"):
 		if area not in available_structures:
 			available_structures.append(area)
 
