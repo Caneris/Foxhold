@@ -37,7 +37,8 @@ var damage_tween: Tween
 
 
 func _ready() -> void:
-
+	add_to_group("heart")
+	add_to_group("structures")
 	animated_sprite.play("default")
 	health_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	initiate_health(max_health)
@@ -111,7 +112,12 @@ func _create_item(cost: int, type: String) -> void:
 
 func heal_heart() -> void:
 	var heal_amount = heal_perc * max_health
-	health_bar.value = min(health_bar.value + heal_amount, max_health)
+	heal(int(heal_amount))
+
+
+## Heal the heart by a specific amount (used by Builder foxlings)
+func heal(amount: int) -> void:
+	health_bar.value = min(health_bar.value + amount, max_health)
 	# Flash green to indicate healing
 	var tween = create_tween()
 	tween.tween_property(animated_sprite, "modulate", Color(0.5, 1.5, 0.5, 1), 0.1)

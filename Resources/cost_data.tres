@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_ot1xr")
 base_costs = {
+"Builder_Foxling": 110,
 "Collector_Foxling": 2,
 "House": 2,
 "House_Upgrade": 5,

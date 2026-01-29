@@ -36,6 +36,8 @@ signal menu_item_selected(wall_id, cost, menu_item_type)
 
 
 func _ready() -> void:
+	add_to_group("walls")
+	add_to_group("structures")
 	_set_destroyed(false)
 	health_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	initiate_health(max_health)
@@ -147,10 +149,20 @@ func _set_destroyed(destroyed: bool):
 
 
 func repair(amount: int):
+	heal(amount)
+
+
+## Heal the wall by a specific amount (used by Builder foxlings)
+func heal(amount: int) -> void:
 	health_bar.value = min(health_bar.value + amount, max_health)
 
 	if is_destroyed and health_bar.value > 0:
 		_set_destroyed(false)
+
+	# Flash green to indicate healing
+	var tween = create_tween()
+	tween.tween_property(animated_sprite, "modulate", Color(0.5, 1.5, 0.5, 1), 0.1)
+	tween.tween_property(animated_sprite, "modulate", Color(1, 1, 1, 1), 0.1)
 
 
 func rebuild():
