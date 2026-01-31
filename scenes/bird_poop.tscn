@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://bpj2c1vlwdihr"]
+
+[ext_resource type="Script" uid="uid://thck0isu64ce" path="res://scripts/bird_shit.gd" id="1_xyjs2"]
+[ext_resource type="AudioStream" uid="uid://cboupd02xvh8q" path="res://assets/passenger_sound/8bit-powerup27.wav" id="2_adjgh"]
+[ext_resource type="PackedScene" uid="uid://cuyvd3oyhnneo" path="res://scenes/player_scenes/poop_splat.tscn" id="2_rrhkh"]
+[ext_resource type="AudioStream" uid="uid://dju1qxbyyx5ne" path="res://assets/passenger_sound/8bit-powerup28.wav" id="3_2fg3s"]
+[ext_resource type="PackedScene" uid="uid://bkopvxy3bkmoq" path="res://scenes/player_scenes/time_popup.tscn" id="3_k3akd"]
+[ext_resource type="AudioStream" uid="uid://d3anqbd3w50wn" path="res://assets/passenger_sound/8bit-powerup35.wav" id="4_kqqvl"]
+[ext_resource type="Texture2D" uid="uid://1cyxao1vcqmg" path="res://assets/bird_poop.png" id="4_up8t8"]
+[ext_resource type="AudioStream" uid="uid://cvydrdnf2vx4q" path="res://assets/passenger_sound/8bit-powerup41.wav" id="5_2thmc"]
+[ext_resource type="AudioStream" uid="uid://b8c8n7dlrgp7i" path="res://assets/740788__beussa__shout.wav" id="6_7dkv0"]
+[ext_resource type="AudioStream" uid="uid://b3ny2mladad5l" path="res://assets/splat_sound/Boom1.wav" id="6_amsbc"]
+[ext_resource type="AudioStream" uid="uid://c248f8od3ow8d" path="res://assets/splat_sound/Boom2.wav" id="7_uhjpo"]
+[ext_resource type="AudioStream" uid="uid://c0y5n5u3unpc0" path="res://assets/splat_sound/Boom4.wav" id="8_nfhk2"]
+[ext_resource type="AudioStream" uid="uid://dqh145oi3a3u3" path="res://assets/splat_sound/Boom5.wav" id="9_tl4ce"]
+[ext_resource type="AudioStream" uid="uid://b2eyyycwml1gf" path="res://assets/shoot_sound/8bit-shoot49.wav" id="11_nfhk2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hckae"]
+size = Vector2(6, 6)
+
+[node name="bird_shit" type="Area2D"]
+script = ExtResource("1_xyjs2")
+mad_passenger_sfx = Array[AudioStream]([ExtResource("2_adjgh"), ExtResource("3_2fg3s"), ExtResource("4_kqqvl"), ExtResource("5_2thmc")])
+splat_sfx = Array[AudioStream]([ExtResource("6_amsbc"), ExtResource("7_uhjpo"), ExtResource("8_nfhk2"), ExtResource("9_tl4ce")])
+shoot_sfx = Array[AudioStream]([ExtResource("11_nfhk2")])
+splat_scene = ExtResource("2_rrhkh")
+time_popup_scene = ExtResource("3_k3akd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(5.96046e-08, 5.96046e-08)
+texture = ExtResource("4_up8t8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hckae")
+
+[node name="SplatSound" type="AudioStreamPlayer2D" parent="."]
+volume_db = 7.31
+attenuation = 8.28211
+
+[node name="AngryPassenger" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_7dkv0")
+attenuation = 8.28211
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
+volume_db = -2.0
