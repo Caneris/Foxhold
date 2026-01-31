@@ -1,6 +1,6 @@
-[gd_scene load_steps=37 format=3 uid="uid://d2e5vfsjvbujp"]
+[gd_scene format=3 uid="uid://d2e5vfsjvbujp"]
 
-[ext_resource type="Script" uid="uid://bpshwnkakma3o" path="res://scripts/enemy_placeholder.gd" id="1_4v77h"]
+[ext_resource type="Script" uid="uid://cnh6e6fttsb6d" path="res://scripts/slime_enemy.gd" id="1_yo5jk"]
 [ext_resource type="PackedScene" uid="uid://dit852ngrx8tm" path="res://scenes/coin.tscn" id="2_yo5jk"]
 [ext_resource type="Texture2D" uid="uid://ejqspfgxsa88" path="res://assets/slime-Sheet.png" id="3_hsqvu"]
 
@@ -233,37 +233,34 @@ corner_radius_bottom_left = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yo5jk"]
 size = Vector2(27, 20.5)
 
-[node name="EnemyPlaceholder" type="CharacterBody2D" groups=["enemy"]]
+[node name="EnemyPlaceholder" type="CharacterBody2D" unique_id=1158724573 groups=["enemy"]]
 scale = Vector2(2, 2)
 collision_layer = 4
 collision_mask = 35
-script = ExtResource("1_4v77h")
-speed = 80.0
-attack_range = 6.0
-damage_per_click = 3
+script = ExtResource("1_yo5jk")
 drop_items = Array[PackedScene]([ExtResource("2_yo5jk")])
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=881170590]
 z_index = 1
 position = Vector2(3.5, 3.5)
 shape = SubResource("RectangleShape2D_4v77h")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=781665606]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_t1l7j")
 animation = &"attack"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1958493786]
 visible = false
 modulate = Color(0.987748, 0.322359, 1, 1)
 position = Vector2(-1.35601e-06, -4.02331e-07)
 scale = Vector2(16, 16)
 texture = SubResource("CanvasTexture_drc24")
 
-[node name="Sight" type="RayCast2D" parent="."]
+[node name="Sight" type="RayCast2D" parent="." unique_id=1358484835]
 collision_mask = 34
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=722427217]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -8.0
@@ -272,7 +269,7 @@ offset_right = 8.0
 offset_bottom = 8.0
 mouse_filter = 2
 
-[node name="HealthBar" type="ProgressBar" parent="Control"]
+[node name="HealthBar" type="ProgressBar" parent="Control" unique_id=561521524]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 1
@@ -295,11 +292,11 @@ step = 1.0
 value = 5.0
 show_percentage = false
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=264967830]
 collision_layer = 4
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=399893202]
 z_index = 2
 position = Vector2(1, -0.5)
 shape = SubResource("RectangleShape2D_yo5jk")
