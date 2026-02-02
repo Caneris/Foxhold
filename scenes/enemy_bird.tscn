@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://d2vvy3tg7twlf"]
+
+[ext_resource type="Texture2D" uid="uid://ds5yc64sm73y6" path="res://assets/raven-Sheet.png" id="1_pdm0q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oghkq"]
+atlas = ExtResource("1_pdm0q")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_df6aj"]
+atlas = ExtResource("1_pdm0q")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_klo4b"]
+atlas = ExtResource("1_pdm0q")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7s8c"]
+atlas = ExtResource("1_pdm0q")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocnrj"]
+atlas = ExtResource("1_pdm0q")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5u160"]
+atlas = ExtResource("1_pdm0q")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nydc6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oghkq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_df6aj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_klo4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a7s8c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocnrj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5u160")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lwax1"]
+size = Vector2(16, 16)
+
+[node name="enemy_bird" type="Area2D" unique_id=1776093933 groups=["enemy"]]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1973495580]
+texture_filter = 1
+scale = Vector2(-1, 1)
+sprite_frames = SubResource("SpriteFrames_nydc6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1100731672]
+shape = SubResource("RectangleShape2D_lwax1")
