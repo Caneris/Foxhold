@@ -55,6 +55,20 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lwax1"]
 size = Vector2(16, 16)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pdm0q"]
+bg_color = Color(0.203922, 0.137255, 0.137255, 0.360784)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6xa5d"]
+bg_color = Color(0.785712, 0.134075, 0.234949, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
 [node name="enemy_bird" type="Area2D" unique_id=1776093933 groups=["enemy"]]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1973495580]
@@ -64,3 +78,35 @@ sprite_frames = SubResource("SpriteFrames_nydc6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1100731672]
 shape = SubResource("RectangleShape2D_lwax1")
+
+[node name="Control" type="Control" parent="." unique_id=336803185]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_filter = 2
+
+[node name="HealthBar" type="ProgressBar" parent="Control" unique_id=1523174200]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.466
+anchor_right = 0.82
+anchor_bottom = 0.466
+offset_left = -4.0
+offset_top = -11.456
+offset_right = 6.88
+offset_bottom = -9.456
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 11
+theme_override_styles/background = SubResource("StyleBoxFlat_pdm0q")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6xa5d")
+max_value = 10.0
+step = 1.0
+value = 5.0
+show_percentage = false
