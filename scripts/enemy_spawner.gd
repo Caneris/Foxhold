@@ -1,7 +1,8 @@
 extends Node2D
 
 @export var enemy_scene : PackedScene
-#@export var spawn_interval : float = 1.0
+@export var bird_scene : PackedScene
+@export var bird_spawn_chance : float = 1.0
 @export var spawn_interval_min : float = 1.0
 @export var spawn_interval_max : float = 1.0
 
@@ -94,23 +95,41 @@ func _on_break_timer_timeout() -> void:
 func spawn_enemy(spawn_index) -> void:
 	n_current += 1
 	n_spawned += 1
-	var enemy := enemy_scene.instantiate()
+
+	# Randomly choose between bird and ground enemy
+	var enemy: Node2D
+	var is_bird := randf() < bird_spawn_chance and bird_scene
+
+	if is_bird:
+		enemy = bird_scene.instantiate()
+		if spawn_index == 0:
+		# left true
+			enemy.left = true
+			enemy.right = false
+		else:
+			# right true
+			enemy.left = false
+			enemy.right = true
+	else:
+		enemy = enemy_scene.instantiate()
+
 	enemy_container.add_child(enemy)
 	enemy_container.move_child(enemy, 0)
 	enemy.global_position = spawn_points[spawn_index].global_position
-	
+
 	# animate spawned enemy (default of animated sprite is "default")
 	var animated_sprite := enemy.get_node_or_null("AnimatedSprite2D")
 	if animated_sprite is AnimatedSprite2D:
 		animated_sprite.play("default")
-		
-		# Make the sprite point towards the heart
-		var heart = get_node_or_null("../Heart") # Adjust path as needed
-		if heart:
-			var direction = (heart.global_position - enemy.global_position).normalized()
-			# flip the sprite based on X direction
-			animated_sprite.flip_h = direction.x >= 0
-	
+
+		# Make the sprite point towards the heart (only for ground enemies)
+		# Birds handle their own sprite flipping during ASCENDING state
+		if not is_bird:
+			var heart = get_node_or_null("../Heart")
+			if heart:
+				var direction = (heart.global_position - enemy.global_position).normalized()
+				animated_sprite.flip_h = direction.x >= 0
+
 	# connect death signal
 	enemy.enemy_died.connect(_on_enemy_died)
 

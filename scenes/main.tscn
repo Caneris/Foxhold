@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b57d0lhm3n03w" path="res://scenes/player.tscn" id="6_tefeu"]
 [ext_resource type="Script" uid="uid://dr5on1xpq0xff" path="res://scripts/camera.gd" id="7_camera"]
 [ext_resource type="PackedScene" uid="uid://bpj2c1vlwdihr" path="res://scenes/bird_poop.tscn" id="9_85g3d"]
+[ext_resource type="PackedScene" uid="uid://d2vvy3tg7twlf" path="res://scenes/enemy_bird.tscn" id="10_choun"]
 
 [sub_resource type="Resource" id="Resource_ya4ey"]
 script = ExtResource("2_choun")
@@ -60,6 +61,7 @@ position = Vector2(0, -198.525)
 
 [node name="EnemySpawner" parent="." unique_id=1205382390 instance=ExtResource("4_jyhfs")]
 position = Vector2(0, 63.528)
+bird_scene = ExtResource("10_choun")
 break_interval = 5.0
 spawn_points_path = Array[NodePath]([NodePath("Position1"), NodePath("Position2")])
 enemy_container_path = NodePath("../EnemyContainer")

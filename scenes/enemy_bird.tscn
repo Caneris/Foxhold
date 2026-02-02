@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://d2vvy3tg7twlf"]
 
+[ext_resource type="Script" uid="uid://cr6mdffmeg8a8" path="res://scripts/bird_enemy.gd" id="1_bird"]
 [ext_resource type="Texture2D" uid="uid://ds5yc64sm73y6" path="res://assets/raven-Sheet.png" id="1_pdm0q"]
+[ext_resource type="PackedScene" uid="uid://bpj2c1vlwdihr" path="res://scenes/bird_poop.tscn" id="2_poop"]
+[ext_resource type="PackedScene" uid="uid://dit852ngrx8tm" path="res://scenes/coin.tscn" id="3_coin"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oghkq"]
 atlas = ExtResource("1_pdm0q")
@@ -70,6 +73,19 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [node name="enemy_bird" type="Area2D" unique_id=1776093933 groups=["enemy"]]
+scale = Vector2(2, 2)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_bird")
+fly_speed = null
+bob_amplitude = null
+bob_frequency = null
+poop_scene = ExtResource("2_poop")
+poop_cooldown = null
+poop_threshold = null
+max_health = null
+damage_per_click = null
+drop_items = Array[PackedScene]([ExtResource("3_coin")])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1973495580]
 texture_filter = 1
@@ -106,7 +122,16 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 11
 theme_override_styles/background = SubResource("StyleBoxFlat_pdm0q")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6xa5d")
-max_value = 10.0
+max_value = 5.0
 step = 1.0
 value = 5.0
 show_percentage = false
+
+[node name="Label" type="Label" parent="." unique_id=1893841439]
+unique_name_in_owner = true
+offset_left = -33.0
+offset_top = -30.5
+offset_right = 39.0
+offset_bottom = -7.5
+theme_override_font_sizes/font_size = 11
+text = "Direction: "
