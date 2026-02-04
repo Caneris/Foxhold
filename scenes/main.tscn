@@ -62,6 +62,7 @@ position = Vector2(0, -198.525)
 [node name="EnemySpawner" parent="." unique_id=1205382390 instance=ExtResource("4_jyhfs")]
 position = Vector2(0, 63.528)
 bird_scene = ExtResource("10_choun")
+bird_spawn_chance = 0.2
 break_interval = 5.0
 spawn_points_path = Array[NodePath]([NodePath("Position1"), NodePath("Position2")])
 enemy_container_path = NodePath("../EnemyContainer")
