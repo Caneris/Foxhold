@@ -39,7 +39,7 @@ var distance_to_target: float
 
 # References
 var heart_node: Node2D
-var main_scene: Node2D
+var main_scene: Node
 var heart_x: float
 
 @onready var debug_label: Label = %Label
