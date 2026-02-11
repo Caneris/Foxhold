@@ -10,6 +10,8 @@ class_name BaseFoxling
 @export var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var max_fall_speed: float = 800.0
 
+var game_world: Node2D
+
 # Home position (set on spawn)
 var home_position: Vector2
 

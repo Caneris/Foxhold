@@ -29,8 +29,7 @@ base_costs = {
 inflation_rate = 0.05
 metadata/_custom_type_script = "uid://cnktbn1ywvyuw"
 
-[node name="Main" type="Node2D" unique_id=1615069531]
-scale = Vector2(1, 1.00743)
+[node name="Main" type="Node" unique_id=70143743]
 script = ExtResource("1_tipki")
 grid_size = 40
 grid_dot_color = Color(0.478431, 1, 1, 0.25098)
@@ -38,28 +37,49 @@ grid_dot_highlight_color = Color(0.957859, 0.643239, 1.54018e-06, 0.878431)
 grid_dot_radius = 1.0
 cost_data = SubResource("Resource_ya4ey")
 
-[node name="UI_Layer" type="CanvasLayer" parent="." unique_id=117814472]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=597947136]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 3
 
-[node name="UI" parent="UI_Layer" unique_id=1898511819 instance=ExtResource("2_85g3d")]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=554016250]
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+canvas_item_default_texture_filter = 0
+physics_object_picking = true
+size = Vector2i(640, 360)
+render_target_update_mode = 4
 
-[node name="Floor" parent="." unique_id=1477375218 instance=ExtResource("1_0wfyh")]
+[node name="GameWorld" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=1206735167]
+
+[node name="Floor" parent="SubViewportContainer/SubViewport/GameWorld" unique_id=1477375218 instance=ExtResource("1_0wfyh")]
 z_index = -2
 position = Vector2(-320, 233.267)
 
-[node name="Heart" parent="." unique_id=1573853761 instance=ExtResource("3_sugp2")]
+[node name="Heart" parent="SubViewportContainer/SubViewport/GameWorld" unique_id=1573853761 instance=ExtResource("3_sugp2")]
 unique_name_in_owner = true
 position = Vector2(314, 195.54726)
 
-[node name="EnemyContainer" type="Node2D" parent="." unique_id=499254330]
+[node name="EnemyContainer" type="Node2D" parent="SubViewportContainer/SubViewport/GameWorld" unique_id=499254330]
+unique_name_in_owner = true
 z_index = 10
 position = Vector2(-0.411221, 133.011)
 
-[node name="HouseContainer" type="Node2D" parent="." unique_id=832083225]
+[node name="HouseContainer" type="Node2D" parent="SubViewportContainer/SubViewport/GameWorld" unique_id=832083225]
+unique_name_in_owner = true
 position = Vector2(0, -198.525)
 
-[node name="WallContainer" type="Node2D" parent="." unique_id=264321752]
+[node name="WallContainer" type="Node2D" parent="SubViewportContainer/SubViewport/GameWorld" unique_id=264321752]
+unique_name_in_owner = true
 
-[node name="EnemySpawner" parent="." unique_id=1205382390 instance=ExtResource("4_jyhfs")]
+[node name="EnemySpawner" parent="SubViewportContainer/SubViewport/GameWorld" unique_id=1205382390 instance=ExtResource("4_jyhfs")]
+unique_name_in_owner = true
 position = Vector2(0, 63.528)
 bird_scene = ExtResource("10_choun")
 bird_spawn_chance = 0.2
@@ -67,33 +87,33 @@ break_interval = 5.0
 spawn_points_path = Array[NodePath]([NodePath("Position1"), NodePath("Position2")])
 enemy_container_path = NodePath("../EnemyContainer")
 
-[node name="Position1" type="Marker2D" parent="EnemySpawner" unique_id=522946850]
+[node name="Position1" type="Marker2D" parent="SubViewportContainer/SubViewport/GameWorld/EnemySpawner" unique_id=522946850]
 position = Vector2(-250, 120)
 
-[node name="Position2" type="Marker2D" parent="EnemySpawner" unique_id=1490945251]
+[node name="Position2" type="Marker2D" parent="SubViewportContainer/SubViewport/GameWorld/EnemySpawner" unique_id=1490945251]
 position = Vector2(900, 120)
 
-[node name="Player" parent="." unique_id=1162149676 instance=ExtResource("6_tefeu")]
+[node name="Player" parent="SubViewportContainer/SubViewport/GameWorld" unique_id=1162149676 instance=ExtResource("6_tefeu")]
 unique_name_in_owner = true
 position = Vector2(-0.411221, 133.011)
 
-[node name="HousePositions" type="Node2D" parent="." unique_id=690271184]
+[node name="HousePositions" type="Node2D" parent="SubViewportContainer/SubViewport/GameWorld" unique_id=690271184]
 position = Vector2(0, -198.525)
 
-[node name="Position1" type="Marker2D" parent="HousePositions" unique_id=1409649133]
+[node name="Position1" type="Marker2D" parent="SubViewportContainer/SubViewport/GameWorld/HousePositions" unique_id=1409649133]
 position = Vector2(122.68, 431.792)
 
-[node name="Position2" type="Marker2D" parent="HousePositions" unique_id=1418301924]
+[node name="Position2" type="Marker2D" parent="SubViewportContainer/SubViewport/GameWorld/HousePositions" unique_id=1418301924]
 position = Vector2(471, 431.792)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1867910722]
+[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport/GameWorld" unique_id=1867910722]
 anchor_mode = 0
 script = ExtResource("7_camera")
 min_zoom = 0.75
 max_zoom = 1.5
 floor_y = 250.0
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1273648055]
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/GameWorld" unique_id=1273648055]
 z_index = -20
 offset_left = -320.0
 offset_top = -360.0
@@ -102,5 +122,9 @@ offset_bottom = 360.0
 mouse_filter = 2
 color = Color(0.94626576, 0.752794, 0.76830304, 1)
 
-[node name="bird_poop" parent="." unique_id=127767661 instance=ExtResource("9_85g3d")]
+[node name="bird_poop" parent="SubViewportContainer/SubViewport/GameWorld" unique_id=127767661 instance=ExtResource("9_85g3d")]
 position = Vector2(317, 74.44686)
+
+[node name="UI_Layer" type="CanvasLayer" parent="." unique_id=117814472]
+
+[node name="UI" parent="UI_Layer" unique_id=1898511819 instance=ExtResource("2_85g3d")]

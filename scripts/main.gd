@@ -11,9 +11,9 @@ extends Node2D
 @onready var heart: Area2D = %Heart
 @onready var ui: Control = $UI_Layer/UI
 @onready var ui_coin_count_label: Control = $UI_Layer/UI/BottomPanel/HBoxContainer/StatsSectionBackground/StatsSection/CoinCountLabel
-@onready var house_container: Node2D = $HouseContainer
-@onready var wall_container: Node2D = $WallContainer
-@onready var enemy_spawner: Node2D = $EnemySpawner
+@onready var house_container: Node2D = %HouseContainer
+@onready var wall_container: Node2D = %WallContainer
+@onready var enemy_spawner: Node2D = %EnemySpawner
 
 
 
@@ -25,11 +25,6 @@ var n_wall : int = 0
 var house_array : Array[Area2D] = []
 var wall_array : Array[Area2D] = []
 
-
-@onready var house_positions: Array[Marker2D] = [
-	$HousePositions/Position1,
-	$HousePositions/Position2
-]
 
 var building_scenes = {
 	"House": preload("res://scenes/house.tscn"),
@@ -321,6 +316,7 @@ func _place_building() -> void:
 			building_preview.global_position = final_global_position
 			building_preview.collision_layer = 16 # to not collide with enemies
 			building_preview.paid_cost = pending_build_cost
+			building_preview.game_world = %GameWorld
 			n_house += 1
 		elif building_type == "Wall":
 			building_preview.wall_id = n_wall

@@ -23,7 +23,7 @@ var heal_timer: float = 0.0
 
 
 func _on_foxling_ready() -> void:
-	heart_reference = get_tree().current_scene.get_node("Heart")
+	heart_reference = get_tree().current_scene.get_node("%Heart")
 
 	# Set up detection area
 	detection_shape.shape.radius = detection_radius

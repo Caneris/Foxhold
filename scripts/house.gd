@@ -7,6 +7,7 @@ var n_foxlings : int = 0
 var foxlings: Array = []
 var level : int = 1
 var paid_cost : int = 0
+var game_world : Node2D
 
 # id in the structures array in main.gd
 var structure_index : int = -1
@@ -146,7 +147,9 @@ func _spawn_foxling(type : String) -> void:
 	
 	var foxling : CharacterBody2D = foxling_scenes[type].instantiate()
 	foxling.position = global_position + Vector2(0, -50)  # Spawn
-	get_tree().current_scene.add_child(foxling)
+	foxling.game_world = game_world
+	# get_tree().current_scene.add_child(foxling)
+	game_world.add_child(foxling)
 	foxlings.append(foxling)
 	n_foxlings += 1
 

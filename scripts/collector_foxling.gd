@@ -22,7 +22,7 @@ var heart_position: Vector2
 
 
 func _on_foxling_ready() -> void:
-	heart_position = get_tree().current_scene.get_node("Heart").global_position
+	heart_position = get_tree().current_scene.get_node("%Heart").global_position
 	
 	# Set up detection area
 	detection_shape.shape.radius = detection_radius
@@ -156,7 +156,8 @@ func _on_detection_area_body_exited(body: Node) -> void:
 # collector_foxling.gd
 func cleanup() -> void:
 	if carried_coin and is_instance_valid(carried_coin):
-		carried_coin.reparent(get_tree().current_scene)
+		# carried_coin.reparent(get_tree().current_scene)
+		carried_coin.reparent(game_world)
 		carried_coin.freeze = false
 		carried_coin.gravity_scale = 1
 		if carried_coin.has_node("CollisionShape2D"):
