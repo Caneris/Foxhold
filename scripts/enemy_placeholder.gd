@@ -41,7 +41,7 @@ func _ready() -> void:
 
 	main_scene = get_tree().current_scene
 	# Cache Heart instance
-	heart_node = get_tree().get_root().get_node("%Heart") as Area2D
+	heart_node = get_tree().current_scene.get_node("%Heart") as Area2D
 	sight.collide_with_areas = true
 	initiate_health(max_health)
 	

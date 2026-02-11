@@ -29,7 +29,7 @@ base_costs = {
 inflation_rate = 0.05
 metadata/_custom_type_script = "uid://cnktbn1ywvyuw"
 
-[node name="Main" type="Node" unique_id=70143743]
+[node name="Main" type="Node2D" unique_id=127379726]
 script = ExtResource("1_tipki")
 grid_size = 40
 grid_dot_color = Color(0.478431, 1, 1, 0.25098)
@@ -53,10 +53,11 @@ snap_2d_transforms_to_pixel = true
 snap_2d_vertices_to_pixel = true
 canvas_item_default_texture_filter = 0
 physics_object_picking = true
-size = Vector2i(640, 360)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="GameWorld" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=1206735167]
+unique_name_in_owner = true
 
 [node name="Floor" parent="SubViewportContainer/SubViewport/GameWorld" unique_id=1477375218 instance=ExtResource("1_0wfyh")]
 z_index = -2

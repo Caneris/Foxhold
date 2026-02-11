@@ -125,7 +125,7 @@ func spawn_enemy(spawn_index) -> void:
 		# Make the sprite point towards the heart (only for ground enemies)
 		# Birds handle their own sprite flipping during ASCENDING state
 		if not is_bird:
-			var heart = get_node_or_null("../Heart")
+			var heart = get_node_or_null("%Heart")
 			if heart:
 				var direction = (heart.global_position - enemy.global_position).normalized()
 				animated_sprite.flip_h = direction.x >= 0

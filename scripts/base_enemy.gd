@@ -39,7 +39,7 @@ signal enemy_died
 
 func _ready() -> void:
 	main_scene = get_tree().current_scene
-	heart_node = get_tree().get_root().get_node("%Heart") as Area2D
+	heart_node = get_tree().current_scene.get_node("%Heart") as Area2D
 	
 	_setup_health()
 	_setup_click_area()
