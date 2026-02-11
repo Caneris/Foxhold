@@ -23,7 +23,7 @@ var slowdown_timer: Timer
 
 var heart_node : Node2D
 var attack_cooldown : float = 0.0
-var main_scene : Node2D
+var main_scene : Node
 
 @onready var sight: RayCast2D = $Sight
 @onready var health_bar: ProgressBar = %HealthBar

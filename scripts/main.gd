@@ -6,7 +6,7 @@ However, the main script also listens to signals from the house.gd script to cre
 and check whether the player has enough coins to create items.
 """
 
-extends Node2D
+extends Node
 
 @onready var heart: Area2D = %Heart
 @onready var ui: Control = $UI_Layer/UI
@@ -14,6 +14,9 @@ extends Node2D
 @onready var house_container: Node2D = %HouseContainer
 @onready var wall_container: Node2D = %WallContainer
 @onready var enemy_spawner: Node2D = %EnemySpawner
+@onready var game_world: Node2D = %GameWorld
+@onready var sub_viewport: SubViewport = %SubViewport
+@onready var grid_overlay: Node2D = %GridOverlay
 
 
 
@@ -107,9 +110,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _ready() -> void:
-	var vp := get_viewport()
-	vp.physics_object_picking_sort = true
-	vp.physics_object_picking_first_only = true
+	# var vp := get_viewport()
+	# vp.physics_object_picking_sort = true
+	# vp.physics_object_picking_first_only = true
+
+	grid_overlay.main = self
 
 	# initialize coin count display
 	ui_coin_count_label.text = "coin count: " + str(coin_count)
@@ -139,7 +144,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if building_mode and building_preview:
-		var mouse_pos = get_global_mouse_position()
+		var mouse_pos = game_world.get_global_mouse_position()
 		# snap preview X to grid
 		var snapped_x = snap_to_grid(mouse_pos.x)
 		building_preview.position.x = snapped_x
@@ -151,12 +156,12 @@ func _process(delta: float) -> void:
 		var scaled_house_width = house_width * house_scale
 		if building_preview.position.x < scaled_house_width / 2:
 			building_preview.position.x = scaled_house_width / 2
-		elif building_preview.position.x > get_viewport_rect().size.x - scaled_house_width / 2:
-			building_preview.position.x = get_viewport_rect().size.x - scaled_house_width / 2
+		elif building_preview.position.x > sub_viewport.size.x - scaled_house_width / 2:
+			building_preview.position.x = sub_viewport.size.x - scaled_house_width / 2
 
 		if building_mode:
 			# ensure grid is drawn while in building mode
-			queue_redraw()
+			grid_overlay.queue_redraw()
 
 
 func _on_wave_starting() -> void:
@@ -254,24 +259,24 @@ func _on_preview_area_exited(area: Area2D):
 		building_preview.get_node("Sprite2D").modulate = preview_normal_color
 
 
-func _draw() -> void:
-	# Only draw grid dots during building mode
-	if not building_mode:
-		return
+# func _draw() -> void:
+# 	# Only draw grid dots during building mode
+# 	if not building_mode:
+# 		return
 
-	var vp := get_viewport_rect()
-	var start_x := 0
-	var end_x := int(vp.size.x)
+# 	var vp := get_viewport_rect()
+# 	var start_x := 0
+# 	var end_x := int(vp.size.x)
 
-	# draw regular dots along the floor row
-	for x in range(start_x, end_x + 1, grid_size):
-		draw_circle(Vector2(x, house_floor_y), grid_dot_radius, grid_dot_color)
+# 	# draw regular dots along the floor row
+# 	for x in range(start_x, end_x + 1, grid_size):
+# 		draw_circle(Vector2(x, house_floor_y), grid_dot_radius, grid_dot_color)
 
-	# highlight the snapped position under the preview (if present)
-	if building_preview:
-		var local_x := building_preview.position.x
-		var highlight_pos := Vector2(local_x, house_floor_y)
-		draw_circle(highlight_pos, grid_dot_radius * 1.8, grid_dot_highlight_color)
+# 	# highlight the snapped position under the preview (if present)
+# 	if building_preview:
+# 		var local_x := building_preview.position.x
+# 		var highlight_pos := Vector2(local_x, house_floor_y)
+# 		draw_circle(highlight_pos, grid_dot_radius * 1.8, grid_dot_highlight_color)
 
 
 func snap_to_grid(x_pos: float) -> float:
@@ -337,7 +342,7 @@ func _place_building() -> void:
 		_update_all_cost_labels()
 		building_preview = null
 		building_mode = false
-		queue_redraw()  # Clear the grid
+		grid_overlay.queue_redraw()  # Clear the grid
 		# Re-enable UI after placement
 		_set_ui_interactable(true)
 		_setup_focus_system()
@@ -349,7 +354,7 @@ func _cancel_building() -> void:
 		building_preview.queue_free()
 		building_preview = null
 	building_mode = false
-	queue_redraw()  # Clear the grid
+	grid_overlay.queue_redraw()  # Clear the grid
 	# Re-enable UI after cancel
 	_set_ui_interactable(true)
 	# refund coins

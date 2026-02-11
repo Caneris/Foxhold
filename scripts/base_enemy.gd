@@ -27,7 +27,7 @@ var slowdown_timer: Timer
 
 # References
 var heart_node: Node2D
-var main_scene: Node2D
+var main_scene: Node
 
 # Child nodes - expected in scene
 @onready var health_bar: ProgressBar = %HealthBar

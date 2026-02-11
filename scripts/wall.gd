@@ -15,7 +15,7 @@ var is_destroyed: bool = false
 @onready var health_bar: ProgressBar = %HealthBar
 var damage_tween: Tween  # Add this 
 @onready var shader_material : ShaderMaterial = $Sprite2D.material
-@onready var main_scene = get_tree().current_scene
+@onready var main_scene : Node = get_tree().current_scene
 var heart_position_x : float
 
 # menu item costs etc

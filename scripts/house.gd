@@ -15,7 +15,7 @@ var focused: bool = false
 
 signal menu_item_selected(house_id, cost, menu_item_type)
 
-@onready var main_scene = get_tree().current_scene
+@onready var main_scene : Node = get_tree().current_scene
 @onready var shader_material : ShaderMaterial = $Sprite2D.material
 @onready var foxling_number_label : Label = $FoxlingNumberLabel
 
