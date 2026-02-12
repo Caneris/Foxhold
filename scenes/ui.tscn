@@ -24,11 +24,14 @@ script = ExtResource("1_nt7q6")
 
 [node name="BottomPanel" type="Panel" parent="." unique_id=863268355]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_top = 0.65400004
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 846.0
-offset_bottom = -44.0
+offset_left = 40.0
+offset_top = 108.67993
+offset_right = -54.0
+offset_bottom = -75.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -38,9 +41,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = 4
 
 [node name="StatsSectionBackground" type="NinePatchRect" parent="BottomPanel/HBoxContainer" unique_id=584825963]
 texture_filter = 1
@@ -484,11 +488,11 @@ texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("3_8dubc")
-region_rect = Rect2(2277, 4015, 743, 445)
-patch_margin_left = 38
-patch_margin_top = 130
-patch_margin_right = 55
-patch_margin_bottom = 140
+region_rect = Rect2(3285, 1290, 315, 215)
+patch_margin_left = 46
+patch_margin_top = 170
+patch_margin_right = 45
+patch_margin_bottom = 170
 
 [node name="PauseSection" type="HBoxContainer" parent="BottomPanel/HBoxContainer/PauseSectionBackground" unique_id=1272909692]
 layout_mode = 1
