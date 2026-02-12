@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://ci8rvsl7jj13i" path="res://scripts/ui.gd" id="1_nt7q6"]
 [ext_resource type="Theme" uid="uid://xuvuht6ohmhu" path="res://Resources/ui_theme.tres" id="1_x4jx1"]
 [ext_resource type="Texture2D" uid="uid://cedfx41chfn0p" path="res://assets/UiSprites/medieval-export-5x.png" id="3_8dubc"]
-[ext_resource type="Texture2D" uid="uid://cbk1lrdn25fbn" path="res://assets/UiSprites/Large tiles/Thick outline/tilemap.png" id="3_yev5y"]
 [ext_resource type="Texture2D" uid="uid://d38rsg5g858r4" path="res://assets/ItemSprites/coins-chests-etc-2-0.png" id="4_gdt2y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wm3ai"]
@@ -484,12 +483,12 @@ texture = SubResource("AtlasTexture_wm3ai")
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("3_yev5y")
-region_rect = Rect2(0, 0, 32, 32)
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
+texture = ExtResource("3_8dubc")
+region_rect = Rect2(2277, 4015, 743, 445)
+patch_margin_left = 38
+patch_margin_top = 130
+patch_margin_right = 55
+patch_margin_bottom = 140
 
 [node name="PauseSection" type="HBoxContainer" parent="BottomPanel/HBoxContainer/PauseSectionBackground" unique_id=1272909692]
 layout_mode = 1
