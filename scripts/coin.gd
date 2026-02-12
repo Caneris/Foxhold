@@ -48,6 +48,7 @@ func pick_up() -> void:
 
 func drop(impulse = Vector2.ZERO) -> void:
 	# impulse = impulse.limit_length(max_throw_speed)
+	print("DROP")
 	if dragging:
 		freeze = false
 		if throw_velocity.length() > min_throw_speed:

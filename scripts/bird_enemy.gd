@@ -20,6 +20,7 @@ enum State { ASCENDING, PATROLLING, ATTACKING }
 
 # Drops
 @export var drop_items: Array[PackedScene]
+var game_world: Node2D
 
 # State
 var current_state: State = State.ASCENDING
@@ -53,6 +54,7 @@ signal enemy_died
 func _ready() -> void:
 	main_scene = get_tree().current_scene
 	heart_node = get_tree().current_scene.get_node("%Heart") as Area2D
+	game_world = main_scene.get_node("%GameWorld") as Node2D
 	heart_x = heart_node.global_position.x
 
 	# Randomize patrol height (10-30% of 360 screen height)
@@ -181,7 +183,7 @@ func _spawn_poop() -> void:
 		return
 	var poop = poop_scene.instantiate()
 	poop.global_position = global_position
-	main_scene.add_child(poop)
+	game_world.add_child(poop)
 
 
 func _on_input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int) -> void:
@@ -201,7 +203,7 @@ func drop_item() -> void:
 	dropped_item.add_to_group("item")
 	dropped_item.clicked.connect(main_scene._on_item_clicked)
 
-	main_scene.add_child(dropped_item)
+	game_world.add_child(dropped_item)
 	dropped_item.global_position = global_position
 	dropped_item.gravity_scale = 1.0
 	dropped_item.linear_velocity = Vector2(randf_range(-100, 100), randf_range(-350, -250))

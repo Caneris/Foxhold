@@ -88,9 +88,10 @@ var base_costs = {
 var cost_inflation_rate: float = 0.15
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if dragged_item and !event.is_pressed():
+			print("Dropping coin")
 			dragged_item.drop(Input.get_last_mouse_velocity())
 			dragged_item = null
 	

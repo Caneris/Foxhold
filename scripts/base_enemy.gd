@@ -28,6 +28,7 @@ var slowdown_timer: Timer
 # References
 var heart_node: Node2D
 var main_scene: Node
+var game_world: Node2D
 
 # Child nodes - expected in scene
 @onready var health_bar: ProgressBar = %HealthBar
@@ -38,8 +39,9 @@ signal enemy_died
 
 
 func _ready() -> void:
-	main_scene = get_tree().current_scene
+	main_scene = get_tree().current_scene as Node
 	heart_node = get_tree().current_scene.get_node("%Heart") as Area2D
+	game_world = main_scene.get_node("%GameWorld") as Node2D
 	
 	_setup_health()
 	_setup_click_area()
@@ -124,7 +126,7 @@ func drop_item() -> void:
 	dropped_item.add_to_group("item")
 	dropped_item.clicked.connect(main_scene._on_item_clicked)
 	
-	main_scene.add_child(dropped_item)
+	game_world.add_child(dropped_item)
 	dropped_item.position = global_position
 	dropped_item.gravity_scale = 1.0
 	dropped_item.linear_velocity = Vector2(randf_range(-100, 100), randf_range(-350, -250))
