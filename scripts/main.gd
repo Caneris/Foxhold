@@ -290,7 +290,7 @@ func _create_building_preview():
 	building_preview.collision_layer = 0
 	# building_preview.modulate.a = 0.5  # Make it semi-transparent
 	building_preview.modulate = preview_normal_color
-	add_child(building_preview)
+	game_world.add_child(building_preview)
 	building_preview.position.y = house_floor_y
 	# Disable UI so buttons cannot be clicked while preview is active
 	_set_ui_interactable(false)
