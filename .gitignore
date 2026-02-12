@@ -6,3 +6,4 @@ mono/
 *.tmp
 .vscode/
 .vscode/settings.json
+assets/
