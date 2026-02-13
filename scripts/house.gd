@@ -146,8 +146,8 @@ func _spawn_foxling(type : String) -> void:
 		return
 	
 	var foxling : CharacterBody2D = foxling_scenes[type].instantiate()
-	foxling.position = global_position + Vector2(0, -50)  # Spawn
 	foxling.game_world = game_world
+	foxling.global_position = global_position + Vector2(0, -50)  # Spawn
 	# get_tree().current_scene.add_child(foxling)
 	game_world.add_child(foxling)
 	foxlings.append(foxling)

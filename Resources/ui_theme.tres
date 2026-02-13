@@ -1,5 +1,35 @@
 [gd_resource type="Theme" format=4 uid="uid://xuvuht6ohmhu"]
 
+[ext_resource type="Texture2D" uid="uid://cedfx41chfn0p" path="res://assets/UiSprites/medieval-export-5x.png" id="1_xguql"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v48r3"]
+texture = ExtResource("1_xguql")
+texture_margin_left = 20.0
+texture_margin_top = 10.0
+texture_margin_right = 20.0
+texture_margin_bottom = 15.0
+region_rect = Rect2(2645, 490, 70, 65)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fs762"]
+texture = ExtResource("1_xguql")
+region_rect = Rect2(2645, 490, 70, 65)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_khvw3"]
+texture = ExtResource("1_xguql")
+region_rect = Rect2(2645, 490, 70, 65)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pkys1"]
+texture = ExtResource("1_xguql")
+texture_margin_left = 20.0
+texture_margin_top = 10.0
+texture_margin_right = 20.0
+texture_margin_bottom = 15.0
+region_rect = Rect2(2565, 485, 70, 70)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xguql"]
+texture = ExtResource("1_xguql")
+region_rect = Rect2(2645, 490, 70, 65)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_khvw3"]
 bg_color = Color(0.6156863, 0.16862746, 0, 0.76862746)
 
@@ -2246,7 +2276,12 @@ corner_radius_bottom_left = 4
 
 [resource]
 Button/colors/font_color = Color(1, 1, 1, 1)
-Button/font_sizes/font_size = 12
+Button/font_sizes/font_size = 24
+Button/styles/disabled = SubResource("StyleBoxTexture_v48r3")
+Button/styles/focus = SubResource("StyleBoxTexture_fs762")
+Button/styles/hover = SubResource("StyleBoxTexture_khvw3")
+Button/styles/normal = SubResource("StyleBoxTexture_pkys1")
+Button/styles/pressed = SubResource("StyleBoxTexture_xguql")
 DestroyButton/base_type = &"Button"
 DestroyButton/styles/normal = SubResource("StyleBoxFlat_khvw3")
 HealButton/base_type = &"Button"
@@ -2264,3 +2299,4 @@ Label/fonts/font = SubResource("FontFile_khvw3")
 Label/styles/focus = SubResource("StyleBoxFlat_xguql")
 Label/styles/normal = SubResource("StyleBoxFlat_pt20x")
 VBoxContainer/constants/separation = 4
+VSeparator/styles/separator = null

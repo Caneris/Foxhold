@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://28i5241ytdhv"]
+[gd_scene format=3 uid="uid://28i5241ytdhv"]
 
 [ext_resource type="Script" uid="uid://dq7yrhnplr61o" path="res://scripts/knight_foxling.gd" id="1_0w4h4"]
 
@@ -7,19 +7,19 @@ size = Vector2(16, 16)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_250ro"]
 
-[node name="KnightFoxling" type="CharacterBody2D"]
+[node name="KnightFoxling" type="CharacterBody2D" unique_id=1697945375]
 collision_layer = 64
 script = ExtResource("1_0w4h4")
 attack_range = 25.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=82303536]
 z_index = 1
 shape = SubResource("RectangleShape2D_uvnab")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1901366032]
 modulate = Color(5.48691e-06, 0.736003, 0.0629369, 1)
 scale = Vector2(16, 16)
 texture = SubResource("CanvasTexture_250ro")
 
-[node name="Sight" type="RayCast2D" parent="."]
+[node name="Sight" type="RayCast2D" parent="." unique_id=566161684]
 collision_mask = 4

@@ -147,18 +147,15 @@ func _state_patrolling(delta: float) -> void:
 	# global_position.y = base_y + sin(time_elapsed * bob_frequency) * bob_amplitude
 
 	# Check turning points
-	print("is_turning: %s" % is_turning)
 	if not is_turning:
 		if global_position.x >= turn_right and move_direction == 1:
 			move_direction = -1
 			animated_sprite.flip_h = false
 			is_turning = true
-			print("turning")
 		elif global_position.x <= turn_left and move_direction == -1:
 			move_direction = 1
 			animated_sprite.flip_h = true
 			is_turning = true
-			print("turning")
 	else:
 		var away_form_edges: bool = global_position.x < turn_right - 50 and global_position.x > turn_left + 50
 		if away_form_edges:
@@ -174,7 +171,6 @@ func _state_patrolling(delta: float) -> void:
 func _state_attacking() -> void:
 	_spawn_poop()
 	poop_timer = poop_cooldown
-	print("Pooped!")
 	current_state = State.PATROLLING
 
 

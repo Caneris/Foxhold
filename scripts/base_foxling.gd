@@ -43,6 +43,9 @@ func _on_foxling_ready() -> void:
 func _physics_process(delta: float) -> void:
 	_apply_gravity(delta)
 	_process_state(delta)
+	if is_on_floor() and Engine.get_physics_frames() % 60 == 0:
+		# print y position for debugging
+		print("Foxling Y Position: ", global_position.y)
 
 
 ## Apply gravity - called every frame

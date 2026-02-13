@@ -66,6 +66,10 @@ func _physics_process(delta: float) -> void:
 	_apply_gravity(delta)
 	_process_movement(delta)
 
+	if is_on_floor() and Engine.get_physics_frames() % 60 == 0:
+		# print y position for debugging
+		print("Enemy Y Position: ", global_position.y)
+
 
 ## Override in child classes for movement behavior
 func _process_movement(_delta: float) -> void:

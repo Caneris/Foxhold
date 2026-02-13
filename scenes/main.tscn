@@ -51,8 +51,6 @@ stretch_shrink = 3
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=554016250]
 unique_name_in_owner = true
 handle_input_locally = false
-snap_2d_transforms_to_pixel = true
-snap_2d_vertices_to_pixel = true
 canvas_item_default_texture_filter = 0
 physics_object_picking = true
 physics_object_picking_sort = true

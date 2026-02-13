@@ -3,7 +3,11 @@
 [ext_resource type="Script" uid="uid://ci8rvsl7jj13i" path="res://scripts/ui.gd" id="1_nt7q6"]
 [ext_resource type="Theme" uid="uid://xuvuht6ohmhu" path="res://Resources/ui_theme.tres" id="1_x4jx1"]
 [ext_resource type="Texture2D" uid="uid://cedfx41chfn0p" path="res://assets/UiSprites/medieval-export-5x.png" id="3_8dubc"]
-[ext_resource type="Texture2D" uid="uid://d38rsg5g858r4" path="res://assets/ItemSprites/coins-chests-etc-2-0.png" id="4_gdt2y"]
+[ext_resource type="Texture2D" uid="uid://sc6w2rrvk8my" path="res://assets/ItemSprites/coins-chests-etc-2-0.png" id="4_gdt2y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gdt2y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wm3ai"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wm3ai"]
 atlas = ExtResource("4_gdt2y")
@@ -25,28 +29,32 @@ script = ExtResource("1_nt7q6")
 [node name="BottomPanel" type="Panel" parent="." unique_id=863268355]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.65400004
+anchor_top = 0.78400004
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 40.0
-offset_top = 108.67993
-offset_right = -54.0
-offset_bottom = -75.0
+offset_top = 40.27997
+offset_bottom = -45.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_gdt2y")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel" unique_id=584570577]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 4
 
+[node name="VSeparator" type="VSeparator" parent="BottomPanel/HBoxContainer" unique_id=697839534]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_wm3ai")
+
 [node name="StatsSectionBackground" type="NinePatchRect" parent="BottomPanel/HBoxContainer" unique_id=584825963]
+visible = false
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
@@ -343,6 +351,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
+theme_override_constants/h_separation = 24
 columns = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection" unique_id=1572975995]
@@ -484,15 +493,16 @@ size_flags_vertical = 4
 texture = SubResource("AtlasTexture_wm3ai")
 
 [node name="PauseSectionBackground" type="NinePatchRect" parent="BottomPanel/HBoxContainer" unique_id=269815473]
+visible = false
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("3_8dubc")
-region_rect = Rect2(3285, 1290, 315, 215)
+region_rect = Rect2(1101, 2579, 336, 172)
 patch_margin_left = 46
-patch_margin_top = 170
+patch_margin_top = 136
 patch_margin_right = 45
-patch_margin_bottom = 170
+patch_margin_bottom = 131
 
 [node name="PauseSection" type="HBoxContainer" parent="BottomPanel/HBoxContainer/PauseSectionBackground" unique_id=1272909692]
 layout_mode = 1
@@ -504,6 +514,10 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="BottomPanel/HBoxContainer" unique_id=821289561]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="HeartMenu" type="PopupMenu" parent="." unique_id=2091276842]
 oversampling_override = 1.0
