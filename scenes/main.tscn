@@ -67,7 +67,7 @@ position = Vector2(-320, 233.267)
 
 [node name="Heart" parent="SubViewportContainer/SubViewport/GameWorld" unique_id=1573853761 instance=ExtResource("3_sugp2")]
 unique_name_in_owner = true
-position = Vector2(314, 195.54726)
+position = Vector2(314, 156.54726)
 
 [node name="EnemyContainer" type="Node2D" parent="SubViewportContainer/SubViewport/GameWorld" unique_id=499254330]
 unique_name_in_owner = true
@@ -100,15 +100,6 @@ position = Vector2(900, 120)
 unique_name_in_owner = true
 position = Vector2(-0.411221, 133.011)
 
-[node name="HousePositions" type="Node2D" parent="SubViewportContainer/SubViewport/GameWorld" unique_id=690271184]
-position = Vector2(0, -198.525)
-
-[node name="Position1" type="Marker2D" parent="SubViewportContainer/SubViewport/GameWorld/HousePositions" unique_id=1409649133]
-position = Vector2(122.68, 431.792)
-
-[node name="Position2" type="Marker2D" parent="SubViewportContainer/SubViewport/GameWorld/HousePositions" unique_id=1418301924]
-position = Vector2(471, 431.792)
-
 [node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport/GameWorld" unique_id=1867910722]
 anchor_mode = 0
 script = ExtResource("7_camera")
@@ -124,6 +115,7 @@ offset_right = 960.0
 offset_bottom = 360.0
 mouse_filter = 2
 color = Color(0.94626576, 0.752794, 0.76830304, 1)
+metadata/_edit_lock_ = true
 
 [node name="bird_poop" parent="SubViewportContainer/SubViewport/GameWorld" unique_id=127767661 instance=ExtResource("9_85g3d")]
 position = Vector2(317, 74.44686)
@@ -135,3 +127,4 @@ script = ExtResource("10_ya4ey")
 [node name="UI_Layer" type="CanvasLayer" parent="." unique_id=117814472]
 
 [node name="UI" parent="UI_Layer" unique_id=1898511819 instance=ExtResource("2_85g3d")]
+metadata/_edit_lock_ = true

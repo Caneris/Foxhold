@@ -13,6 +13,8 @@
 atlas = ExtResource("4_gdt2y")
 region = Rect2(306, 21, 11, 11)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8dubc"]
+
 [sub_resource type="CanvasTexture" id="CanvasTexture_xlq6p"]
 
 [node name="UI" type="Control" unique_id=1339503301]
@@ -32,7 +34,7 @@ anchors_preset = -1
 anchor_top = 0.78400004
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 40.27997
+offset_top = -0.72003174
 offset_bottom = -45.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -51,6 +53,7 @@ theme_override_constants/separation = 4
 [node name="VSeparator" type="VSeparator" parent="BottomPanel/HBoxContainer" unique_id=697839534]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
 theme_override_styles/separator = SubResource("StyleBoxEmpty_wm3ai")
 
 [node name="StatsSectionBackground" type="NinePatchRect" parent="BottomPanel/HBoxContainer" unique_id=584825963]
@@ -219,7 +222,6 @@ custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-theme_type_variation = &"HealButton"
 text = "Heal"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer4" unique_id=242604452]
@@ -288,7 +290,6 @@ custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-theme_type_variation = &"DestroyButton"
 text = "Destroy"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer2" unique_id=721786460]
@@ -316,7 +317,6 @@ custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-theme_type_variation = &"HealButton"
 text = "Repair
 "
 
@@ -474,7 +474,6 @@ custom_minimum_size = Vector2(60, 40)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-theme_type_variation = &"DestroyButton"
 text = "Destroy"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer4" unique_id=296176618]
@@ -518,6 +517,8 @@ alignment = 1
 [node name="VSeparator2" type="VSeparator" parent="BottomPanel/HBoxContainer" unique_id=821289561]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+theme_override_styles/separator = SubResource("StyleBoxEmpty_8dubc")
 
 [node name="HeartMenu" type="PopupMenu" parent="." unique_id=2091276842]
 oversampling_override = 1.0
