@@ -63,7 +63,7 @@ func _state_moving_to_structure(delta: float) -> void:
 	move_towards(current_target.global_position, delta)
 
 	# Close enough to start healing (15-20 pixels)
-	if global_position.distance_to(current_target.global_position) < 50.0:
+	if global_position.distance_to(current_target.global_position) < 100.0:
 		current_state = State.HEAL_STRUCTURE
 		heal_timer = 0.0  # Start healing immediately
 
