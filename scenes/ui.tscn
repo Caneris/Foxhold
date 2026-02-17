@@ -4,6 +4,7 @@
 [ext_resource type="Theme" uid="uid://xuvuht6ohmhu" path="res://Resources/ui_theme.tres" id="1_x4jx1"]
 [ext_resource type="Texture2D" uid="uid://cedfx41chfn0p" path="res://assets/UiSprites/medieval-export-5x.png" id="3_8dubc"]
 [ext_resource type="Texture2D" uid="uid://sc6w2rrvk8my" path="res://assets/ItemSprites/coins-chests-etc-2-0.png" id="4_gdt2y"]
+[ext_resource type="FontFile" uid="uid://c3debd14kiu08" path="res://fonts/Minecraft.ttf" id="5_wm3ai"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gdt2y"]
 
@@ -16,6 +17,10 @@ region = Rect2(306, 21, 11, 11)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8dubc"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_xlq6p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dubc"]
+atlas = ExtResource("4_gdt2y")
+region = Rect2(418, 21, 11, 11)
 
 [node name="UI" type="Control" unique_id=1339503301]
 layout_mode = 3
@@ -118,7 +123,6 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="HeartActionSection" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground" unique_id=1765106405]
-visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -153,6 +157,7 @@ layout_mode = 2
 text = "2"
 
 [node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer/HBoxContainer" unique_id=45303476]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -180,6 +185,7 @@ layout_mode = 2
 text = "2"
 
 [node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer2/HBoxContainer" unique_id=687915452]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -207,6 +213,7 @@ layout_mode = 2
 text = "2"
 
 [node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer3/HBoxContainer" unique_id=2027395948]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -234,6 +241,7 @@ layout_mode = 2
 text = "2"
 
 [node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HeartActionSection/VBoxContainer4/HBoxContainer" unique_id=1908620834]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -275,6 +283,7 @@ layout_mode = 2
 text = "2"
 
 [node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer/HBoxContainer" unique_id=1084922424]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -302,6 +311,7 @@ layout_mode = 2
 text = "2"
 
 [node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer2/HBoxContainer" unique_id=1067982733]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -330,12 +340,14 @@ layout_mode = 2
 text = "2"
 
 [node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/WallActionSection/VBoxContainer3/HBoxContainer" unique_id=2093705992]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_wm3ai")
 
 [node name="HouseActionSection" type="GridContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground" unique_id=730914992]
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -368,13 +380,19 @@ text = "Upgrade"
 [node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer" unique_id=1456514570]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 8
+alignment = 1
 
 [node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer/HBoxContainer" unique_id=2002811512]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("5_wm3ai")
+theme_override_font_sizes/font_size = 34
 text = "2"
 
 [node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer/HBoxContainer" unique_id=1434812580]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -400,9 +418,11 @@ size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer2/HBoxContainer" unique_id=900603990]
 layout_mode = 2
+size_flags_vertical = 8
 text = "2"
 
 [node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer2/HBoxContainer" unique_id=700075366]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -428,9 +448,11 @@ size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer3/HBoxContainer" unique_id=305837208]
 layout_mode = 2
+size_flags_vertical = 8
 text = "2"
 
 [node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer3/HBoxContainer" unique_id=807007102]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -456,9 +478,11 @@ size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer5/HBoxContainer" unique_id=1110440473]
 layout_mode = 2
+size_flags_vertical = 8
 text = "2"
 
 [node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer5/HBoxContainer" unique_id=16064439]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -483,9 +507,11 @@ size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer4/HBoxContainer" unique_id=1151972468]
 layout_mode = 2
+size_flags_vertical = 8
 text = "2"
 
 [node name="TextureRect" type="TextureRect" parent="BottomPanel/HBoxContainer/ActionSectionBackground/HouseActionSection/VBoxContainer4/HBoxContainer" unique_id=162433453]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -538,9 +564,9 @@ item_0/id = 0
 [node name="BreakTimerCircle" type="TextureProgressBar" parent="." unique_id=1269799971]
 visible = false
 layout_mode = 0
-offset_left = 40.0
+offset_left = 424.0
 offset_top = 40.0
-offset_right = 100.0
+offset_right = 484.0
 offset_bottom = 100.0
 step = 0.05
 value = 80.0
@@ -548,3 +574,37 @@ fill_mode = 4
 nine_patch_stretch = true
 texture_progress = SubResource("CanvasTexture_xlq6p")
 tint_progress = Color(0.290196, 0.411765, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2050465749]
+texture_filter = 1
+layout_mode = 0
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = SubResource("AtlasTexture_8dubc")
+
+[node name="CoinCountLabel" type="Label" parent="." unique_id=680540321]
+texture_filter = 1
+layout_mode = 0
+offset_left = 158.0
+offset_top = 64.0
+offset_right = 207.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(0.9643937, 0.6229003, 0.8900115, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 50
+text = "10"
+
+[node name="WaveCountLabel" type="Label" parent="." unique_id=1516167080]
+layout_mode = 0
+offset_left = 1591.0
+offset_top = 64.0
+offset_right = 1740.0
+offset_bottom = 125.0
+theme_override_colors/font_color = Color(0.9647059, 0.62352943, 0.8901961, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 50
+text = "WAVE# 1"

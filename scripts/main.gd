@@ -10,7 +10,8 @@ extends Node
 
 @onready var heart: Area2D = %Heart
 @onready var ui: Control = $UI_Layer/UI
-@onready var ui_coin_count_label: Control = $UI_Layer/UI/BottomPanel/HBoxContainer/StatsSectionBackground/StatsSection/CoinCountLabel
+@onready var ui_coin_count_label: Control = $UI_Layer/UI/CoinCountLabel
+@onready var ui_wave_count_label: Control = $UI_Layer/UI/WaveCountLabel
 @onready var house_container: Node2D = %HouseContainer
 @onready var wall_container: Node2D = %WallContainer
 @onready var enemy_spawner: Node2D = %EnemySpawner
@@ -118,7 +119,7 @@ func _ready() -> void:
 	grid_overlay.main = self
 
 	# initialize coin count display
-	ui_coin_count_label.text = "coin count: " + str(coin_count)
+	ui_coin_count_label.text = str(coin_count)
 	ui.action_button_pressed.connect(_on_ui_action_pressed)
 	
 	# connect ui and enemy spawner signals
@@ -166,9 +167,14 @@ func _process(delta: float) -> void:
 
 
 func _on_wave_starting() -> void:
+	_update_wave_count_label()
 	_apply_cost_inflation()
 	_update_all_cost_labels()
 
+
+func _update_wave_count_label() -> void:
+	var wave_number = enemy_spawner.wave_number
+	ui_wave_count_label.text = "WAVE# " + str(wave_number)
 
 func _apply_cost_inflation() -> void:
 	var wave : int = enemy_spawner.wave_number
@@ -452,7 +458,7 @@ func _update_ui_visibility() -> void:
 
 func update_coin_count(amount: int) -> void:
 	coin_count += amount
-	ui_coin_count_label.text = "coin count: " + str(coin_count)
+	ui_coin_count_label.text = str(coin_count)
 
 func _on_item_clicked(item: RigidBody2D) -> void:
 	if !dragged_item:
